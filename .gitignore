@@ -60,8 +60,6 @@ sysinfo.txt
 *.aab
 *.unitypackage
 *.app
-/ToriJump_Android_BurstDebugInformation_DoNotShip
-/ToriJump_Android_BackUpThisFolder_ButDontShipItWithYourGame
 
 # Crashlytics generated file
 crashlytics-build.properties
