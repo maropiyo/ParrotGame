@@ -7,7 +7,7 @@ public class ObjectGenerator : MonoBehaviour
     // 現在のオブジェクト
     private GameObject currentObject;
     // 生成位置
-    public Vector2 spawnPosition = new Vector2(0, 2);
+    private Vector2 spawnPosition = new Vector2(0, 2);
 
     void Start()
     {
@@ -36,8 +36,8 @@ public class ObjectGenerator : MonoBehaviour
             currentObject.GetComponent<Rigidbody2D>().gravityScale = 1;
             // 現在のオブジェクトをリセット
             currentObject = null;
-            // 次のオブジェクトを0.1秒後に生成
-            Invoke("GenerateRandomObject", 0.1f);
+            // 次のオブジェクトを0.5秒後に生成
+            Invoke("GenerateRandomObject", 0.5f);
         }
     }
 }
