@@ -22,7 +22,9 @@ public class ObjectGenerator : MonoBehaviour
         // ランダムでオブジェクトを選択して生成
         int randomIndex = Random.Range(0, objectList.Length);
         currentObject = Instantiate(objectList[randomIndex], spawnPosition, Quaternion.identity);
+        // 重力を無効化
         currentObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<CurrentObjectMover>().currentObject = currentObject;
     }
 
     /// <summary>
@@ -36,6 +38,7 @@ public class ObjectGenerator : MonoBehaviour
             currentObject.GetComponent<Rigidbody2D>().gravityScale = 1;
             // 現在のオブジェクトをリセット
             currentObject = null;
+            GetComponent<CurrentObjectMover>().currentObject = currentObject;
             // 次のオブジェクトを0.5秒後に生成
             Invoke("GenerateRandomObject", 0.5f);
         }
