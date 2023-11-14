@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class TitleSceneManager : MonoBehaviour
 {
-    // スタートボタンが押された時、ゲーム画面に遷移する
-    public void ClickStartButton()
+    // ゲーム画面をロードする
+    public void LoadGameScene()
     {
         SceneManager.LoadScene("GameScene");
     }
