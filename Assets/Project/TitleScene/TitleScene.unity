@@ -545,7 +545,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1999900016
 MonoBehaviour:
@@ -593,7 +593,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 376259569}
         m_TargetAssemblyTypeName: TitleSceneManager, Assembly-CSharp
-        m_MethodName: ClickStartButton
+        m_MethodName: LoadGameScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
