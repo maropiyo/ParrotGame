@@ -43,8 +43,8 @@ public class ObjectGenerator : MonoBehaviour
             // 現在のオブジェクトをリセット
             currentObject = null;
             GetComponent<CurrentObjectMover>().currentObject = null;
-            // 0.5秒後にオブジェクトを生成
-            Invoke("GenerateRandomObject", 0.5f);
+            // 0.4秒後にオブジェクトを生成
+            Invoke("GenerateRandomObject", 0.4f);
         }
     }
 }
