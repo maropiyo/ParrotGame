@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Chick
+  - Sparrow
+  - Quail
+  - Pigeon
+  - Duck
+  - Penguin
+  - Hawk
+  - Owl
+  - Pelican
+  - Ostrich
   layers:
   - Default
   - TransparentFX
