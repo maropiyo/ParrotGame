@@ -7,7 +7,7 @@ public class ObjectGenerator : MonoBehaviour
     // 現在のオブジェクト
     private GameObject currentObject;
     // 生成位置
-    private Vector2 spawnPosition = new Vector2(0, 2.2f);
+    private Vector2 spawnPosition = new Vector2(0, 2.5f);
 
     void Start()
     {
