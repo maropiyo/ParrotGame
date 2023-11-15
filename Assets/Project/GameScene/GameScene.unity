@@ -604,6 +604,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectList:
   - {fileID: 5421947476687101130, guid: 1a022f45994804ac2a650fa790510380, type: 3}
+  - {fileID: 6749771380065320965, guid: 106bd55dbf6da4a6aa87d43e66bd2a6b, type: 3}
+  - {fileID: 6749771380065320965, guid: 36249cbf3cf1f48a69e94f7323e65eb0, type: 3}
+  - {fileID: 6749771380065320965, guid: 42b8c55e1b2004384a86ee17eee64226, type: 3}
+  - {fileID: 6749771380065320965, guid: f818495160a6f4808a57c6c02861f1fc, type: 3}
 --- !u!114 &1291080370
 MonoBehaviour:
   m_ObjectHideFlags: 0
