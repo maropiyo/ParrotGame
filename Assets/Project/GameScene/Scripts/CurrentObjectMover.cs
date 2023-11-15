@@ -4,6 +4,8 @@ public class CurrentObjectMover : MonoBehaviour
 {
     // 現在のオブジェクト
     public GameObject currentObject = null;
+    // 現在のオブジェクトの半分大きさ
+    private float halfScaleX;
     // ドラッグ開始位置
     private Vector3 touchStartPos;
     // オブジェクトの初期位置
@@ -13,6 +15,10 @@ public class CurrentObjectMover : MonoBehaviour
 
     void Update()
     {
+        if (currentObject != null)
+        {
+            halfScaleX = currentObject.transform.localScale.x / 2;
+        }
         // ドラッグ開始
         if (currentObject != null && Input.GetMouseButtonDown(0))
         {
@@ -24,7 +30,7 @@ public class CurrentObjectMover : MonoBehaviour
         if (isDragging && Input.GetMouseButton(0))
         {
             Vector3 offset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - touchStartPos;
-            float newX = Mathf.Clamp(objectStartPos.x + offset.x, -2f, 2f);
+            float newX = Mathf.Clamp(objectStartPos.x + offset.x, -2.38f + halfScaleX, 2.38f - halfScaleX);
             currentObject.transform.position = new Vector3(newX, objectStartPos.y, objectStartPos.z);
         }
         // ドラッグ終了
