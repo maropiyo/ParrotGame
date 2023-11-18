@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 511804839346607650}
   - component: {fileID: 1589564440693885635}
-  - component: {fileID: 4122594602930406823}
   - component: {fileID: -3284796360484194983}
-  - component: {fileID: 6325431316415284872}
+  - component: {fileID: -5527357471213665947}
+  - component: {fileID: 8404647089502120450}
+  - component: {fileID: 926215537739402272}
   m_Layer: 0
-  m_Name: Quail
-  m_TagString: Quail
+  m_Name: Okame
+  m_TagString: Okame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.21960784, g: 0.21960784, b: 0.21960784, a: 1}
+  m_Sprite: {fileID: 21300000, guid: db144c97ab5da4246b7e9210856f81c8, type: 3}
+  m_Color: {r: 1, g: 0.960237, b: 0.9198113, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -87,7 +88,48 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &4122594602930406823
+--- !u!50 &-3284796360484194983
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749771380065320965}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &-5527357471213665947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749771380065320965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0ac2b325ea4704aea498c1bcf5b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextObjectTag: Penguin
+  nextObjectPrefab: {fileID: 6749771380065320965, guid: aeeecc7c7b5364a3b860de1271d265ce, type: 3}
+--- !u!58 &8404647089502120450
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,23 +163,16 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.49999997
---- !u!50 &-3284796360484194983
-Rigidbody2D:
-  serializedVersion: 4
+  m_Radius: 2.16
+--- !u!68 &926215537739402272
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6749771380065320965}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -145,21 +180,42 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &6325431316415284872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6749771380065320965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d0ac2b325ea4704aea498c1bcf5b17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextObjectTag: Pegion
-  nextObjectPrefab: {fileID: 6749771380065320965, guid: 42b8c55e1b2004384a86ee17eee64226, type: 3}
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.0123806, y: 2.1548147}
+  - {x: 0.31616056, y: 2.2090023}
+  - {x: 0.68684435, y: 2.2902086}
+  - {x: 1.100855, y: 2.40827}
+  - {x: 1.266129, y: 2.479733}
+  - {x: 1.3044382, y: 2.4682708}
+  - {x: 1.3225889, y: 2.418045}
+  - {x: 1.3024088, y: 2.3820043}
+  - {x: 1.0781667, y: 2.1883855}
+  - {x: 1.2201322, y: 2.1599855}
+  - {x: 1.2909036, y: 2.1303697}
+  - {x: 1.3009079, y: 2.0812066}
+  - {x: 1.2817218, y: 2.0519283}
+  - {x: 1.0842125, y: 1.9918698}
+  - {x: 0.92429185, y: 1.9534732}
+  - {x: 0.91874284, y: 1.952989}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

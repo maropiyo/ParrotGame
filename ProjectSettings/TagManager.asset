@@ -5,15 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Chick
-  - Sparrow
-  - Quail
-  - Pigeon
-  - Duck
-  - Penguin
+  - Buncho
+  - Shimaenaga
+  - Sekisei
+  - Okame
+  - Kakapo
   - Hawk
   - Owl
-  - Pelican
   - Ostrich
+  - Eagle
+  - Shoebill
+  - Penguin
+  - Pelican
   layers:
   - Default
   - TransparentFX
