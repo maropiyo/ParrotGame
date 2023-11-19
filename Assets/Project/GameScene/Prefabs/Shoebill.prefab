@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8565917250456839258}
   - component: {fileID: 1911245323916117483}
   - component: {fileID: 4770564207067779426}
+  - component: {fileID: 3692104520985017309}
   m_Layer: 0
   m_Name: Shoebill
   m_TagString: Shoebill
@@ -105,7 +106,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f6a5f02e6d7234827a34b8d7711bb76d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -253,3 +254,15 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &3692104520985017309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749771380065320965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19729925d3fa64277a22e0ceb58960e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

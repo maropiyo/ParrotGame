@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5527357471213665947}
   - component: {fileID: 8404647089502120450}
   - component: {fileID: 926215537739402272}
+  - component: {fileID: -6474171637309274640}
   m_Layer: 0
   m_Name: Okame
   m_TagString: Okame
@@ -104,7 +105,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f6a5f02e6d7234827a34b8d7711bb76d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -204,9 +205,21 @@ EdgeCollider2D:
   - {x: 0.5758804, y: 2.2652233}
   - {x: 1.0483319, y: 2.3913789}
   - {x: 1.2650262, y: 2.480292}
-  - {x: 1.3198456, y: 2.4531782}
-  - {x: 1.2750791, y: 1.7342001}
+  - {x: 1.3150623, y: 2.4488387}
+  - {x: 1.2780423, y: 1.7371634}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &-6474171637309274640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749771380065320965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19729925d3fa64277a22e0ceb58960e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

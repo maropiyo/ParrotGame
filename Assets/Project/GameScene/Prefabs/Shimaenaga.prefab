@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6325431316415284872}
   - component: {fileID: 3535582476192758286}
   - component: {fileID: 1596515348479769182}
-  - component: {fileID: 252255429533855394}
+  - component: {fileID: -4406719256824466583}
   m_Layer: 0
   m_Name: Shimaenaga
   m_TagString: Shimaenaga
@@ -105,7 +105,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f6a5f02e6d7234827a34b8d7711bb76d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -200,49 +200,15 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0077317012, y: -0.7269166}
   m_Size: {x: 4.346734, y: 3.1403997}
   m_Direction: 1
---- !u!68 &252255429533855394
-EdgeCollider2D:
+--- !u!114 &-4406719256824466583
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6749771380065320965}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -1.9006951, y: 0.1488752}
-  - {x: -1.5952269, y: 0.5677637}
-  - {x: -1.4026902, y: 1.1494579}
-  - {x: 0.49454254, y: 1.2026337}
-  - {x: 1.3686602, y: 1.2271334}
-  - {x: 1.5875912, y: 0.59273064}
-  - {x: 1.8076388, y: 0.27718562}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19729925d3fa64277a22e0ceb58960e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

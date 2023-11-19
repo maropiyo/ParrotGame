@@ -25,7 +25,8 @@ public class ObjectGenerator : MonoBehaviour
         // 重力を無効化
         currentObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         // 当たり判定を無効化
-        currentObject.GetComponent<Collider2D>().enabled = false;
+        Collider2D[] colliders = currentObject.GetComponents<Collider2D>();
+        foreach (Collider2D collider in colliders) collider.enabled = false;
         GetComponent<CurrentObjectMover>().currentObject = currentObject;
     }
 
@@ -39,7 +40,8 @@ public class ObjectGenerator : MonoBehaviour
             // 重力を有効化
             currentObject.GetComponent<Rigidbody2D>().gravityScale = 1;
             // 当たり判定を有効化
-            currentObject.GetComponent<Collider2D>().enabled = true;
+            Collider2D[] colliders = currentObject.GetComponents<Collider2D>();
+            foreach (Collider2D collider in colliders) collider.enabled = true;
             // 現在のオブジェクトをリセット
             currentObject = null;
             GetComponent<CurrentObjectMover>().currentObject = null;
