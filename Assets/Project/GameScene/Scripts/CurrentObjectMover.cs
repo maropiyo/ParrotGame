@@ -63,13 +63,6 @@ public class CurrentObjectMover : MonoBehaviour
 
         // オブジェクトの位置を更新する
         currentObject.transform.position = new Vector3(newXPos, objectStartPos.y, objectStartPos.z);
-
-        // マウスの現在位置を次回の計算のために保存する
-        // touchStartPos = Input.mousePosition;
-
-        // Vector3 offset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - touchStartPos;
-        // float newX = Mathf.Clamp(objectStartPos.x + offset.x, -2.7f, 2.7f);
-        // currentObject.transform.position = new Vector3(newX, objectStartPos.y, objectStartPos.z);
     }
 }
 
