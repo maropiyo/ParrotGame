@@ -11,9 +11,9 @@ public class CurrentObjectMover : MonoBehaviour
     // オブジェクトの初期位置
     private Vector3 objectStartPos;
     // 左制限
-    private float leftLimit = -2.7f;
+    private float leftLimit = -2.69f;
     // 右制限
-    private float rightLimit = 2.7f;
+    private float rightLimit = 2.69f;
     // ドラッグ中か
     private bool isDragging = false;
 
