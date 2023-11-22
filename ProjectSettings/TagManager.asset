@@ -4,19 +4,20 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Chick
-  - Buncho
-  - Shimaenaga
+  - Box
+  - Mameruriha
+  - Botan
+  - Sazanami
+  - Kozakura
   - Sekisei
   - Okame
-  - Kakapo
-  - Hawk
-  - Owl
-  - Ostrich
-  - Eagle
-  - Shoebill
-  - Penguin
-  - Box
+  - Momoiro
+  - Kongo
+  - Lutino
+  - Shirohara
+  - Ohana
+  - Taihaku
+  - Kogane
   layers:
   - Default
   - TransparentFX

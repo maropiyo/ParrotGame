@@ -24,7 +24,7 @@ public class ObjectEvolution : MonoBehaviour
             Destroy(collision.gameObject);
 
             // ダチョウ同士の場合は進化しない
-            if (collision.gameObject.CompareTag("Ostrich"))
+            if (collision.gameObject.CompareTag("Kongo"))
             {
                 return;
             }
