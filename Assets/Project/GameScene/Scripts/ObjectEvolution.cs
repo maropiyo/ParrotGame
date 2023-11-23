@@ -10,6 +10,13 @@ public class ObjectEvolution : MonoBehaviour
     private bool isEvolved = false;
     // 衝突回数(3つ以上のオブジェクトが同時に衝突した時に3つ目以降のオブジェクトに処理を走らせないために使う)
     private int collisionCount = 0;
+    // ScoreManagerクラスのインスタンスを生成
+    private ScoreManager scoreManager;
+
+    void Start()
+    {
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,20 +30,20 @@ public class ObjectEvolution : MonoBehaviour
             // 衝突したオブジェクトを破棄
             Destroy(collision.gameObject);
 
-            // ダチョウ同士の場合は進化しない
-            if (collision.gameObject.CompareTag("Kongo"))
-            {
-                return;
-            }
             // まだ進化していない場合は進化させる
-            else if (isEvolved == false && collision.gameObject.GetComponent<ObjectEvolution>().isEvolved == false)
+            if (isEvolved == false && collision.gameObject.GetComponent<ObjectEvolution>().isEvolved == false)
             {
+                // 進化フラグをTrueにする
                 isEvolved = true;
-
-                // 進化後のオブジェクトを衝突したオブジェクトの間に生成
-                Instantiate(nextObjectPrefab, (transform.position + collision.gameObject.transform.position)/2, Quaternion.identity);
+                // 接触したオブジェクトがコンゴウインコ以外の場合
+                if (!collision.gameObject.CompareTag("Kongo"))
+                {
+                    // 進化後のオブジェクトを衝突したオブジェクトの間に生成
+                    Instantiate(nextObjectPrefab, (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
+                }
+                // スコアを加算する
+                scoreManager.addScore(tag);
             }
         }
-
     }
 }

@@ -8,10 +8,21 @@ public class ObjectGenerator : MonoBehaviour
     private GameObject currentObject;
     // 生成位置
     private Vector2 spawnPosition = new Vector2(0, 3.0f);
+    // 自動ドロップモード
+    [SerializeField]
+    private bool isAutoDropMode = false;
 
     void Start()
     {
         GenerateRandomObject();
+    }
+
+    void Update()
+    {
+        if (isAutoDropMode)
+        {
+            DropObject();
+        }
     }
 
     /// <summary>
