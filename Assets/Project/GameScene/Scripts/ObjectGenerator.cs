@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ObjectGenerator : MonoBehaviour
 {
@@ -8,9 +9,9 @@ public class ObjectGenerator : MonoBehaviour
     private GameObject currentObject;
     // 生成位置
     private Vector2 spawnPosition = new Vector2(0, 3.0f);
-    // 自動ドロップモード
-    [SerializeField]
-    private bool isAutoDropMode = false;
+    // オートモードトグル
+    public Toggle autoModeToggle;
+
 
     void Start()
     {
@@ -19,8 +20,9 @@ public class ObjectGenerator : MonoBehaviour
 
     void Update()
     {
-        if (isAutoDropMode)
+        if (autoModeToggle.isOn)
         {
+            Debug.Log(autoModeToggle.isOn);
             DropObject();
         }
     }
