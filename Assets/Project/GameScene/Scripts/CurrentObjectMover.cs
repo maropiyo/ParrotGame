@@ -1,10 +1,11 @@
+using System.Runtime.Serialization;
 using UnityEngine;
 
-public class CurrentObjectMover : MonoBehaviour
+public class ObjectMover : MonoBehaviour
 {
     // 現在のオブジェクト
     public GameObject currentObject = null;
-    // 現在のオブジェクトの半分大きさ
+    // オブジェクトの半径
     private float halfObjectRadius;
     // ドラッグ開始位置
     private Vector3 touchStartPos;
@@ -14,22 +15,30 @@ public class CurrentObjectMover : MonoBehaviour
     private float leftLimit = -2.69f;
     // 右制限
     private float rightLimit = 2.69f;
-    // ドラッグ中か
-    private bool isDragging = false;
+    private ObjectGenerator objectGenerator;
+
+    void Start()
+    {
+        // ObjectManagerオブジェクトのObjectGeneratorコンポーネントを取得
+        objectGenerator = GameObject.Find("ObjectManager").GetComponent<ObjectGenerator>();
+    }
 
     void Update()
     {
+        // objectGeneratorコンポーネントから現在のオブジェクトを取得
+        currentObject = objectGenerator.currentObject;
+
         if (currentObject)
         {
             // オブジェクトの半径を計算
             CalculateObjectRadius();
 
+            // タップされた時
             if (Input.GetMouseButtonDown(0))
             {
-                // ドラッグ開始
                 OnDragStart();
             }
-            else if (isDragging && Input.GetMouseButton(0))
+            else if (Input.GetMouseButton(0))
             {
                 // ドラッグ中
                 OnDragging();
@@ -37,7 +46,6 @@ public class CurrentObjectMover : MonoBehaviour
             else if (Input.GetMouseButtonUp(0))
             {
                 // ドラッグ終了
-                OnDragEnd();
             }
         }
     }
@@ -55,14 +63,7 @@ public class CurrentObjectMover : MonoBehaviour
         touchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // オブジェクトの初期位置を記録
         objectStartPos = currentObject.transform.position;
-        // ドラッグ中フラグを有効にする
-        isDragging = true;
-    }
 
-    private void OnDragEnd()
-    {
-        // ドラッグ中フラグを無効にする
-        isDragging = false;
     }
 
     private void OnDragging()

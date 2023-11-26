@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,8 +7,13 @@ public class ObjectGenerator : MonoBehaviour
 {
     // オブジェクトリスト
     public GameObject[] objectList;
+    // 生成済みオブジェクトキュー
+    [SerializeField]
+    private List<GameObject> generatedObjectQueue;
     // 現在のオブジェクト
-    private GameObject currentObject;
+    public GameObject currentObject;
+    // 次のオブジェクト
+    private GameObject nextObject;
     // 生成位置
     private Vector2 spawnPosition = new Vector2(0, 3.0f);
     // オートモードトグル
@@ -15,39 +22,66 @@ public class ObjectGenerator : MonoBehaviour
 
     void Start()
     {
-        GenerateRandomObject();
+        while (generatedObjectQueue.Count < 3)
+        {
+            // ランダムなオブジェクトを生成してキューに追加
+            generatedObjectQueue.Add(GenerateRandomObject());
+        }
+        // キューの最初のオブジェクトをスポーン
+        SpawnObject(generatedObjectQueue[0]);
+        // キューの先頭のオブジェクトを削除
+        generatedObjectQueue.RemoveAt(0);
     }
 
     void Update()
     {
+        // 生成済みオブジェクトキューの要素が3未満の場合
+        if (generatedObjectQueue.Count < 3)
+        {
+            // ランダムなオブジェクトを生成してキューに追加
+            generatedObjectQueue.Add(GenerateRandomObject());
+        }
+        nextObject = generatedObjectQueue[1];
+
+        // デバッグ用
         if (autoModeToggle.isOn)
         {
-            DropObject();
+            DropCurrentObject();
         }
     }
 
     /// <summary>
     /// オブジェクトをランダムに生成する
     /// </summary>
-    void GenerateRandomObject()
+    private GameObject GenerateRandomObject()
     {
-        // ランダムでオブジェクトを選択して生成
-        int randomIndex = Random.Range(0, objectList.Length);
-        currentObject = Instantiate(objectList[randomIndex], spawnPosition, Quaternion.identity);
+        // オブジェクトリストからランダムに1つのオブジェクトを返す。
+        return objectList[Random.Range(0, objectList.Length)];
+    }
+
+    /// <summary>
+    /// オブジェクトをスポーンさせる。
+    /// </summary>
+    /// <param name="spawnObject"></param>
+    private void SpawnObject(GameObject spawnObject)
+    {
+        currentObject = Instantiate(spawnObject, spawnPosition, Quaternion.identity);
         // 重力を無効化
         currentObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         // 当たり判定を無効化
         Collider2D[] colliders = currentObject.GetComponents<Collider2D>();
         foreach (Collider2D collider in colliders) collider.enabled = false;
-        GetComponent<CurrentObjectMover>().currentObject = currentObject;
+        // キューの先頭のオブジェクトを削除
+        generatedObjectQueue.RemoveAt(0);
     }
+
 
     /// <summary>
     /// オブジェクトを落下させる
     /// </summary>
-    public void DropObject()
+    public void DropCurrentObject()
     {
-        if (currentObject != null)
+        if (currentObject)
         {
             // 重力を有効化
             currentObject.GetComponent<Rigidbody2D>().gravityScale = 1;
@@ -56,9 +90,15 @@ public class ObjectGenerator : MonoBehaviour
             foreach (Collider2D collider in colliders) collider.enabled = true;
             // 現在のオブジェクトをリセット
             currentObject = null;
-            GetComponent<CurrentObjectMover>().currentObject = null;
-            // 0.4秒後にオブジェクトを生成
-            Invoke("GenerateRandomObject", 0.4f);
+            // 4秒待つ
+            StartCoroutine(WaitAndSpawn(0.4f));
         }
+    }
+    IEnumerator WaitAndSpawn(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        // キューの最初のオブジェクトをスポーン
+        SpawnObject(generatedObjectQueue[0]);
     }
 }
