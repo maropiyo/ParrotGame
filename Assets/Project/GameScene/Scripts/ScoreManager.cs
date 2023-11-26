@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    // インコと点数の対応表
+    // インコのタグと点数の対応表
     private Dictionary<string, int> ParrotScores = new Dictionary<string, int>
     {
         {"Mameruriha", 1},
@@ -23,24 +23,65 @@ public class ScoreManager : MonoBehaviour
 
     // スコアを表示するテキストコンポーネント
     public Text currentScoreText;
+    // ベストスコアを表示するテキストコンポーネント
+    public Text bestScoreText;
     // 現在のスコア
     private int currentScore = 0;
+    // ベストスコア
+    private int bestScore = 0;
 
+    void Start()
+    {
+        // ゲーム開始時のベストスコアを取得する。
+        bestScore = ES3.Load<int>("BestScore", defaultValue: 0);
+        bestScoreText.text = bestScore.ToString();
+    }
 
     void Update()
     {
-        // スコアの変化を監視し、UIに反映
-        UpdateScoreUI();
+        // スコアを更新する。
+        UpdateScore();
+        // ベストスコアを更新する。
+        UpdateBestScore();
     }
 
+    /// <summary>
+    /// オブジェクトのタグに応じたスコアを加算する。
+    /// </summary>
     public void addScore(string tag)
     {
         // スコアを加算
         currentScore += ParrotScores[tag];
     }
 
-    private void UpdateScoreUI()
+    /// <summary>
+    /// ベストスコアを保存する。
+    /// </summary>
+    public void SaveBestScore()
     {
+        ES3.Save<int>("BestScore", bestScore);
+    }
+
+    /// <summary>
+    /// ベストスコアをUIに反映させる。
+    /// </summary>
+    private void UpdateBestScore()
+    {
+        // 現在のスコアがベストスコアを上回った場合、ベストスコアを上書きする。
+        if (bestScore < currentScore)
+        {
+            bestScore = currentScore;
+        }
+        // UIに反映させる。
+        bestScoreText.text = bestScore.ToString();
+    }
+
+    /// <summary>
+    /// 現在のスコアをUIに反映させる。
+    /// </summary>
+    private void UpdateScore()
+    {
+        // UIに反映させる。
         currentScoreText.text = currentScore.ToString();
     }
 }
