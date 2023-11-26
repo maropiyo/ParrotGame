@@ -10,12 +10,17 @@ public class ObjectEvolution : MonoBehaviour
     private bool isEvolved = false;
     // 衝突回数(3つ以上のオブジェクトが同時に衝突した時に3つ目以降のオブジェクトに処理を走らせないために使う)
     private int collisionCount = 0;
-    // ScoreManagerクラスのインスタンスを生成
+    // ScoreManagerコンポーネント
     private ScoreManager scoreManager;
+    // SoundManagerコンポーネント
+    private SoundEffectPlayer soundEffectPlayer;
 
     void Start()
     {
+        // ScoreManagerコンポーネントのScoreManagerコンポーネントを取得
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        // SoundManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
+        soundEffectPlayer = GameObject.Find("SoundManager").GetComponent<SoundEffectPlayer>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -41,6 +46,8 @@ public class ObjectEvolution : MonoBehaviour
                     // 進化後のオブジェクトを衝突したオブジェクトの間に生成
                     Instantiate(nextObjectPrefab, (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
                 }
+                // 進化時の効果音を鳴らす
+                soundEffectPlayer.PlayEvolutionSound();
                 // スコアを加算する
                 scoreManager.addScore(tag);
             }
