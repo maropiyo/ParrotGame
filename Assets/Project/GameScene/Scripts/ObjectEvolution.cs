@@ -19,8 +19,8 @@ public class ObjectEvolution : MonoBehaviour
     {
         // ScoreManagerコンポーネントのScoreManagerコンポーネントを取得
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        // AudioManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
-        soundEffectPlayer = GameObject.Find("AudioManager").GetComponent<SoundEffectPlayer>();
+        // SoundEffectManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
+        soundEffectPlayer = GameObject.Find("SoundEffectManager").GetComponent<SoundEffectPlayer>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

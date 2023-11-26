@@ -13,8 +13,8 @@ public class ObjectPositionChecker : MonoBehaviour
     {
         // ScoreManagerオブジェクトのScoreManagerコンポーネントを取得
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        // AudioManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
-        soundEffectPlayer = GameObject.Find("AudioManager").GetComponent<SoundEffectPlayer>();
+        // SoundEffectManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
+        soundEffectPlayer = GameObject.Find("SoundEffectManager").GetComponent<SoundEffectPlayer>();
         // GameSceneManagerオブジェクトのGameSceneManagerコンポーネントを取得
         gameSceneManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
     }
