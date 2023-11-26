@@ -4,22 +4,16 @@ public class CurrentObjectMover : MonoBehaviour
 {
     // 現在のオブジェクト
     public GameObject currentObject = null;
-
     // 現在のオブジェクトの半分大きさ
     private float halfObjectRadius;
-
     // ドラッグ開始位置
     private Vector3 touchStartPos;
-
     // オブジェクトの初期位置
     private Vector3 objectStartPos;
-
     // 左制限
     private float leftLimit = -2.69f;
-
     // 右制限
     private float rightLimit = 2.69f;
-
     // ドラッグ中か
     private bool isDragging = false;
 

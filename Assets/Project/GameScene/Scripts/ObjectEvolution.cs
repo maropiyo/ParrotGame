@@ -12,15 +12,15 @@ public class ObjectEvolution : MonoBehaviour
     private int collisionCount = 0;
     // ScoreManagerコンポーネント
     private ScoreManager scoreManager;
-    // SoundManagerコンポーネント
+    // SoundEffectPlayerコンポーネント
     private SoundEffectPlayer soundEffectPlayer;
 
     void Start()
     {
         // ScoreManagerコンポーネントのScoreManagerコンポーネントを取得
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        // SoundManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
-        soundEffectPlayer = GameObject.Find("SoundManager").GetComponent<SoundEffectPlayer>();
+        // AudioManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
+        soundEffectPlayer = GameObject.Find("AudioManager").GetComponent<SoundEffectPlayer>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
