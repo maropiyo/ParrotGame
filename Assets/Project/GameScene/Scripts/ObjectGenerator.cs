@@ -22,7 +22,6 @@ public class ObjectGenerator : MonoBehaviour
     {
         if (autoModeToggle.isOn)
         {
-            Debug.Log(autoModeToggle.isOn);
             DropObject();
         }
     }
