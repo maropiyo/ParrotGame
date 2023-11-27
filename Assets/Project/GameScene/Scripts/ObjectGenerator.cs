@@ -13,20 +13,31 @@ public class ObjectGenerator : MonoBehaviour
     // 現在のオブジェクト
     public GameObject currentObject;
     // 次のオブジェクト
-    private GameObject nextObject;
+    public GameObject nextObject;
+    // 卵のスプライト
+    public Sprite egg;
+    // 割れた卵のスプライト
+    public Sprite brokenEgg;
     // 生成位置
     private Vector2 spawnPosition = new Vector2(0, 3.0f);
+    // Playerオブジェクト
+    private GameObject player;
     // オートモードトグル
     public Toggle autoModeToggle;
 
 
     void Start()
     {
+        // Playerオブジェクトを取得
+        player = GameObject.Find("Player");
+
         while (generatedObjectQueue.Count < 3)
         {
             // ランダムなオブジェクトを生成してキューに追加
             generatedObjectQueue.Add(GenerateRandomObject());
         }
+        // 次のオブジェクトをセット
+        nextObject = generatedObjectQueue[0];
         // キューの最初のオブジェクトをスポーン
         SpawnObject(generatedObjectQueue[0]);
         // キューの先頭のオブジェクトを削除
@@ -41,7 +52,7 @@ public class ObjectGenerator : MonoBehaviour
             // ランダムなオブジェクトを生成してキューに追加
             generatedObjectQueue.Add(GenerateRandomObject());
         }
-        nextObject = generatedObjectQueue[1];
+        nextObject = generatedObjectQueue[0];
 
         // デバッグ用
         if (autoModeToggle.isOn)
@@ -65,7 +76,11 @@ public class ObjectGenerator : MonoBehaviour
     /// <param name="spawnObject"></param>
     private void SpawnObject(GameObject spawnObject)
     {
+        // スポーン位置を設定
+        spawnPosition = new Vector2(player.transform.position.x, player.transform.position.y + 0.1f);
         currentObject = Instantiate(spawnObject, spawnPosition, Quaternion.identity);
+        // 現在のオブジェクトをPlayerオブジェクトの子要素にする
+        currentObject.transform.parent = player.transform;
         // 重力を無効化
         currentObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         // 当たり判定を無効化
@@ -88,6 +103,8 @@ public class ObjectGenerator : MonoBehaviour
             // 当たり判定を有効化
             Collider2D[] colliders = currentObject.GetComponents<Collider2D>();
             foreach (Collider2D collider in colliders) collider.enabled = true;
+            // playerオブジェクトとの親子関係を解除
+            currentObject.transform.parent = null;
             // 現在のオブジェクトをリセット
             currentObject = null;
             // 4秒待つ
