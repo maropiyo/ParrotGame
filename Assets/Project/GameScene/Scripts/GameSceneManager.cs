@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class GameSceneManager : MonoBehaviour
 {
     // タイトル画面をロードする
-    // TODO: GameOver画面を作ったらそっちに切り替える。
     public void LoadTitleScene()
     {
         SceneManager.LoadScene("TitleScene");
