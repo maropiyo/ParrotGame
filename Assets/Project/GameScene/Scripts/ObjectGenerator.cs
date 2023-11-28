@@ -14,14 +14,11 @@ public class ObjectGenerator : MonoBehaviour
     public GameObject currentObject;
     // 次のオブジェクト
     public GameObject nextObject;
-    // 卵のスプライト
-    public Sprite egg;
-    // 割れた卵のスプライト
-    public Sprite brokenEgg;
     // 生成位置
     private Vector2 spawnPosition = new Vector2(0, 3.0f);
     // Playerオブジェクト
     private GameObject player;
+    private PlayerSpriteManager playerSpriteManager;
     // オートモードトグル
     public Toggle autoModeToggle;
 
@@ -30,6 +27,7 @@ public class ObjectGenerator : MonoBehaviour
     {
         // Playerオブジェクトを取得
         player = GameObject.Find("Player");
+        playerSpriteManager = player.GetComponent<PlayerSpriteManager>();
 
         while (generatedObjectQueue.Count < 3)
         {
@@ -76,8 +74,9 @@ public class ObjectGenerator : MonoBehaviour
     /// <param name="spawnObject"></param>
     private void SpawnObject(GameObject spawnObject)
     {
-        // スポーン位置を設定
-        spawnPosition = new Vector2(player.transform.position.x, player.transform.position.y + 0.1f);
+        playerSpriteManager.ChangeNormalSprite();
+        // スポーン位置を設定し生成
+        spawnPosition = player.transform.position;
         currentObject = Instantiate(spawnObject, spawnPosition, Quaternion.identity);
         // 現在のオブジェクトをPlayerオブジェクトの子要素にする
         currentObject.transform.parent = player.transform;
@@ -98,6 +97,7 @@ public class ObjectGenerator : MonoBehaviour
     {
         if (currentObject)
         {
+            playerSpriteManager.ChangeFallSprite();
             // 重力を有効化
             currentObject.GetComponent<Rigidbody2D>().gravityScale = 1;
             // 当たり判定を有効化
