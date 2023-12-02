@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ES3GlobalReferences
   m_EditorClassIdentifier: 
   refId:
-    _Keys: []
-    _Values: 
+    _Keys:
+    - {fileID: 11500000, guid: 00c65f47efcce475cb375e78da630419, type: 3}
+    _Values: 3d781aa91db2a15b
