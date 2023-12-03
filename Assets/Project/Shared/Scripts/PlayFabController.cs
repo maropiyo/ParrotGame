@@ -101,7 +101,7 @@ public class PlayFabController : MonoBehaviour
         Debug.Log($"表示名の更新に成功しました。DisplayName: {result.DisplayName}");
         // UIを更新する。
         DisplayName = result.DisplayName;
-        GameObject.Find("SceneController").GetComponent<TitleSceneManager>().UpdateDisplayName(DisplayName);
+        GameObject.Find("SceneController").GetComponent<TitleSceneManager>().ShowDisplayName();
     }
     // 表示名の更新失敗時に呼ばれる
     private void OnUpdatedisplayNameFailure(PlayFabError error)
@@ -139,7 +139,7 @@ public class PlayFabController : MonoBehaviour
         Debug.Log($"表示名の取得に成功しました。DisplayName: {result.PlayerProfile.DisplayName}");
         // UIを更新する。
         DisplayName = result.PlayerProfile.DisplayName;
-        GameObject.Find("SceneController").GetComponent<TitleSceneManager>().UpdateDisplayName(DisplayName);
+        GameObject.Find("SceneController").GetComponent<TitleSceneManager>().ShowDisplayName();
     }
     // 表示名の取得失敗時に呼ばれる
     private void OnGetDisplayNameFailure(PlayFabError error)

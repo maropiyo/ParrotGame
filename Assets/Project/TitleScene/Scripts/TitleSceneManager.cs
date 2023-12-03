@@ -13,6 +13,8 @@ public class TitleSceneManager : MonoBehaviour
     [SerializeField] Text DisplayNameText;
     // 表示名入力欄
     [SerializeField] InputField DisplayNameInputField;
+    // ベストスコアを表示するテキスト
+    [SerializeField] Text BestScoreText;
     // ユーザー情報ポップアップ
     [SerializeField] private GameObject UserInfoPopup;
 
@@ -21,9 +23,12 @@ public class TitleSceneManager : MonoBehaviour
         // すでにログインしている場合
         if (PlayFabClientAPI.IsClientLoggedIn())
         {
-            // 表示名を取得する。
-            PlayFabController.Instance.GetDisplayName(PlayFabSettings.staticPlayer.PlayFabId);
+            // 表示名を表示する。
+            ShowDisplayName();
         }
+
+        // ベストスコアを表示する。
+        BestScoreText.text = "BestScore: " + ES3.Load<int>("BestScore", defaultValue: 0);
     }
 
     // ゲーム画面をロードする
@@ -32,13 +37,14 @@ public class TitleSceneManager : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
-    // 表示名を更新する
-    public void UpdateDisplayName(string displayName)
+    // 表示名を表示する
+    public void ShowDisplayName()
     {
-        // 入力欄の文字列を表示名に設定する。
-        DisplayNameText.text = displayName;
+        string displayName = GameObject.Find("PlayFabController").GetComponent<PlayFabController>().DisplayName;
         // 表示名を更新する。
         DisplayNameInputField.text = displayName;
+        // 表示名入力欄の文字列を更新する。
+        DisplayNameText.text = displayName;
     }
 
     /// ユーザー情報ポップアップを表示する

@@ -32,6 +32,8 @@ public class ObjectPositionChecker : MonoBehaviour
         // 画面外に出たかどうかを判定
         if (screenPosition.x < 0 || screenPosition.x > Screen.width || screenPosition.y < 0 || screenPosition.y > Screen.height)
         {
+            // 一回だけ処理を行う
+            enabled = false;
             // ベストスコアを保存
             scoreManager.SaveBestScore();
             StartCoroutine(PauseAndLoadCoroutine());
