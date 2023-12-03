@@ -22,14 +22,16 @@ public class BgmPlayer : MonoBehaviour
                 // Sceneを遷移してもオブジェクトが消えないようにする
                 DontDestroyOnLoad(gameObject);
             }
-
-            // BGMを再生
-            PlayBGM();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
+        PlayBGM();
     }
 
     void PlayBGM()
