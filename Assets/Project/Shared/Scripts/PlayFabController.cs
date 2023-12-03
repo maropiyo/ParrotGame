@@ -99,8 +99,9 @@ public class PlayFabController : MonoBehaviour
     private void OnUpdateDisplayNameSuccess(UpdateUserTitleDisplayNameResult result)
     {
         Debug.Log($"表示名の更新に成功しました。DisplayName: {result.DisplayName}");
-        // UIを更新する。
         DisplayName = result.DisplayName;
+        // 表示名を保存する。
+        ES3.Save<string>("DisplayName", DisplayName);
         GameObject.Find("SceneController").GetComponent<TitleSceneManager>().ShowDisplayName();
     }
     // 表示名の更新失敗時に呼ばれる
@@ -137,8 +138,9 @@ public class PlayFabController : MonoBehaviour
     private void OnGetDisplayNameSuccess(GetPlayerProfileResult result)
     {
         Debug.Log($"表示名の取得に成功しました。DisplayName: {result.PlayerProfile.DisplayName}");
-        // UIを更新する。
         DisplayName = result.PlayerProfile.DisplayName;
+        // 表示名を保存する。
+        ES3.Save<string>("DisplayName", DisplayName);
         GameObject.Find("SceneController").GetComponent<TitleSceneManager>().ShowDisplayName();
     }
     // 表示名の取得失敗時に呼ばれる

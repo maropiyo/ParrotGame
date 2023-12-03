@@ -40,7 +40,7 @@ public class TitleSceneManager : MonoBehaviour
     // 表示名を表示する
     public void ShowDisplayName()
     {
-        string displayName = GameObject.Find("PlayFabController").GetComponent<PlayFabController>().DisplayName;
+        string displayName = ES3.Load<string>("DisplayName", defaultValue: "名無し");
         // 表示名を更新する。
         DisplayNameInputField.text = displayName;
         // 表示名入力欄の文字列を更新する。
