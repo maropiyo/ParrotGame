@@ -28,7 +28,7 @@ public class TitleSceneManager : MonoBehaviour
         }
 
         // ベストスコアを表示する。
-        BestScoreText.text = "BestScore: " + ES3.Load<int>("BestScore", defaultValue: 0);
+        BestScoreText.text = "最高: " + ES3.Load<int>("BestScore", defaultValue: 0);
     }
 
     // ゲーム画面をロードする
