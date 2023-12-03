@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using PlayFab.ClientModels;
 using PlayFab;
@@ -7,6 +8,14 @@ public class PlayFabController : MonoBehaviour
 {
     public static PlayFabController Instance;
     public bool DontDestroyEnabled = true;
+    // 情報を取得する際のパラメータ
+    [SerializeField] GetPlayerCombinedInfoRequestParams InfoRequestParams;
+    // ユーザー名
+    [HideInInspector] public string UserName { get; private set; }
+
+    // ユーザー名テキスト
+    [SerializeField] Text UserNameText;
+
 
     void Awake()
     {
@@ -38,9 +47,12 @@ public class PlayFabController : MonoBehaviour
         PlayFabAuthService.OnPlayFabError -= PlayFabAuthService_OnPlayFabError;
     }
 
-    private void PlayFabAuthService_OnLoginSuccess(LoginResult success)
+    private void PlayFabAuthService_OnLoginSuccess(LoginResult result)
     {
         Debug.Log("ログイン成功");
+        // ユーザー名を取得してUIに表示する。
+        UserName = result.InfoResultPayload.UserData["Name"].Value;
+        UserNameText.text = UserName;
     }
     private void PlayFabAuthService_OnPlayFabError(PlayFabError error)
     {
@@ -49,7 +61,34 @@ public class PlayFabController : MonoBehaviour
     }
     void Start()
     {
+        // InfoRequestParamsを初期化
+        PlayFabAuthService.Instance.InfoRequestParams = InfoRequestParams;
+
+        // 匿名認証を行う。
         PlayFabAuthService.Instance.Authenticate(Authtypes.Silent);
+    }
+
+    /// <summary>
+    /// ユーザー名を設定する。
+    /// </summary>
+    /// <param name="displayName"></param>
+    public void SetPlayerDisplayName(string displayName)
+    {
+        PlayFabClientAPI.UpdateUserTitleDisplayName(
+            new UpdateUserTitleDisplayNameRequest
+            {
+                DisplayName = displayName
+            },
+            result =>
+            {
+                Debug.Log("Set display name was succeeded.");
+
+            },
+            error =>
+            {
+                Debug.LogError(error.GenerateErrorReport());
+            }
+        );
     }
 
     /// <summary>
