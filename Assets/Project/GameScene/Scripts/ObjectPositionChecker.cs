@@ -12,6 +12,7 @@ public class ObjectPositionChecker : MonoBehaviour
 
     void Start()
     {
+        enabled = true;
         // ScoreManagerオブジェクトのScoreManagerコンポーネントを取得
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         // SoundEffectManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
@@ -37,6 +38,11 @@ public class ObjectPositionChecker : MonoBehaviour
             // ベストスコアを保存
             scoreManager.SaveBestScore();
             StartCoroutine(PauseAndLoadCoroutine());
+        }
+        else
+        {
+            // 画面内にある場合は処理を継続
+            enabled = true;
         }
     }
 
