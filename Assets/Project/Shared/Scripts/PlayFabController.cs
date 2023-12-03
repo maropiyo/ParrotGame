@@ -1,28 +1,32 @@
-using PlayFab;
-using PlayFab.ClientModels;
 using UnityEngine;
+using PlayFab.ClientModels;
+using PlayFab;
 
 public class PlayFabController : MonoBehaviour
 {
-    void Start()
+    private void OnEnable()
     {
-        // PlayFabにログインする。
-        LoginToPlayFab();
+        PlayFabAuthService.OnLoginSuccess += PlayFabAuthService_OnLoginSuccess;
+        PlayFabAuthService.OnPlayFabError += PlayFabAuthService_OnPlayFabError;
     }
 
-    /// <summary>
-    /// PlayFabにログインする。
-    /// </summary>
-    void LoginToPlayFab()
+    private void OnDisable()
     {
-        PlayFabClientAPI.LoginWithCustomID(
-            new LoginWithCustomIDRequest
-            {
-                CustomId = System.Guid.NewGuid().ToString("N"),
-                // アカウントが存在しない場合は新規作成する。
-                CreateAccount = true,
-            }
-        , OnSuccess => Debug.Log("PlayFab Login Success")
-        , OnFailure => Debug.Log("PlayFab Login Failure"));
+        PlayFabAuthService.OnLoginSuccess -= PlayFabAuthService_OnLoginSuccess;
+        PlayFabAuthService.OnPlayFabError -= PlayFabAuthService_OnPlayFabError;
+    }
+
+    private void PlayFabAuthService_OnLoginSuccess(LoginResult success)
+    {
+        Debug.Log("ログイン成功");
+    }
+    private void PlayFabAuthService_OnPlayFabError(PlayFabError error)
+    {
+        Debug.Log("ログイン失敗");
+        Debug.Log(error.ToString());
+    }
+    void Start()
+    {
+        PlayFabAuthService.Instance.Authenticate(Authtypes.Silent);
     }
 }
