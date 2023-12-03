@@ -13,6 +13,8 @@ public class PlayFabController : MonoBehaviour
 
     // 表示名テキスト
     [SerializeField] Text DisplayNameText;
+    // 表示名入力欄
+    [SerializeField] private InputField DisplayNameInputField;
 
 
     void Awake()
@@ -48,12 +50,6 @@ public class PlayFabController : MonoBehaviour
     private void PlayFabAuthService_OnLoginSuccess(LoginResult result)
     {
         Debug.Log("ログイン成功");
-        // 新規作成の場合
-        if (result.NewlyCreated)
-        {
-            // 初期ユーザー名を設定
-            SetPlayerDisplayName("No Name");
-        }
         // 表示名を取得してUIに表示する。
         GetDisplayName(result.PlayFabId);
     }
@@ -71,13 +67,12 @@ public class PlayFabController : MonoBehaviour
     /// <summary>
     /// ユーザー名を設定する。
     /// </summary>
-    /// <param name="displayName"></param>
-    public void SetPlayerDisplayName(string displayName)
+    public void SetPlayerDisplayName()
     {
         PlayFabClientAPI.UpdateUserTitleDisplayName(
             new UpdateUserTitleDisplayNameRequest
             {
-                DisplayName = displayName
+                DisplayName = DisplayNameInputField.text
             },
             result =>
             {
@@ -110,6 +105,7 @@ public class PlayFabController : MonoBehaviour
             {
                 DisplayName = result.PlayerProfile.DisplayName;
                 DisplayNameText.text = DisplayName;
+                DisplayNameInputField.text = DisplayName;
                 Debug.Log($"DisplayName: {DisplayName}");
             },
             error =>

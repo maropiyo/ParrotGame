@@ -201,7 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 247954903}
   m_Layer: 5
-  m_Name: InputUserInfoPopup
+  m_Name: UserInfoPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,40 +258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DontDestroyEnabled: 1
-  InfoRequestParams:
-    GetCharacterInventories: 0
-    GetCharacterList: 0
-    GetPlayerProfile: 1
-    GetPlayerStatistics: 0
-    GetTitleData: 0
-    GetUserAccountInfo: 0
-    GetUserData: 0
-    GetUserInventory: 0
-    GetUserReadOnlyData: 0
-    GetUserVirtualCurrency: 0
-    PlayerStatisticNames: []
-    ProfileConstraints:
-      ShowAvatarUrl: 0
-      ShowBannedUntil: 0
-      ShowCampaignAttributions: 0
-      ShowContactEmailAddresses: 0
-      ShowCreated: 0
-      ShowDisplayName: 0
-      ShowExperimentVariants: 0
-      ShowLastLogin: 0
-      ShowLinkedAccounts: 0
-      ShowLocations: 0
-      ShowMemberships: 0
-      ShowOrigination: 0
-      ShowPushNotificationRegistrations: 0
-      ShowStatistics: 0
-      ShowTags: 0
-      ShowTotalValueToDateInUsd: 0
-      ShowValuesToDate: 0
-    TitleDataKeys: []
-    UserDataKeys: []
-    UserReadOnlyDataKeys: []
-  UserNameText: {fileID: 703137078}
+  DisplayNameText: {fileID: 703137078}
+  DisplayNameInputField: {fileID: 920389637}
 --- !u!4 &257947696
 Transform:
   m_ObjectHideFlags: 0
@@ -351,6 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4d6046c3f8d4d2d9a1df612b6fd998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UserInfoPopup: {fileID: 247954902}
 --- !u!1 &420765745
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,7 +551,7 @@ GameObject:
   - component: {fileID: 703137076}
   - component: {fileID: 703137078}
   m_Layer: 5
-  m_Name: UserNameText
+  m_Name: DisplayNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -648,7 +617,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: No name
+  m_Text: 
 --- !u!1 &732933988
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,10 +730,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 247954902}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 376259569}
+        m_TargetAssemblyTypeName: TitleSceneManager, Assembly-CSharp
+        m_MethodName: CloseUserInfoPopup
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -873,7 +842,7 @@ GameObject:
   - component: {fileID: 920389636}
   - component: {fileID: 920389637}
   m_Layer: 5
-  m_Name: NameInputField
+  m_Name: DisplayNameInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -994,7 +963,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnDidEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 257947695}
+        m_TargetAssemblyTypeName: PlayFabController, Assembly-CSharp
+        m_MethodName: SetPlayerDisplayName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2559,7 +2540,7 @@ GameObject:
   - component: {fileID: 1633316214}
   - component: {fileID: 1633316216}
   m_Layer: 5
-  m_Name: Text
+  m_Name: DisplayNameImputFieldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2908,9 +2889,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Name
-
-'
+  m_Text: Name
 --- !u!222 &1777179259
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2931,7 +2910,7 @@ GameObject:
   - component: {fileID: 1871714575}
   - component: {fileID: 1871714574}
   m_Layer: 5
-  m_Name: NameLabelText
+  m_Name: DisplayNameLabelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3223,7 +3202,7 @@ GameObject:
   - component: {fileID: 2112132873}
   - component: {fileID: 2112132874}
   m_Layer: 5
-  m_Name: UserNameButton
+  m_Name: DisplayNameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3331,17 +3310,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1617344276}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 376259569}
+        m_TargetAssemblyTypeName: TitleSceneManager, Assembly-CSharp
+        m_MethodName: ShowUserInfoPopup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
