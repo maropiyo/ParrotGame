@@ -50,9 +50,14 @@ public class PlayFabController : MonoBehaviour
     private void PlayFabAuthService_OnLoginSuccess(LoginResult result)
     {
         Debug.Log("ログイン成功");
+        // 新規作成の場合
+        if (result.NewlyCreated)
+        {
+            // 初期ユーザー名を設定
+            SetPlayerDisplayName("NoName");
+        }
         // ユーザー名を取得してUIに表示する。
-        UserName = result.InfoResultPayload.UserData["Name"].Value;
-        UserNameText.text = UserName;
+        GetDisplayName(result.PlayFabId);
     }
     private void PlayFabAuthService_OnPlayFabError(PlayFabError error)
     {
@@ -83,6 +88,30 @@ public class PlayFabController : MonoBehaviour
             {
                 Debug.Log("Set display name was succeeded.");
 
+            },
+            error =>
+            {
+                Debug.LogError(error.GenerateErrorReport());
+            }
+        );
+    }
+
+    public void GetDisplayName(string playFabId)
+    {
+        PlayFabClientAPI.GetPlayerProfile(
+            new GetPlayerProfileRequest
+            {
+                PlayFabId = playFabId,
+                ProfileConstraints = new PlayerProfileViewConstraints
+                {
+                    ShowDisplayName = true
+                }
+            },
+            result =>
+            {
+                UserName = result.PlayerProfile.DisplayName;
+                UserNameText.text = UserName;
+                Debug.Log($"DisplayName: {UserName}");
             },
             error =>
             {
