@@ -319,6 +319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4d6046c3f8d4d2d9a1df612b6fd998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisplayNameText: {fileID: 703137078}
+  DisplayNameInputField: {fileID: 920389637}
   UserInfoPopup: {fileID: 247954902}
 --- !u!1 &420765745
 GameObject:
@@ -606,7 +608,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -617,7 +619,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: No name
 --- !u!1 &732933988
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,7 +959,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 0
+  m_CharacterLimit: 8
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -966,7 +968,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 257947695}
         m_TargetAssemblyTypeName: PlayFabController, Assembly-CSharp
-        m_MethodName: SetPlayerDisplayName
+        m_MethodName: UpdateDisplayName
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -982,7 +984,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: No name
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0

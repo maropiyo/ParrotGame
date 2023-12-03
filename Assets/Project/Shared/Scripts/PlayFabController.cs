@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using PlayFab.ClientModels;
 using PlayFab;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayFabController : MonoBehaviour
 {
@@ -11,11 +12,11 @@ public class PlayFabController : MonoBehaviour
     // 表示名
     [HideInInspector] public string DisplayName { get; private set; }
 
+    /* UIパーツ */
     // 表示名テキスト
     [SerializeField] Text DisplayNameText;
     // 表示名入力欄
-    [SerializeField] private InputField DisplayNameInputField;
-
+    [SerializeField] InputField DisplayNameInputField;
 
     void Awake()
     {
@@ -35,84 +36,115 @@ public class PlayFabController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    // イベントハンドラーの登録
     private void OnEnable()
     {
+        // ログイン成功時のイベントハンドラーを登録
         PlayFabAuthService.OnLoginSuccess += PlayFabAuthService_OnLoginSuccess;
+        // ログイン失敗時のイベントハンドラーを登録
         PlayFabAuthService.OnPlayFabError += PlayFabAuthService_OnPlayFabError;
     }
-
     private void OnDisable()
     {
+        // ログイン成功時のイベントハンドラーを解除
         PlayFabAuthService.OnLoginSuccess -= PlayFabAuthService_OnLoginSuccess;
+        // ログイン失敗時のイベントハンドラーを解除
         PlayFabAuthService.OnPlayFabError -= PlayFabAuthService_OnPlayFabError;
     }
 
-    private void PlayFabAuthService_OnLoginSuccess(LoginResult result)
-    {
-        Debug.Log("ログイン成功");
-        // 表示名を取得してUIに表示する。
-        GetDisplayName(result.PlayFabId);
-    }
-    private void PlayFabAuthService_OnPlayFabError(PlayFabError error)
-    {
-        Debug.Log("ログイン失敗");
-        Debug.Log(error.ToString());
-    }
     void Start()
     {
         // 匿名認証を行う。
         PlayFabAuthService.Instance.Authenticate(Authtypes.Silent);
     }
 
-    /// <summary>
-    /// ユーザー名を設定する。
-    /// </summary>
-    public void SetPlayerDisplayName()
+    // ログイン成功時に呼ばれる
+    private void PlayFabAuthService_OnLoginSuccess(LoginResult result)
     {
-        PlayFabClientAPI.UpdateUserTitleDisplayName(
-            new UpdateUserTitleDisplayNameRequest
-            {
-                DisplayName = DisplayNameInputField.text
-            },
-            result =>
-            {
-                Debug.Log("Set display name was succeeded.");
-
-            },
-            error =>
-            {
-                Debug.LogError(error.GenerateErrorReport());
-            }
-        );
+        Debug.Log("ログイン成功");
+        // 表示名を取得してUIに表示する。
+        GetDisplayName(result.PlayFabId);
+        // ベストスコアをPlayFabに送信する。(オフラインでスコアを更新した時などに反映される)
+        SubmitScore(ES3.Load<int>("BestScore", defaultValue: 0));
+    }
+    // ログイン失敗時に呼ばれる
+    private void PlayFabAuthService_OnPlayFabError(PlayFabError error)
+    {
+        Debug.Log("ログイン失敗");
+        Debug.Log(error.ToString());
     }
 
     /// <summary>
-    /// 表示名を取得して、UIに表示する。
+    /// 表示名を更新する。
+    /// InputFieldのOnEndEditから呼び出す。
+    /// </summary>
+    public void UpdateDisplayName()
+    {
+        // 表示名の更新リクエストを作成する。
+        var request = new UpdateUserTitleDisplayNameRequest
+        {
+            DisplayName = DisplayNameInputField.text
+        };
+
+        // 表示名の更新を開始する。
+        Debug.Log($"表示名の更新を開始します");
+        PlayFabClientAPI.UpdateUserTitleDisplayName(
+            request,
+            OnUpdateDisplayNameSuccess,
+            OnUpdatedisplayNameFailure
+        );
+    }
+    // 表示名の更新成功時に呼ばれる
+    private void OnUpdateDisplayNameSuccess(UpdateUserTitleDisplayNameResult result)
+    {
+        Debug.Log($"表示名の更新に成功しました。DisplayName: {result.DisplayName}");
+        // UIを更新する。
+        DisplayName = result.DisplayName;
+        GameObject.Find("SceneController").GetComponent<TitleSceneManager>().UpdateDisplayName(DisplayName);
+    }
+    // 表示名の更新失敗時に呼ばれる
+    private void OnUpdatedisplayNameFailure(PlayFabError error)
+    {
+        // エラー内容をログに出力
+        Debug.LogError($"表示名の更新に失敗しました\n{error.GenerateErrorReport()}");
+    }
+
+    /// <summary>
+    /// 表示名を取得する。
     /// </summary>
     /// <param name="playFabId"></param>
     public void GetDisplayName(string playFabId)
     {
-        PlayFabClientAPI.GetPlayerProfile(
-            new GetPlayerProfileRequest
+        // リクエストを作成する。
+        var request = new GetPlayerProfileRequest
+        {
+            PlayFabId = playFabId,
+            ProfileConstraints = new PlayerProfileViewConstraints
             {
-                PlayFabId = playFabId,
-                ProfileConstraints = new PlayerProfileViewConstraints
-                {
-                    ShowDisplayName = true
-                }
-            },
-            result =>
-            {
-                DisplayName = result.PlayerProfile.DisplayName;
-                DisplayNameText.text = DisplayName;
-                DisplayNameInputField.text = DisplayName;
-                Debug.Log($"DisplayName: {DisplayName}");
-            },
-            error =>
-            {
-                Debug.LogError(error.GenerateErrorReport());
+                ShowDisplayName = true
             }
+        };
+        // 表示名の取得を開始する。
+        Debug.Log($"表示名の取得を開始します");
+        PlayFabClientAPI.GetPlayerProfile(
+            request,
+            OnGetDisplayNameSuccess,
+            OnGetDisplayNameFailure
         );
+    }
+    // 表示名の取得成功時に呼ばれる
+    private void OnGetDisplayNameSuccess(GetPlayerProfileResult result)
+    {
+        Debug.Log($"表示名の取得に成功しました。DisplayName: {result.PlayerProfile.DisplayName}");
+        // UIを更新する。
+        DisplayName = result.PlayerProfile.DisplayName;
+        GameObject.Find("SceneController").GetComponent<TitleSceneManager>().UpdateDisplayName(DisplayName);
+    }
+    // 表示名の取得失敗時に呼ばれる
+    private void OnGetDisplayNameFailure(PlayFabError error)
+    {
+        Debug.LogError($"表示名の取得に失敗しました\n{error.GenerateErrorReport()}");
     }
 
     /// <summary>
@@ -121,7 +153,8 @@ public class PlayFabController : MonoBehaviour
     /// <param name="playerScore"></param>
     public void SubmitScore(int playerScore)
     {
-        PlayFabClientAPI.UpdatePlayerStatistics(new UpdatePlayerStatisticsRequest
+        // リクエストを作成する。
+        var request = new UpdatePlayerStatisticsRequest
         {
             Statistics = new List<StatisticUpdate>
             {
@@ -131,13 +164,25 @@ public class PlayFabController : MonoBehaviour
                     Value = playerScore
                 }
             }
-        }, result =>
-        {
-            Debug.Log($"スコア {playerScore} 送信完了！");
-        }, error =>
-        {
-            Debug.Log(error.GenerateErrorReport());
-        });
+        };
+
+        // スコアの送信を開始する。
+        Debug.Log($"スコアの送信を開始します");
+        PlayFabClientAPI.UpdatePlayerStatistics(
+            request,
+            OnSubmitScoreSuccess,
+            OnSubmitScoreFailure
+        );
+    }
+    // スコア送信成功時に呼ばれる
+    private void OnSubmitScoreSuccess(UpdatePlayerStatisticsResult result)
+    {
+        Debug.Log($"スコアの送信に成功しました");
+    }
+    // スコア送信失敗時に呼ばれる
+    private void OnSubmitScoreFailure(PlayFabError error)
+    {
+        Debug.LogError($"スコアの送信に失敗しました\n{error.GenerateErrorReport()}");
     }
 
     /// <summary>
@@ -145,23 +190,31 @@ public class PlayFabController : MonoBehaviour
     /// </summary>
     public void GetLeaderboard()
     {
-        PlayFabClientAPI.GetLeaderboard(new GetLeaderboardRequest
+
+        // リクエストを作成する。
+        var request = new GetLeaderboardRequest
         {
-            StatisticName = "HighScoreRanking"
-        }, result =>
+            StatisticName = "HighScoreRanking",
+        };
+        PlayFabClientAPI.GetLeaderboard(
+            request,
+            OnGetLeaderboardSuccess,
+            OnGetLeaderboardFailure
+            );
+    }
+    // ランキング取得成功時に呼ばれる
+    private void OnGetLeaderboardSuccess(GetLeaderboardResult result)
+    {
+        Debug.Log($"ランキングの取得に成功しました");
+        // ランキングをログに出力する。
+        foreach (var item in result.Leaderboard)
         {
-            foreach (var item in result.Leaderboard)
-            {
-                string displayName = item.DisplayName;
-                if (displayName == null)
-                {
-                    displayName = "NoName";
-                }
-                Debug.Log($"{item.Position + 1}位:{displayName} " + $"スコア {item.StatValue}");
-            }
-        }, error =>
-        {
-            Debug.Log(error.GenerateErrorReport());
-        });
+            Debug.Log($"DisplayName: {item.DisplayName}, Score: {item.StatValue}");
+        }
+    }
+    // ランキング取得失敗時に呼ばれる
+    private void OnGetLeaderboardFailure(PlayFabError error)
+    {
+        Debug.LogError($"ランキングの取得に失敗しました\n{error.GenerateErrorReport()}");
     }
 }
