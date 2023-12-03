@@ -8,13 +8,11 @@ public class PlayFabController : MonoBehaviour
 {
     public static PlayFabController Instance;
     public bool DontDestroyEnabled = true;
-    // 情報を取得する際のパラメータ
-    [SerializeField] GetPlayerCombinedInfoRequestParams InfoRequestParams;
-    // ユーザー名
-    [HideInInspector] public string UserName { get; private set; }
+    // 表示名
+    [HideInInspector] public string DisplayName { get; private set; }
 
-    // ユーザー名テキスト
-    [SerializeField] Text UserNameText;
+    // 表示名テキスト
+    [SerializeField] Text DisplayNameText;
 
 
     void Awake()
@@ -54,9 +52,9 @@ public class PlayFabController : MonoBehaviour
         if (result.NewlyCreated)
         {
             // 初期ユーザー名を設定
-            SetPlayerDisplayName("NoName");
+            SetPlayerDisplayName("No Name");
         }
-        // ユーザー名を取得してUIに表示する。
+        // 表示名を取得してUIに表示する。
         GetDisplayName(result.PlayFabId);
     }
     private void PlayFabAuthService_OnPlayFabError(PlayFabError error)
@@ -66,9 +64,6 @@ public class PlayFabController : MonoBehaviour
     }
     void Start()
     {
-        // InfoRequestParamsを初期化
-        PlayFabAuthService.Instance.InfoRequestParams = InfoRequestParams;
-
         // 匿名認証を行う。
         PlayFabAuthService.Instance.Authenticate(Authtypes.Silent);
     }
@@ -96,6 +91,10 @@ public class PlayFabController : MonoBehaviour
         );
     }
 
+    /// <summary>
+    /// 表示名を取得して、UIに表示する。
+    /// </summary>
+    /// <param name="playFabId"></param>
     public void GetDisplayName(string playFabId)
     {
         PlayFabClientAPI.GetPlayerProfile(
@@ -109,9 +108,9 @@ public class PlayFabController : MonoBehaviour
             },
             result =>
             {
-                UserName = result.PlayerProfile.DisplayName;
-                UserNameText.text = UserName;
-                Debug.Log($"DisplayName: {UserName}");
+                DisplayName = result.PlayerProfile.DisplayName;
+                DisplayNameText.text = DisplayName;
+                Debug.Log($"DisplayName: {DisplayName}");
             },
             error =>
             {
