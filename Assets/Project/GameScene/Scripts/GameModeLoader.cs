@@ -12,10 +12,10 @@ public class GameModeLoader : MonoBehaviour
     void Start()
     {
         gameMode = ES3.Load<string>("GameMode");
-        gameModeChange(gameMode);
+        GameModeChange(gameMode);
     }
 
-    private void gameModeChange(string gameMode)
+    private void GameModeChange(string gameMode)
     {
         switch (gameMode)
         {
