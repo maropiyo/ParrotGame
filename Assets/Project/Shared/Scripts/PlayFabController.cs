@@ -3,20 +3,14 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using PlayFab.ClientModels;
 using PlayFab;
-using UnityEngine.SocialPlatforms.Impl;
+using System.Collections;
 
 public class PlayFabController : MonoBehaviour
 {
+    // シングルトンパターンの実装
     public static PlayFabController Instance;
-    public bool DontDestroyEnabled = true;
     // 表示名
-    [HideInInspector] public string DisplayName { get; private set; }
-
-    /* UIパーツ */
-    // 表示名テキスト
-    [SerializeField] Text DisplayNameText;
-    // 表示名入力欄
-    [SerializeField] InputField DisplayNameInputField;
+    public string DisplayName { get; private set; }
 
     void Awake()
     {
@@ -24,12 +18,8 @@ public class PlayFabController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-
-            if (DontDestroyEnabled)
-            {
-                // Sceneを遷移してもオブジェクトが消えないようにする
-                DontDestroyOnLoad(gameObject);
-            }
+            // Sceneを遷移してもオブジェクトが消えないようにする
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -37,12 +27,11 @@ public class PlayFabController : MonoBehaviour
         }
     }
 
-    // イベントハンドラーの登録
     private void OnEnable()
     {
-        // ログイン成功時のイベントハンドラーを登録
+        // PlayFabAuthServiceのログイン成功時のイベントハンドラーを登録
         PlayFabAuthService.OnLoginSuccess += PlayFabAuthService_OnLoginSuccess;
-        // ログイン失敗時のイベントハンドラーを登録
+        // PlayFabAuthServiceのログイン失敗時のイベントハンドラーを登録
         PlayFabAuthService.OnPlayFabError += PlayFabAuthService_OnPlayFabError;
     }
     private void OnDisable()
@@ -55,7 +44,7 @@ public class PlayFabController : MonoBehaviour
 
     void Start()
     {
-        // 匿名認証を行う。
+        // ログイン認証を開始する。
         PlayFabAuthService.Instance.Authenticate(Authtypes.Silent);
     }
 
@@ -63,10 +52,17 @@ public class PlayFabController : MonoBehaviour
     private void PlayFabAuthService_OnLoginSuccess(LoginResult result)
     {
         Debug.Log("ログイン成功");
-        // 表示名を取得してUIに表示する。
-        GetDisplayName(result.PlayFabId);
-        // ベストスコアをPlayFabに送信する。(オフラインでスコアを更新した時などに反映される)
-        SubmitScore(ES3.Load<int>("BestScore", defaultValue: 0));
+        // 新規登録の場合は表示名を更新する。
+        if (result.NewlyCreated)
+        {
+            // 初期表示名を設定してから表示名を取得する。
+            StartCoroutine(UpdateAndGetDisplayName("名無しさん", result.PlayFabId));
+        }
+        else
+        {
+            // 表示名を取得する。
+            GetDisplayName(result.PlayFabId);
+        }
     }
     // ログイン失敗時に呼ばれる
     private void PlayFabAuthService_OnPlayFabError(PlayFabError error)
@@ -76,15 +72,42 @@ public class PlayFabController : MonoBehaviour
     }
 
     /// <summary>
+    /// 表示名を更新してから取得する。(新規登録時のみ使用)
+    /// </summary>
+    /// <param name="displayName"></param>
+    /// <param name="playFabId"></param>
+    /// <returns></returns>
+    private IEnumerator UpdateAndGetDisplayName(string displayName, string playFabId)
+    {
+        // UpdateDisplayNameを実行
+        UpdateDisplayName(displayName);
+
+        // UpdateDisplayNameが完了するのを待つ
+        while (DisplayName == null)
+        {
+            // 1フレーム待つ
+            yield return null;
+        }
+
+        // 表示名が更新されたので、その後にGetDisplayNameを実行
+        GetDisplayName(playFabId);
+    }
+
+    /// <summary>
     /// 表示名を更新する。
     /// InputFieldのOnEndEditから呼び出す。
     /// </summary>
-    public void UpdateDisplayName()
+    public void UpdateDisplayName(string displayName)
     {
+        // 表示名が未入力の場合は処理を終了する。
+        if (displayName == "")
+        {
+            return;
+        }
         // 表示名の更新リクエストを作成する。
         var request = new UpdateUserTitleDisplayNameRequest
         {
-            DisplayName = DisplayNameInputField.text
+            DisplayName = displayName
         };
 
         // 表示名の更新を開始する。
@@ -100,9 +123,8 @@ public class PlayFabController : MonoBehaviour
     {
         Debug.Log($"表示名の更新に成功しました。DisplayName: {result.DisplayName}");
         DisplayName = result.DisplayName;
-        // 表示名を保存する。
-        ES3.Save<string>("DisplayName", DisplayName);
-        GameObject.Find("SceneController").GetComponent<TitleSceneManager>().ShowDisplayName();
+        // 表示名をローカルに保存する。
+        EasySaveManager.Instance.SaveDisplayName(result.DisplayName);
     }
     // 表示名の更新失敗時に呼ばれる
     private void OnUpdatedisplayNameFailure(PlayFabError error)
@@ -139,9 +161,8 @@ public class PlayFabController : MonoBehaviour
     {
         Debug.Log($"表示名の取得に成功しました。DisplayName: {result.PlayerProfile.DisplayName}");
         DisplayName = result.PlayerProfile.DisplayName;
-        // 表示名を保存する。
-        ES3.Save<string>("DisplayName", DisplayName);
-        GameObject.Find("SceneController").GetComponent<TitleSceneManager>().ShowDisplayName();
+        // 表示名をローカルに保存する。
+        EasySaveManager.Instance.SaveDisplayName(result.PlayerProfile.DisplayName);
     }
     // 表示名の取得失敗時に呼ばれる
     private void OnGetDisplayNameFailure(PlayFabError error)
