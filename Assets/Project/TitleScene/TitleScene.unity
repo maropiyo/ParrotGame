@@ -241,7 +241,7 @@ GameObject:
   m_Layer: 0
   m_Name: PlayFabController
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -257,7 +257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c65f47efcce475cb375e78da630419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DontDestroyEnabled: 1
 --- !u!4 &257947696
 Transform:
   m_ObjectHideFlags: 0
@@ -284,7 +283,7 @@ GameObject:
   - component: {fileID: 376259568}
   - component: {fileID: 376259569}
   m_Layer: 0
-  m_Name: TitleSceneManager
+  m_Name: SceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -317,10 +316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4d6046c3f8d4d2d9a1df612b6fd998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayNameText: {fileID: 703137078}
-  DisplayNameInputField: {fileID: 920389637}
-  BestScoreText: {fileID: 664095010}
-  UserInfoPopup: {fileID: 247954902}
 --- !u!1 &420765745
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +408,7 @@ GameObject:
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -429,7 +424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cecdef0bcd70424a93a75cd7f2be24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DontDestroyEnabled: 1
   bgmAudioSource: {fileID: 1150961896}
   bgm: {fileID: 8300000, guid: b0934df84ba3347d9a03c97d9d80b89b, type: 3}
 --- !u!4 &510954308
@@ -549,6 +543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 545747346}
+  - component: {fileID: 545747347}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -571,6 +566,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &545747347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545747345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be854b5cf947846f7afa9b0723fb67c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayNameText: {fileID: 703137078}
+  DisplayNameInputField: {fileID: 920389637}
+  BestScoreText: {fileID: 664095010}
+  UserInfoPopup: {fileID: 247954902}
+  ModeSelectPopup: {fileID: 1434754784}
 --- !u!1 &664095008
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,8 +853,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 376259569}
-        m_TargetAssemblyTypeName: TitleSceneManager, Assembly-CSharp
+      - m_Target: {fileID: 545747347}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: CloseUserInfoPopup
         m_Mode: 1
         m_Arguments:
@@ -1075,9 +1087,9 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 257947695}
-        m_TargetAssemblyTypeName: PlayFabController, Assembly-CSharp
-        m_MethodName: UpdateDisplayName
+      - m_Target: {fileID: 545747347}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SaveDisplayName
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1276,7 +1288,7 @@ MonoBehaviour:
   openPrefabs: 0
   prefabs: []
   idRef:
-    _Keys: 29e076c9adf9ac575ad1afe3a1bcd54c47935afcab9af96661bc2f1bd2e0e53e9ef33dfc55c21e74565af6ee58d9e4591e1b649075b4e73c2623d596d637d578138fb9528126097b8b1959ae5cf5f2792829014984ab36170c00d732ec889d1e857e02e89336da4425e01b8e0e96981aeab14100c6e1036758a25d81fd3b6813b77733daf7da0c5efdb9919b383ada7569bc1d9dca9de56582694035945c4260b6d0ba79368cee105c1d037f8c615f6c7cd3eaba5906dd545c985c601b42f35f88ceaef60bab540bac2d42ad9a65d8200ad4b26746fdba4ff2651d9d308df4621163085b0f56772f82219978b674103d8f8395100ba4597a7702fc5a71482439dd5b63c8a283ef4ca37d19db9cbe67678aa5d44cddfa926b0a8ee40d5a1dbe39fd605612d8d9e01174e1b488be3516356a63d0cb74d85c2813312ece9702593f3b52d8fc14793f4f3b3d2604b9f6522b79afa4f64cf2c424052d00a6ab117970778a3ceef2edb61da42007b2fe60e10879822bce4376a83566cc6bc723b355567594657bbc50e366a3de1cf72d1f43584b308401ca52cc1eb799141daa41d635699578463883925de527abf054c4ca4d338c56a3228bfb37520090b8c81d961ee4750eff8d8ff151616e0adde72b5d5b47036cc1e110f70987bf17d5092b4d4ebb3979bad702a0775378efb15fe3bd06944769d2489d7435334a2dfa09d1857031cd810521e94704bcb78233ec816f282ef77b6f3d15774aa9d767c4358843394d62eca2f719967e0f7924282e8f6945f9d781c37125301ee00e0853c812ad6fa006ef806a1fa428a60493ca3e1e6956a927a0a041a91814cfee615ae7621f6b594c641af9c79914e1fbb1a67f00ef35a200f145270288703f4bb8b9c31cac13a7487620217056432be5040b87c06c58f4c86c3f0fae7d3180eb30f25dbd8702a9c54ec7770f571158351a41fd7de90049ef3a054f92fc07ca459f354064e61793f99c3e8e5b1e03e08169ba3640d1012ccfc4b30772ae1537b86e435072ad44e4ce2b08e5d8715b2fac7125edd2ad3685c29409bf7bb7183e7b67277bf1b471329b225d2448d74d94c31b4edd1e8a10b8e4cb0cdadb546fc1c8636839d5b1757805d824585af41253564d4c5c61345cfb88209f433fb356b84d62a41b90eb4112a6d6d74666b75d13a6b7744f0fdf519101cea8ea061f3da6294ff10a8c8e297f237fb388db2d3335e0f2738f93d94a2b652859b33b1d291c8c296fbbc03652e2bbef28093ecd79e156b0fc0ae9b406192c4a09198b9e29d54501a664053654fa7d43afec024517b044c3d1b9ea63566c039240df9f1b54985d0b79a948126f3d781aa91db2a15b28ea1c6a88bbc70331246de11c918d69af9c26c491ea477e043a61b0039e763606167bb628ab6f258fbc147572a2c126aca29882e2214d12cf65923de287f82f665c19cdf3bc6d02db1cd963159ef65dc5a9924a3a65e775bd47ec0f4c96ef2173bdac142116937ae9ed39efd45b365039c3cbf3f0a49f68032e2e0480837b421b7a85f076dcaf21f7c01335f1f9a7270dc39ba9e6f21212ea19ca987c2cba5ab70999a382fd744e18250a2d4598253998820727e555c049f01db562856f3252f3de63ab9b4a530d60f70e20b7f1af3f3f75524024d867710f0b412ee00e4070077effde23714c5f888b8a338e3a0a216b52ce2b7e2dac1314d49215647f733055e458859ebafd5b399393ff0df66f2276492c202f78f5601b94c55949eb1e7c578171ffd0bd3250d5f5d83410c721355ed575a6797344644a197afde93b335e91238a5d23f7de19f7b899580733d47a34bce8579cb69e4bcc400be36bc3847acf68e377f6fc571ddaa6fe8d57a90d4e8e35cd7f9b5a22329d628341d443812b5dacabec6d10c063dded78402778ab6d6819a8a7c501db5c066ea6120a463f7976c2e0005dfc8c7b6a697c545157e967174fcff296acfe6115fcba2e4484053f4c2eae96a302dd6f7ae5278f7c9d2b2ac1c6ce865b63b77dcf28018daa555465
+    _Keys: 29e076c9adf9ac575ad1afe3a1bcd54c47935afcab9af96661bc2f1bd2e0e53e9ef33dfc55c21e74565af6ee58d9e4591e1b649075b4e73c2623d596d637d578138fb9528126097b8b1959ae5cf5f2792829014984ab36170c00d732ec889d1e857e02e89336da4425e01b8e0e96981aeab14100c6e1036758a25d81fd3b6813b77733daf7da0c5efdb9919b383ada7569bc1d9dca9de56582694035945c4260b6d0ba79368cee105c1d037f8c615f6c7cd3eaba5906dd545c985c601b42f35f88ceaef60bab540bac2d42ad9a65d8200ad4b26746fdba4ff2651d9d308df4621163085b0f56772f82219978b674103d8f8395100ba4597a7702fc5a71482439dd5b63c8a283ef4ca37d19db9cbe67678aa5d44cddfa926b0a8ee40d5a1dbe39fd605612d8d9e01174e1b488be3516356a63d0cb74d85c2813312ece9702593f3b52d8fc14793f4f3b3d2604b9f6522b79afa4f64cf2c424052d00a6ab117970778a3ceef2edb61da42007b2fe60e10879822bce4376a83566cc6bc723b355567594657bbc50e366a3de1cf72d1f43584b308401ca52cc1eb799141daa41d635699578463883925de527abf054c4ca4d338c56a3228bfb37520090b8c81d961ee4750eff8d8ff151616e0adde72b5d5b47036cc1e110f70987bf17d5092b4d4ebb3979bad702a0775378efb15fe3bd06944769d2489d7435334a2dfa09d1857031cd810521e94704bcb78233ec816f282ef77b6f3d15774aa9d767c4358843394d62eca2f719967e0f7924282e8f6945f9d781c37125301ee00e0853c812ad6fa006ef806a1fa428a60493ca3e1e6956a927a0a041a91814cfee615ae7621f6b594c641af9c79914e1fbb1a67f00ef35a200f145270288703f4bb8b9c31cac13a7487620217056432be5040b87c06c58f4c86c3f0fae7d3180eb30f25dbd8702a9c54ec7770f571158351a41fd7de90049ef3a054f92fc07ca459f354064e61793f99c3e8e5b1e03e08169ba3640d1012ccfc4b30772ae1537b86e435072ad44e4ce2b08e5d8715b2fac7125edd2ad3685c29409bf7bb7183e7b67277bf1b471329b225d2448d74d94c31b4edd1e8a10b8e4cb0cdadb546fc1c8636839d5b1757805d824585af41253564d4c5c61345cfb88209f433fb356b84d62a41b90eb4112a6d6d74666b75d13a6b7744f0fdf519101cea8ea061f3da6294ff10a8c8e297f237fb388db2d3335e0f2738f93d94a2b652859b33b1d291c8c296fbbc03652e2bbef28093ecd79e156b0fc0ae9b406192c4a09198b9e29d54501a664053654fa7d43afec024517b044c3d1b9ea63566c039240df9f1b54985d0b79a948126f3d781aa91db2a15b28ea1c6a88bbc70331246de11c918d69af9c26c491ea477e043a61b0039e763606167bb628ab6f258fbc147572a2c126aca29882e2214d12cf65923de287f82f665c19cdf3bc6d02db1cd963159ef65dc5a9924a3a65e775bd47ec0f4c96ef2173bdac142116937ae9ed39efd45b365039c3cbf3f0a49f68032e2e0480837b421b7a85f076dcaf21f7c01335f1f9a7270dc39ba9e6f21212ea19ca987c2cba5ab70999a382fd744e18250a2d4598253998820727e555c049f01db562856f3252f3de63ab9b4a530d60f70e20b7f1af3f3f75524024d867710f0b412ee00e4070077effde23714c5f888b8a338e3a0a216b52ce2b7e2dac1314d49215647f733055e458859ebafd5b399393ff0df66f2276492c202f78f5601b94c55949eb1e7c578171ffd0bd3250d5f5d83410c721355ed575a6797344644a197afde93b335e91238a5d23f7de19f7b899580733d47a34bce8579cb69e4bcc400be36bc3847acf68e377f6fc571ddaa6fe8d57a90d4e8e35cd7f9b5a22329d628341d443812b5dacabec6d10c063dded78402778ab6d6819a8a7c501db5c066ea6120a463f7976c2e0005dfc8c7b6a697c545157e967174fcff296acfe6115fcba2e4484053f4c2eae96a302dd6f7ae5278f7c9d2b2ac1c6ce865b63b77dcf28018daa5554658ad0ac5191b7132d6a848ebfc68c561f
     _Values:
     - {fileID: 519420032}
     - {fileID: 519420028}
@@ -1459,6 +1471,8 @@ MonoBehaviour:
     - {fileID: 664095010}
     - {fileID: 545747345}
     - {fileID: 545747346}
+    - {fileID: 11500000, guid: be854b5cf947846f7afa9b0723fb67c1, type: 3}
+    - {fileID: 545747347}
 --- !u!4 &947432805
 Transform:
   m_ObjectHideFlags: 0
@@ -2491,10 +2505,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1434754784}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 545747347}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: CloseModeSelectPopup
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3191,10 +3205,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1434754784}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 545747347}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ShowModeSelectPopup
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3441,8 +3455,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 376259569}
-        m_TargetAssemblyTypeName: TitleSceneManager, Assembly-CSharp
+      - m_Target: {fileID: 545747347}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: ShowUserInfoPopup
         m_Mode: 1
         m_Arguments:
@@ -3460,10 +3474,10 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 928891632}
   - {fileID: 64436949}
-  - {fileID: 376259568}
   - {fileID: 1326143569}
-  - {fileID: 947432805}
+  - {fileID: 376259568}
+  - {fileID: 545747346}
   - {fileID: 1306377786}
   - {fileID: 510954308}
   - {fileID: 257947696}
-  - {fileID: 545747346}
+  - {fileID: 947432805}
