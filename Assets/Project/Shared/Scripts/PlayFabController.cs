@@ -143,6 +143,8 @@ public class PlayFabController : MonoBehaviour
     {
         Debug.Log($"表示名の取得に成功しました。DisplayName: {result.PlayerProfile.DisplayName}");
         DisplayName = result.PlayerProfile.DisplayName;
+        // ローカルのベストスコアをPlayFabに送信する。
+        SubmitScore(EasySaveManager.Instance.BestScore);
     }
     // 表示名の取得失敗時に呼ばれる
     private void OnGetDisplayNameFailure(PlayFabError error)
