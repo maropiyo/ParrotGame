@@ -41,21 +41,15 @@ public class EasySaveManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        // セーブデータをロードする。
-        Load();
-    }
-
     // セーブデータをロードする。
     public void Load()
     {
         // ベストスコアをロードする。
-        BestScore = ES3.Load(KEY_BEST_SCORE, 0);
+        BestScore = ES3.Load(KEY_BEST_SCORE, defaultValue: 0);
         // BGMの音量をロードする。
-        BgmVolume = ES3.Load(KEY_BGM_VOLUME, 1.0f);
+        BgmVolume = ES3.Load(KEY_BGM_VOLUME, defaultValue: 1.0f);
         // SEの音量をロードする。
-        SeVolume = ES3.Load(KEY_SE_VOLUME, 1.0f);
+        SeVolume = ES3.Load(KEY_SE_VOLUME, defaultValue: 1.0f);
         // 表示名をロードする。
         DisplayName = ES3.Load<string>(KEY_DISPLAY_NAME, defaultValue: "名無しさん");
     }
