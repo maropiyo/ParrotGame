@@ -21,7 +21,7 @@ public class ObjectPositionChecker : MonoBehaviour
         gameSceneManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         CheckIfOutOfScreen();
     }
