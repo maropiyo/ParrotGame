@@ -61,7 +61,7 @@ public class PlayFabController : MonoBehaviour
         if (result.NewlyCreated)
         {
             // 初期表示名を設定してから表示名を取得する。
-            UpdateAndGetDisplayName("名無しさん");
+            UpdateAndGetDisplayName("名無しのインコ");
         }
         else
         {

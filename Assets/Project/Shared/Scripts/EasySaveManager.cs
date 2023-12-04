@@ -41,6 +41,12 @@ public class EasySaveManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        // セーブデータをロードする。
+        Load();
+    }
+
     // セーブデータをロードする。
     public void Load()
     {
@@ -51,7 +57,7 @@ public class EasySaveManager : MonoBehaviour
         // SEの音量をロードする。
         SeVolume = ES3.Load(KEY_SE_VOLUME, defaultValue: 1.0f);
         // 表示名をロードする。
-        DisplayName = ES3.Load<string>(KEY_DISPLAY_NAME, defaultValue: "名無しさん");
+        DisplayName = ES3.Load<string>(KEY_DISPLAY_NAME, defaultValue: "名無しのインコ");
     }
 
     // べストスコアをセーブする。
