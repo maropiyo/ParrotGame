@@ -12,7 +12,7 @@ public class EasySaveManager : MonoBehaviour
     const string KEY_BGM_VOLUME = "BgmVolume";
     const string KEY_SE_VOLUME = "SeVolume";
     const string KEY_DISPLAY_NAME = "DisplayName";
-
+    const string KEY_GAME_MODE = "GameMode";
 
     // ベストスコア
     public int BestScore { get; private set; }
@@ -57,7 +57,7 @@ public class EasySaveManager : MonoBehaviour
         // SEの音量をロードする。
         SeVolume = ES3.Load(KEY_SE_VOLUME, 1.0f);
         // 表示名をロードする。
-        DisplayName = ES3.Load<string>(KEY_DISPLAY_NAME, "");
+        DisplayName = ES3.Load<string>(KEY_DISPLAY_NAME, defaultValue: "名無しさん");
     }
 
     // べストスコアをセーブする。
@@ -92,6 +92,6 @@ public class EasySaveManager : MonoBehaviour
     public void SaveGameMode(string gameMode)
     {
         // ゲームモードをセーブする。
-        ES3.Save<string>("GameMode", gameMode);
+        ES3.Save(KEY_GAME_MODE, gameMode);
     }
 }
