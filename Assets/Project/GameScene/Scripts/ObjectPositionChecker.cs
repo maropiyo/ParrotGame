@@ -35,6 +35,8 @@ public class ObjectPositionChecker : MonoBehaviour
         {
             // 一回だけ処理を行う
             enabled = false;
+            // プレイヤーの動きを止める
+            GameObject.Find("Player").GetComponent<PlayerMover>().canMove = false;
             // ベストスコアを保存
             scoreManager.SaveBestScore();
             StartCoroutine(PauseAndLoadCoroutine());
