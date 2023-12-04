@@ -8,19 +8,22 @@ public class EasySaveManager : MonoBehaviour
     public static EasySaveManager Instance;
 
     // セーブデータのキー
-    const string KEY_HIGH_SCORE = "HighScore";
+    const string KEY_BEST_SCORE = "BestScore";
     const string KEY_BGM_VOLUME = "BgmVolume";
     const string KEY_SE_VOLUME = "SeVolume";
     const string KEY_DISPLAY_NAME = "DisplayName";
 
-    // ハイスコア
-    public int HighScore { get; private set; }
+
+    // ベストスコア
+    public int BestScore { get; private set; }
     // BGMの音量
     public float BgmVolume { get; private set; }
     // SEの音量
     public float SeVolume { get; private set; }
     // 表示名
     public string DisplayName { get; private set; }
+    // ゲームモード
+    public string GameMode { get; set; }
 
 
     void Awake()
@@ -47,8 +50,8 @@ public class EasySaveManager : MonoBehaviour
     // セーブデータをロードする。
     public void Load()
     {
-        // ハイスコアをロードする。
-        HighScore = ES3.Load(KEY_HIGH_SCORE, 0);
+        // ベストスコアをロードする。
+        BestScore = ES3.Load(KEY_BEST_SCORE, 0);
         // BGMの音量をロードする。
         BgmVolume = ES3.Load(KEY_BGM_VOLUME, 1.0f);
         // SEの音量をロードする。
@@ -57,11 +60,11 @@ public class EasySaveManager : MonoBehaviour
         DisplayName = ES3.Load<string>(KEY_DISPLAY_NAME, "");
     }
 
-    // ハイスコアをセーブする。
-    public void SaveHighScore(int highScore)
+    // べストスコアをセーブする。
+    public void SaveBestScore(int bestScore)
     {
-        // ハイスコアをセーブする。
-        ES3.Save(KEY_HIGH_SCORE, highScore);
+        // べストスコアをセーブする。
+        ES3.Save(KEY_BEST_SCORE, bestScore);
     }
 
     // BGMの音量をセーブする。
@@ -83,5 +86,12 @@ public class EasySaveManager : MonoBehaviour
     {
         // 表示名をセーブする。
         ES3.Save(KEY_DISPLAY_NAME, displayName);
+    }
+
+    // ゲームモードをセーブする。
+    public void SaveGameMode(string gameMode)
+    {
+        // ゲームモードをセーブする。
+        ES3.Save<string>("GameMode", gameMode);
     }
 }
