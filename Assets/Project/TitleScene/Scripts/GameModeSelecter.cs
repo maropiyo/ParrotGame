@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameModeSelector : MonoBehaviour
 {
     // シーンコントローラー
-    GameObject sceneController = GameObject.Find("SceneController");
+    public GameObject sceneController;
 
     /// <summary>
     /// ゲームモードをNormalに設定してGameSceneに遷移する。
