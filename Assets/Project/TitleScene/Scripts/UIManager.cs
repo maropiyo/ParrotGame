@@ -66,6 +66,8 @@ class UIManager : MonoBehaviour
         EasySaveManager.Instance.SaveDisplayName(displayName);
         // 表示名をPlayFabに保存する。
         PlayFabController.Instance.UpdateDisplayName(displayName);
+        // ユーザー情報ポップアップを閉じる。
+        CloseUserInfoPopup();
         // UIを更新する。
         UpdateUI();
     }
