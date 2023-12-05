@@ -65,7 +65,7 @@ class UIManager : MonoBehaviour
         // 表示名をローカルに保存する。
         EasySaveManager.Instance.SaveDisplayName(displayName);
         // 表示名をPlayFabに保存する。
-        PlayFabController.Instance.UpdateAndGetDisplayName(displayName);
+        PlayFabController.Instance.UpdateDisplayName(displayName);
         // UIを更新する。
         UpdateUI();
     }

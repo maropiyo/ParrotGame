@@ -9,8 +9,6 @@ public class PlayFabController : MonoBehaviour
 {
     // シングルトンパターンの実装
     public static PlayFabController Instance;
-    // 表示名
-    public string DisplayName { get; private set; }
     // PlayFabId
     private string playFabId;
 
@@ -57,17 +55,8 @@ public class PlayFabController : MonoBehaviour
         // PlayFabIdを保存
         playFabId = result.PlayFabId;
 
-        // 新規登録の場合は表示名を更新する。
-        if (result.NewlyCreated)
-        {
-            // 初期表示名を設定してから表示名を取得する。
-            UpdateAndGetDisplayName("名無しのインコ");
-        }
-        else
-        {
-            // 表示名を取得する。
-            GetDisplayName();
-        }
+        // 表示名を更新する。
+        UpdateDisplayName(EasySaveManager.Instance.DisplayName);
     }
     // ログイン失敗時に呼ばれる
     private void PlayFabAuthService_OnPlayFabError(PlayFabError error)
@@ -77,16 +66,11 @@ public class PlayFabController : MonoBehaviour
     }
 
     /// <summary>
-    /// 表示名を更新してから取得する。
+    /// 表示名を更新する。
     /// InputFieldのOnEndEditから呼び出す。
     /// </summary>
-    public void UpdateAndGetDisplayName(string displayName)
+    public void UpdateDisplayName(string displayName)
     {
-        // 表示名が未入力の場合は処理を終了する。
-        if (displayName == "")
-        {
-            return;
-        }
         // 表示名の更新リクエストを作成する。
         var request = new UpdateUserTitleDisplayNameRequest
         {
@@ -105,9 +89,8 @@ public class PlayFabController : MonoBehaviour
     private void OnUpdateDisplayNameSuccess(UpdateUserTitleDisplayNameResult result)
     {
         Debug.Log($"表示名の更新に成功しました。DisplayName: {result.DisplayName}");
-        DisplayName = result.DisplayName;
-        // 表示名を取得する。
-        GetDisplayName();
+        // ローカルのベストスコアをPlayFabに送信する。
+        SubmitScore(EasySaveManager.Instance.BestScore);
     }
     // 表示名の更新失敗時に呼ばれる
     private void OnUpdatedisplayNameFailure(PlayFabError error)
