@@ -41,12 +41,6 @@ public class EasySaveManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        // セーブデータをロードする。
-        Load();
-    }
-
     // セーブデータをロードする。
     public void Load()
     {
