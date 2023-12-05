@@ -4,6 +4,8 @@ public class PlayerMover : MonoBehaviour
 {
     // 現在のオブジェクト
     public GameObject currentObject = null;
+    // 動かせるか
+    public bool canMove = true;
     // オブジェクトの半径
     private float halfObjectRadius;
     // ドラッグ開始位置
@@ -18,6 +20,8 @@ public class PlayerMover : MonoBehaviour
 
     void Start()
     {
+        // 動かせるようにする
+        canMove = true;
         // ObjectManagerオブジェクトのObjectGeneratorコンポーネントを取得
         objectGenerator = GameObject.Find("ObjectManager").GetComponent<ObjectGenerator>();
     }
@@ -42,11 +46,11 @@ public class PlayerMover : MonoBehaviour
             }
         }
         // タップされた時
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && canMove)
         {
             OnDragStart();
         }
-        else if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0) && canMove)
         {
             // ドラッグ中
             OnDragging();

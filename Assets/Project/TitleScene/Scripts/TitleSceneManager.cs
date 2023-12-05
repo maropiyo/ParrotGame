@@ -1,12 +1,11 @@
+using PlayFab;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-/// <summary>
-/// タイトル画面のSceneManager
-/// </summary>
 public class TitleSceneManager : MonoBehaviour
 {
-    // ゲーム画面をロードする
+    // GameSceneに遷移する。
     public void LoadGameScene()
     {
         SceneManager.LoadScene("GameScene");

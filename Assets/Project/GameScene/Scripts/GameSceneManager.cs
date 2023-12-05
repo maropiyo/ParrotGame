@@ -10,6 +10,5 @@ public class GameSceneManager : MonoBehaviour
     public void LoadTitleScene()
     {
         SceneManager.LoadScene("TitleScene");
-
     }
 }

@@ -2,22 +2,39 @@ using UnityEngine;
 
 public class GameModeSelector : MonoBehaviour
 {
+    // シーンコントローラー
     public GameObject sceneController;
+
+    /// <summary>
+    /// ゲームモードをNormalに設定してGameSceneに遷移する。
+    /// </summary>
     public void SelectNormalMode()
     {
-        ES3.Save<string>("GameMode", "Normal");
+        // ゲームモードをNormalに設定する。
+        EasySaveManager.Instance.SaveGameMode("Normal");
+        // GameSceneに遷移する。
         sceneController.GetComponent<TitleSceneManager>().LoadGameScene();
     }
 
+    /// <summary>
+    /// ゲームモードをSlipに設定してGameSceneに遷移する。
+    /// </summary>
     public void SelectSlipMode()
     {
-        ES3.Save<string>("GameMode", "Slip");
+        // ゲームモードをSlipに設定する。
+        EasySaveManager.Instance.SaveGameMode("Slip");
+        // GameSceneに遷移する。
         sceneController.GetComponent<TitleSceneManager>().LoadGameScene();
     }
 
+    /// <summary>
+    /// ゲームモードをJumpに設定してGameSceneに遷移する。
+    /// </summary>
     public void SelectJumpMode()
     {
-        ES3.Save<string>("GameMode", "Jump");
+        // ゲームモードをJumpに設定する。
+        EasySaveManager.Instance.SaveGameMode("Jump");
+        // GameSceneに遷移する。
         sceneController.GetComponent<TitleSceneManager>().LoadGameScene();
     }
 }

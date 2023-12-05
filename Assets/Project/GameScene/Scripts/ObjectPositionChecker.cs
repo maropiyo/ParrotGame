@@ -12,6 +12,7 @@ public class ObjectPositionChecker : MonoBehaviour
 
     void Start()
     {
+        enabled = true;
         // ScoreManagerオブジェクトのScoreManagerコンポーネントを取得
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         // SoundEffectManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
@@ -20,7 +21,7 @@ public class ObjectPositionChecker : MonoBehaviour
         gameSceneManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         CheckIfOutOfScreen();
     }
@@ -32,9 +33,18 @@ public class ObjectPositionChecker : MonoBehaviour
         // 画面外に出たかどうかを判定
         if (screenPosition.x < 0 || screenPosition.x > Screen.width || screenPosition.y < 0 || screenPosition.y > Screen.height)
         {
+            // 一回だけ処理を行う
+            enabled = false;
+            // プレイヤーの動きを止める
+            GameObject.Find("Player").GetComponent<PlayerMover>().canMove = false;
             // ベストスコアを保存
             scoreManager.SaveBestScore();
             StartCoroutine(PauseAndLoadCoroutine());
+        }
+        else
+        {
+            // 画面内にある場合は処理を継続
+            enabled = true;
         }
     }
 

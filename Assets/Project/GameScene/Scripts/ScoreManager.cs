@@ -59,7 +59,10 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void SaveBestScore()
     {
-        ES3.Save<int>("BestScore", bestScore);
+        // ベストスコアを保存する。
+        EasySaveManager.Instance.SaveBestScore(bestScore);
+        // ベストスコアをPlayFabに送信する。
+        PlayFabController.Instance.SubmitScore(bestScore);
     }
 
     /// <summary>
