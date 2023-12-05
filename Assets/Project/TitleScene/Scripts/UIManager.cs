@@ -16,16 +16,16 @@ class UIManager : MonoBehaviour
 
     void Start()
     {
-        // UIの更新
-        UpdateUI();
-    }
-
-    // UIの更新
-    public void UpdateUI()
-    {
         // ローカルに保存されているデータを読み込む
         EasySaveManager.Instance.Load();
 
+        // UIを更新する。
+        UpdateUI();
+    }
+
+    // UIを更新する。
+    public void UpdateUI()
+    {
         // 表示名のテキストをセットする。
         SetDisplayNameText();
 
