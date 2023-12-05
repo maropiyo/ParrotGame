@@ -75,6 +75,8 @@ class UIManager : MonoBehaviour
     /// ユーザー情報ポップアップを表示する
     public void ShowUserInfoPopup()
     {
+        // 表示名の入力欄に表示名をセットする。
+        SetDisplayNameInputField();
         // ユーザー情報ポップアップを表示する
         UserInfoPopup.SetActive(true);
     }
