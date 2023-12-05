@@ -117,42 +117,6 @@ public class PlayFabController : MonoBehaviour
     }
 
     /// <summary>
-    /// 表示名を取得する。
-    /// </summary>
-    public void GetDisplayName()
-    {
-        // リクエストを作成する。
-        var request = new GetPlayerProfileRequest
-        {
-            PlayFabId = playFabId,
-            ProfileConstraints = new PlayerProfileViewConstraints
-            {
-                ShowDisplayName = true
-            }
-        };
-        // 表示名の取得を開始する。
-        Debug.Log($"表示名の取得を開始します");
-        PlayFabClientAPI.GetPlayerProfile(
-            request,
-            OnGetDisplayNameSuccess,
-            OnGetDisplayNameFailure
-        );
-    }
-    // 表示名の取得成功時に呼ばれる
-    private void OnGetDisplayNameSuccess(GetPlayerProfileResult result)
-    {
-        Debug.Log($"表示名の取得に成功しました。DisplayName: {result.PlayerProfile.DisplayName}");
-        DisplayName = result.PlayerProfile.DisplayName;
-        // ローカルのベストスコアをPlayFabに送信する。
-        SubmitScore(EasySaveManager.Instance.BestScore);
-    }
-    // 表示名の取得失敗時に呼ばれる
-    private void OnGetDisplayNameFailure(PlayFabError error)
-    {
-        Debug.LogError($"表示名の取得に失敗しました\n{error.GenerateErrorReport()}");
-    }
-
-    /// <summary>
     /// スコアを送信する。
     /// </summary>
     /// <param name="playerScore"></param>
