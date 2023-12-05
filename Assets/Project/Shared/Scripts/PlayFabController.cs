@@ -177,5 +177,6 @@ public class PlayFabController : MonoBehaviour
     private void OnGetLeaderboardFailure(PlayFabError error)
     {
         Debug.LogError($"ランキングの取得に失敗しました\n{error.GenerateErrorReport()}");
+        // TODO: ランキングの取得に失敗した旨を表示する。
     }
 }
