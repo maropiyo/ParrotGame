@@ -4214,9 +4214,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 257947695}
-        m_TargetAssemblyTypeName: PlayFabController, Assembly-CSharp
-        m_MethodName: GetLeaderboard
+      - m_Target: {fileID: 1290893975}
+        m_TargetAssemblyTypeName: RankingManager, Assembly-CSharp
+        m_MethodName: ShowRankingPopup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

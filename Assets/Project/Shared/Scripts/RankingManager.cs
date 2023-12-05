@@ -12,6 +12,8 @@ public class RankingManager : MonoBehaviour
     /// ランキングポップアップを表示する。
     public void ShowRankingPopup()
     {
+        // リーダーボードを取得する。
+        PlayFabController.Instance.GetLeaderboard();
         // ランキングポップアップを表示する。
         RankingPopup.SetActive(true);
     }

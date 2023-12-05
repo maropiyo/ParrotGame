@@ -143,7 +143,6 @@ public class PlayFabController : MonoBehaviour
     /// </summary>
     public void GetLeaderboard()
     {
-
         // リクエストを作成する。
         var request = new GetLeaderboardRequest
         {
@@ -165,8 +164,6 @@ public class PlayFabController : MonoBehaviour
         // ランキングを表示する。
         foreach (var item in result.Leaderboard)
         {
-            // ランキングポップアップを表示する。
-            rankingManager.ShowRankingPopup();
             // ランキングノードを生成する。
             rankingManager.GenerateRankingNode(
                 (item.Position + 1).ToString(),
