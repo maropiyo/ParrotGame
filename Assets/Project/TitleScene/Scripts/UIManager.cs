@@ -64,12 +64,12 @@ class UIManager : MonoBehaviour
         string displayName = DisplayNameInputField.text;
         // 表示名をローカルに保存する。
         EasySaveManager.Instance.SaveDisplayName(displayName);
-        // 表示名をPlayFabに保存する。
-        PlayFabController.Instance.UpdateDisplayName(displayName);
+        // 表示名テキストを更新する。
+        SetDisplayNameText();
         // ユーザー情報ポップアップを閉じる。
         CloseUserInfoPopup();
-        // UIを更新する。
-        UpdateUI();
+        // 表示名をPlayFabに保存する。
+        PlayFabController.Instance.UpdateDisplayName(displayName);
     }
 
     /// ユーザー情報ポップアップを表示する
