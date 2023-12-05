@@ -58,7 +58,7 @@ class UIManager : MonoBehaviour
     }
 
     /// 入力された表示名を保存する。
-    public void SaveDisplayName()
+    public void SaveInputDisplayName()
     {
         // 入力された表示名を取得する。
         string displayName = DisplayNameInputField.text;
