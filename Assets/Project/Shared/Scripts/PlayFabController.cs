@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using PlayFab.ClientModels;
 using PlayFab;
 using System.Collections;
+using System;
 
 public class PlayFabController : MonoBehaviour
 {
@@ -55,8 +56,10 @@ public class PlayFabController : MonoBehaviour
         // PlayFabIdを保存
         playFabId = result.PlayFabId;
 
-        // 表示名を更新する。
+        // ローカルの表示名をPlayFabに送信する。
         UpdateDisplayName(EasySaveManager.Instance.DisplayName);
+        // ローカルのベストスコアをPlayFabに送信する。
+        SubmitScore(EasySaveManager.Instance.BestScore);
     }
     // ログイン失敗時に呼ばれる
     private void PlayFabAuthService_OnPlayFabError(PlayFabError error)
@@ -89,8 +92,6 @@ public class PlayFabController : MonoBehaviour
     private void OnUpdateDisplayNameSuccess(UpdateUserTitleDisplayNameResult result)
     {
         Debug.Log($"表示名の更新に成功しました。DisplayName: {result.DisplayName}");
-        // ローカルのベストスコアをPlayFabに送信する。
-        SubmitScore(EasySaveManager.Instance.BestScore);
     }
     // 表示名の更新失敗時に呼ばれる
     private void OnUpdatedisplayNameFailure(PlayFabError error)
@@ -158,12 +159,23 @@ public class PlayFabController : MonoBehaviour
     private void OnGetLeaderboardSuccess(GetLeaderboardResult result)
     {
         Debug.Log($"ランキングの取得に成功しました");
-        // ランキングをログに出力する。
+
+        // ランキングマネージャーを取得する。
+        var rankingManager = GameObject.Find("RankingManager").GetComponent<RankingManager>();
+        // ランキングを表示する。
         foreach (var item in result.Leaderboard)
         {
-            Debug.Log($"DisplayName: {item.DisplayName}, Score: {item.StatValue}");
+            // ランキングポップアップを表示する。
+            rankingManager.ShowRankingPopup();
+            // ランキングノードを生成する。
+            rankingManager.GenerateRankingNode(
+                (item.Position + 1).ToString(),
+                item.DisplayName,
+                item.StatValue.ToString()
+            );
         }
     }
+
     // ランキング取得失敗時に呼ばれる
     private void OnGetLeaderboardFailure(PlayFabError error)
     {

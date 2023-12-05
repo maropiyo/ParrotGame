@@ -16,10 +16,6 @@ public class EasySaveManager : MonoBehaviour
 
     // ベストスコア
     public int BestScore { get; private set; }
-    // BGMの音量
-    public float BgmVolume { get; private set; }
-    // SEの音量
-    public float SeVolume { get; private set; }
     // 表示名
     public string DisplayName { get; private set; }
     // ゲームモード
@@ -45,13 +41,11 @@ public class EasySaveManager : MonoBehaviour
     public void Load()
     {
         // ベストスコアをロードする。
-        BestScore = ES3.Load(KEY_BEST_SCORE, defaultValue: 0);
-        // BGMの音量をロードする。
-        BgmVolume = ES3.Load(KEY_BGM_VOLUME, defaultValue: 1.0f);
-        // SEの音量をロードする。
-        SeVolume = ES3.Load(KEY_SE_VOLUME, defaultValue: 1.0f);
+        LoadBestScore();
         // 表示名をロードする。
-        DisplayName = ES3.Load<string>(KEY_DISPLAY_NAME, defaultValue: "名無しのインコ");
+        LoadDisplayName();
+        // ゲームモードをロードする。
+        LoadGameMode();
     }
 
     // べストスコアをセーブする。
@@ -59,20 +53,16 @@ public class EasySaveManager : MonoBehaviour
     {
         // べストスコアをセーブする。
         ES3.Save(KEY_BEST_SCORE, bestScore);
+
+        // ベストスコアをロードする。
+        LoadBestScore();
     }
 
-    // BGMの音量をセーブする。
-    public void SaveBgmVolume(float bgmVolume)
+    // ベストスコアをロードする。
+    public void LoadBestScore()
     {
-        // BGMの音量をセーブする。
-        ES3.Save(KEY_BGM_VOLUME, bgmVolume);
-    }
-
-    // SEの音量をセーブする。
-    public void SaveSeVolume(float seVolume)
-    {
-        // SEの音量をセーブする。
-        ES3.Save(KEY_SE_VOLUME, seVolume);
+        // ベストスコアをロードする。
+        BestScore = ES3.Load<int>(KEY_BEST_SCORE, defaultValue: 0);
     }
 
     // 表示名をセーブする。
@@ -80,6 +70,16 @@ public class EasySaveManager : MonoBehaviour
     {
         // 表示名をセーブする。
         ES3.Save(KEY_DISPLAY_NAME, displayName);
+
+        // 表示名をロードする。
+        LoadDisplayName();
+    }
+
+    // 表示名をロードする。
+    public void LoadDisplayName()
+    {
+        // 表示名をロードする。
+        DisplayName = ES3.Load<string>(KEY_DISPLAY_NAME, defaultValue: "名無しのインコ");
     }
 
     // ゲームモードをセーブする。
@@ -87,5 +87,12 @@ public class EasySaveManager : MonoBehaviour
     {
         // ゲームモードをセーブする。
         ES3.Save(KEY_GAME_MODE, gameMode);
+    }
+
+    // ゲームモードをロードする。
+    public void LoadGameMode()
+    {
+        // ゲームモードをロードする。
+        GameMode = ES3.Load<string>(KEY_GAME_MODE, defaultValue: "Normal");
     }
 }
