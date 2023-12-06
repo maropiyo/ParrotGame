@@ -55,6 +55,11 @@ public class PlayerMover : MonoBehaviour
             // ドラッグ中
             OnDragging();
         }
+        else if (Input.GetMouseButtonUp(0) && canMove)
+        {
+            // ドラッグ終了
+            OnDragEnd();
+        }
     }
 
     private void CalculateObjectRadius()
@@ -64,12 +69,13 @@ public class PlayerMover : MonoBehaviour
         halfObjectRadius = currentObject.transform.localScale.x * collider.radius * transform.localScale.x;
     }
 
+    // ドラッグ開始時に呼ばれる
     private void OnDragStart()
     {
-        // ドラッグ開始位置を記録
+        // タップされた位置を取得
         touchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // オブジェクトの初期位置を記録
-        objectStartPos = transform.position;
+        // オブジェクトをタップしたX座標に移動
+        objectStartPos = new Vector3(touchStartPos.x, transform.position.y, transform.position.z);
 
     }
 
@@ -83,5 +89,12 @@ public class PlayerMover : MonoBehaviour
 
         // オブジェクトの位置を更新する
         transform.position = new Vector3(newXPos, objectStartPos.y, objectStartPos.z);
+    }
+
+    // ドラック終了時に呼ばれる
+    private void OnDragEnd()
+    {
+        // 現在のオブジェクトを落下させる
+        objectGenerator.DropCurrentObject();
     }
 }
