@@ -13,9 +13,9 @@ public class PlayerMover : MonoBehaviour
     // オブジェクトの初期位置
     private Vector3 objectStartPos;
     // 左制限
-    private float leftLimit = -2.69f;
+    private float _leftLimit = -2.39f;
     // 右制限
-    private float rightLimit = 2.69f;
+    private float _rightLimit = 2.39f;
     private ObjectGenerator objectGenerator;
 
     void Start()
@@ -26,7 +26,6 @@ public class PlayerMover : MonoBehaviour
         objectGenerator = GameObject.Find("ObjectManager").GetComponent<ObjectGenerator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         // objectGeneratorコンポーネントから現在のオブジェクトを取得
@@ -36,13 +35,13 @@ public class PlayerMover : MonoBehaviour
         {
             // オブジェクトの半径を計算
             CalculateObjectRadius();
-            if (transform.position.x < leftLimit + halfObjectRadius)
+            if (transform.position.x < _leftLimit + halfObjectRadius)
             {
-                transform.position = new Vector3(leftLimit + halfObjectRadius, transform.position.y, transform.position.z);
+                transform.position = new Vector3(_leftLimit + halfObjectRadius, transform.position.y, transform.position.z);
             }
-            if (transform.position.x > rightLimit - halfObjectRadius)
+            if (transform.position.x > _rightLimit - halfObjectRadius)
             {
-                transform.position = new Vector3(rightLimit - halfObjectRadius, transform.position.y, transform.position.z);
+                transform.position = new Vector3(_rightLimit - halfObjectRadius, transform.position.y, transform.position.z);
             }
         }
         // タップされた時
@@ -85,7 +84,7 @@ public class PlayerMover : MonoBehaviour
         Vector3 offset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - touchStartPos;
 
         // 新しいX座標を計算し、制限内でクランプする
-        float newXPos = Mathf.Clamp(objectStartPos.x + offset.x, leftLimit + halfObjectRadius, rightLimit - halfObjectRadius);
+        float newXPos = Mathf.Clamp(objectStartPos.x + offset.x, _leftLimit + halfObjectRadius, _rightLimit - halfObjectRadius);
 
         // オブジェクトの位置を更新する
         transform.position = new Vector3(newXPos, objectStartPos.y, objectStartPos.z);
