@@ -57,6 +57,10 @@ public class ObjectPositionChecker : MonoBehaviour
         // 一定時間待つ
         yield return new WaitForSecondsRealtime(2.0f);
 
+
+        // インタースティシャル広告を表示する
+        GoogleMobileAdsManager.Instance.ShowInterstitialAd();
+
         // ゲームの時間を元に戻す
         Time.timeScale = 1f;
 

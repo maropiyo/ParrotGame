@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameSceneManager : MonoBehaviour
 {
+    void Start()
+    {
+        // インタースティシャル広告をロードする。
+        GoogleMobileAdsManager.Instance.LoadInterstitialAd();
+    }
+
     // タイトル画面をロードする
     public void LoadTitleScene()
     {

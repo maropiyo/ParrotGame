@@ -13,9 +13,9 @@ public class PlayerMover : MonoBehaviour
     // オブジェクトの初期位置
     private Vector3 objectStartPos;
     // 左制限
-    private float _leftLimit = -2.39f;
+    private float _leftLimit = -2.19f;
     // 右制限
-    private float _rightLimit = 2.39f;
+    private float _rightLimit = 2.19f;
     private ObjectGenerator objectGenerator;
 
     void Start()

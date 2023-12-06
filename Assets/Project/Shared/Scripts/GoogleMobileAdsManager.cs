@@ -115,6 +115,7 @@ public class GoogleMobileAdsManager : MonoBehaviour
     {
         if (_interstitialAd != null && _interstitialAd.CanShowAd())
         {
+            Debug.Log("インタースティシャル広告を表示します。");
             // インタースティシャル広告を表示する。
             _interstitialAd.Show();
         }
