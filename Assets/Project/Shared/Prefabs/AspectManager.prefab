@@ -48,4 +48,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394b74f52cad7492baaae0787a3c825a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetAspect: 0.5625
+  targetAspect: 0.5
