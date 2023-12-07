@@ -19,8 +19,6 @@ public class ObjectEvolution : MonoBehaviour
     {
         // ScoreManagerコンポーネントのScoreManagerコンポーネントを取得
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        // SoundEffectManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
-        soundEffectPlayer = GameObject.Find("SoundEffectManager").GetComponent<SEPlayer>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -47,7 +45,7 @@ public class ObjectEvolution : MonoBehaviour
                     Instantiate(nextObjectPrefab, (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
                 }
                 // 進化時の効果音を鳴らす
-                soundEffectPlayer.PlayEvolutionSound();
+                SEPlayer.Instance.PlayEvolutionSound();
                 // スコアを加算する
                 scoreManager.addScore(tag);
             }

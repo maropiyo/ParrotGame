@@ -15,8 +15,6 @@ public class ObjectPositionChecker : MonoBehaviour
         enabled = true;
         // ScoreManagerオブジェクトのScoreManagerコンポーネントを取得
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        // SoundEffectManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
-        soundEffectPlayer = GameObject.Find("SoundEffectManager").GetComponent<SEPlayer>();
         // GameSceneManagerオブジェクトのGameSceneManagerコンポーネントを取得
         gameSceneManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
     }
@@ -57,9 +55,8 @@ public class ObjectPositionChecker : MonoBehaviour
         // 一定時間待つ
         yield return new WaitForSecondsRealtime(2.0f);
 
-
         // インタースティシャル広告を表示する
-        GoogleMobileAdsManager.Instance.ShowInterstitialAd();
+        // GoogleMobileAdsManager.Instance.ShowInterstitialAd();
 
         // ゲームの時間を元に戻す
         Time.timeScale = 1f;
