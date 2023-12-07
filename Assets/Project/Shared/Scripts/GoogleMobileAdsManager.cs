@@ -57,8 +57,7 @@ public class GoogleMobileAdsManager : MonoBehaviour
         // Google Mobile Ads SDKを初期化する。
         MobileAds.Initialize(initStatus =>
         {
-            // SDKの初期化が完了したら、広告をロードする。
-            LoadBannerView();
+
         });
     }
 

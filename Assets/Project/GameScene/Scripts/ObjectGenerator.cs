@@ -118,4 +118,37 @@ public class ObjectGenerator : MonoBehaviour
         // キューの最初のオブジェクトをスポーン
         SpawnObject(generatedObjectQueue[0]);
     }
+
+    /// <summary>
+    /// オブジェクトを削除する
+    /// </summary>
+    public void DestroyObject()
+    {
+        // Mameruriha,Botan,Sazanami,Kozakura,Lutinoタグに一致するオブジェクトを削除
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Mameruriha");
+        foreach (GameObject obj in objects)
+        {
+            Destroy(obj);
+        }
+        objects = GameObject.FindGameObjectsWithTag("Botan");
+        foreach (GameObject obj in objects)
+        {
+            Destroy(obj);
+        }
+        objects = GameObject.FindGameObjectsWithTag("Sazanami");
+        foreach (GameObject obj in objects)
+        {
+            Destroy(obj);
+        }
+        objects = GameObject.FindGameObjectsWithTag("Kozakura");
+        foreach (GameObject obj in objects)
+        {
+            Destroy(obj);
+        }
+        objects = GameObject.FindGameObjectsWithTag("Lutino");
+        foreach (GameObject obj in objects)
+        {
+            Destroy(obj);
+        }
+    }
 }

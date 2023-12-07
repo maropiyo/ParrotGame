@@ -23,13 +23,13 @@ public class GameModeLoader : MonoBehaviour
                 parrotPhysicsMaterial.friction = 0.3f;
                 parrotPhysicsMaterial.bounciness = 0;
                 break;
-            case "Slip":
-                parrotPhysicsMaterial.friction = 0;
-                parrotPhysicsMaterial.bounciness = 0;
-                break;
             case "Jump":
+                parrotPhysicsMaterial.friction = 0.3f;
+                parrotPhysicsMaterial.bounciness = 0.9f;
+                break;
+            case "SuperJump":
                 parrotPhysicsMaterial.friction = 0.1f;
-                parrotPhysicsMaterial.bounciness = 1.0f;
+                parrotPhysicsMaterial.bounciness = 1f;
                 break;
             default:
                 break;
