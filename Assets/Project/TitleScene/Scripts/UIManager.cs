@@ -7,6 +7,12 @@ class UIManager : MonoBehaviour
     public Text DisplayNameText;
     // 表示名の入力欄
     public InputField DisplayNameInputField;
+    // BGMの音量のスライダー
+    public Slider BgmVolumeSlider;
+    // SEの音量のスライダー
+    public Slider SeVolumeSlider;
+    // 設定ポップアップ
+    public GameObject SettingPopup;
     // ユーザー情報ポップアップ
     public GameObject UserInfoPopup;
     // モード選択ポップアップ
@@ -29,6 +35,12 @@ class UIManager : MonoBehaviour
 
         // 表示名の入力欄に表示名をセットする。
         SetDisplayNameInputField();
+
+        // BGMの音量スライダーの値をセットする。
+        SetBgmVolumeSlider();
+
+        // SEの音量スライダーの値をセットする。
+        SetSeVolumeSlider();
     }
 
     /// 表示名テキストをセットする。
@@ -58,6 +70,54 @@ class UIManager : MonoBehaviour
         CloseUserInfoPopup();
         // 表示名をPlayFabに保存する。
         PlayFabController.Instance.UpdateDisplayName(displayName);
+    }
+
+    /// BGMの音量スライダーの値をセットする。
+    private void SetBgmVolumeSlider()
+    {
+        // BGMの音量スライダーの値をセットする。
+        BgmVolumeSlider.value = EasySaveManager.Instance.BgmVolume;
+    }
+
+    /// BGMの音量スライダーの値を保存する。
+    public void SaveBgmVolumeSlider()
+    {
+        // BGMの音量スライダーの値を保存する。
+        EasySaveManager.Instance.SaveBgmVolume(BgmVolumeSlider.value);
+
+        // BGMの音量を更新する。
+        BGMPlayer.Instance.UpdateBgmVolume();
+    }
+
+    /// SEの音量スライダーの値をセットする。
+    private void SetSeVolumeSlider()
+    {
+        // SEの音量スライダーの値をセットする。
+        SeVolumeSlider.value = EasySaveManager.Instance.SeVolume;
+    }
+
+    /// SEの音量スライダーの値を保存する。
+    public void SaveSeVolumeSlider()
+    {
+        // SEの音量スライダーの値を保存する。
+        EasySaveManager.Instance.SaveSeVolume(SeVolumeSlider.value);
+
+        // SEの音量を更新する。
+        SEPlayer.Instance.UpdateSeVolume();
+    }
+
+    /// 設定ポップアップを表示する
+    public void ShowSettingPopup()
+    {
+        // 設定ポップアップを表示する
+        SettingPopup.SetActive(true);
+    }
+
+    /// 設定ポップアップを閉じる
+    public void CloseSettingPopup()
+    {
+        // 設定ポップアップを閉じる
+        SettingPopup.SetActive(false);
     }
 
     /// ユーザー情報ポップアップを表示する

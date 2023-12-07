@@ -16,6 +16,10 @@ public class EasySaveManager : MonoBehaviour
 
     // ベストスコア
     public int BestScore { get; private set; }
+    // BGMの音量
+    public float BgmVolume { get; set; }
+    // SEの音量
+    public float SeVolume { get; set; }
     // 表示名
     public string DisplayName { get; private set; }
     // ゲームモード
@@ -44,6 +48,10 @@ public class EasySaveManager : MonoBehaviour
         LoadBestScore();
         // 表示名をロードする。
         LoadDisplayName();
+        // BGMの音量をロードする。
+        LoadBgmVolume();
+        // SEの音量をロードする。
+        LoadSeVolume();
         // ゲームモードをロードする。
         LoadGameMode();
     }
@@ -63,6 +71,40 @@ public class EasySaveManager : MonoBehaviour
     {
         // ベストスコアをロードする。
         BestScore = ES3.Load<int>(KEY_BEST_SCORE, defaultValue: 0);
+    }
+
+    // BGMの音量をセーブする。
+    public void SaveBgmVolume(float bgmVolume)
+    {
+        // BGMの音量をセーブする。
+        ES3.Save(KEY_BGM_VOLUME, bgmVolume);
+
+        // BGMの音量をロードする。
+        LoadBgmVolume();
+    }
+
+    // BGMの音量をロードする。
+    public void LoadBgmVolume()
+    {
+        // BGMの音量をロードする。
+        BgmVolume = ES3.Load<float>(KEY_BGM_VOLUME, defaultValue: 1.0f);
+    }
+
+    // SEの音量をセーブする。
+    public void SaveSeVolume(float seVolume)
+    {
+        // SEの音量をセーブする。
+        ES3.Save(KEY_SE_VOLUME, seVolume);
+
+        // SEの音量をロードする。
+        LoadSeVolume();
+    }
+
+    // SEの音量をロードする。
+    public void LoadSeVolume()
+    {
+        // SEの音量をロードする。
+        SeVolume = ES3.Load<float>(KEY_SE_VOLUME, defaultValue: 1.0f);
     }
 
     // 表示名をセーブする。

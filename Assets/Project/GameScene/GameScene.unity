@@ -2230,7 +2230,7 @@ GameObject:
   - component: {fileID: 1453577918}
   - component: {fileID: 1453577919}
   m_Layer: 0
-  m_Name: SoundEffectManager
+  m_Name: SEManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

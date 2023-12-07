@@ -6,7 +6,7 @@ public class ObjectPositionChecker : MonoBehaviour
     // ScoreManagerコンポーネント
     private ScoreManager scoreManager;
     // SoundEffectPlayerコンポーネント
-    private SoundEffectPlayer soundEffectPlayer;
+    private SEPlayer soundEffectPlayer;
     // GameSceneManagerコンポーネント
     private GameSceneManager gameSceneManager;
 
@@ -16,7 +16,7 @@ public class ObjectPositionChecker : MonoBehaviour
         // ScoreManagerオブジェクトのScoreManagerコンポーネントを取得
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         // SoundEffectManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
-        soundEffectPlayer = GameObject.Find("SoundEffectManager").GetComponent<SoundEffectPlayer>();
+        soundEffectPlayer = GameObject.Find("SoundEffectManager").GetComponent<SEPlayer>();
         // GameSceneManagerオブジェクトのGameSceneManagerコンポーネントを取得
         gameSceneManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
     }

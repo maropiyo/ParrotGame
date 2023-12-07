@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class BgmPlayer : MonoBehaviour
+public class BGMPlayer : MonoBehaviour
 {
     // シングルトンパターンの実装
-    public static BgmPlayer Instance;
+    public static BGMPlayer Instance;
 
     // AudioSourceコンポーネント
     public AudioSource bgmAudioSource;
@@ -44,5 +44,12 @@ public class BgmPlayer : MonoBehaviour
     public void StopBGM()
     {
         bgmAudioSource.Stop();
+    }
+
+    // BGMの音量を更新する
+    public void UpdateBgmVolume()
+    {
+        // AudioSourceの音量を更新する
+        bgmAudioSource.volume = EasySaveManager.Instance.BgmVolume;
     }
 }
