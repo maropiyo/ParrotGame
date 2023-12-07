@@ -1,12 +1,33 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AspectRatioManager : MonoBehaviour
 {
-    
-    public float targetAspect = 9f / 16f; // 目標のアスペクト比
+    // 目標のアスペクト比X
+    public float targetAspectX = 9.0f;
+    // 目標のアスペクト比Y
+    public float targetAspectY = 19.5f;
+    // 目標のアスペクト比
+    private float targetAspect;
+
+    // シーンがロードされた時に呼び出される
 
     void Start()
     {
+        // シーンを遷移してもオブジェクトが破棄されないようにする
+        DontDestroyOnLoad(this);
+
+        // 目標のアスペクト比を計算する
+        targetAspect = targetAspectX / targetAspectY;
+
+        // シーンがロードされた時に呼び出されるイベントにメソッドを登録する
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    // シーンがロードされた時に呼び出される
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // アスペクト比を調整する
         AdjustAspectRatio();
     }
 
