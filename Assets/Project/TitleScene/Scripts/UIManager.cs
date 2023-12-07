@@ -7,8 +7,6 @@ class UIManager : MonoBehaviour
     public Text DisplayNameText;
     // 表示名の入力欄
     public InputField DisplayNameInputField;
-    // ベストスコアのテキスト
-    public Text BestScoreText;
     // ユーザー情報ポップアップ
     public GameObject UserInfoPopup;
     // モード選択ポップアップ
@@ -29,9 +27,6 @@ class UIManager : MonoBehaviour
         // 表示名のテキストをセットする。
         SetDisplayNameText();
 
-        // ベストスコアのテキストをセットする。
-        SetBestScoreText();
-
         // 表示名の入力欄に表示名をセットする。
         SetDisplayNameInputField();
     }
@@ -41,13 +36,6 @@ class UIManager : MonoBehaviour
     {
         // 表示名テキストをセットする。
         DisplayNameText.text = EasySaveManager.Instance.DisplayName;
-    }
-
-    /// ベストスコアのテキストをセットする。
-    private void SetBestScoreText()
-    {
-        // ベストスコアのテキストをセットする。
-        BestScoreText.text = "BEST: " + EasySaveManager.Instance.BestScore;
     }
 
     /// 表示名の入力欄に表示名をセットする。
