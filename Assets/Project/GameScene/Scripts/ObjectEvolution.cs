@@ -41,8 +41,15 @@ public class ObjectEvolution : MonoBehaviour
                 // 接触したオブジェクトがコンゴウインコ以外の場合
                 if (!collision.gameObject.CompareTag("Kongo"))
                 {
-                    // 進化後のオブジェクトを衝突したオブジェクトの間に生成
-                    Instantiate(nextObjectPrefab, (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
+                    // 進化後のオブジェクトを生成
+                    GameObject newObject = Instantiate(nextObjectPrefab, (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
+                    // newObjectのサイズを0にする
+                    newObject.transform.localScale = Vector3.zero;
+                    // 進化後のオブジェクトを徐々に大きくする
+                    LeanTween.scale(newObject, nextObjectPrefab.transform.localScale, 0.1f).setEase(LeanTweenType.easeInExpo);
+                    // エフェクトを再生
+                    ParticleSystem particle = newObject.GetComponent<ParticleSystem>();
+                    particle.Play();
                 }
                 // 進化時の効果音を鳴らす
                 SEPlayer.Instance.PlayEvolutionSound();
