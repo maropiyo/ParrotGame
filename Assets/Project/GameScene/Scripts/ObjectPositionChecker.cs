@@ -29,7 +29,7 @@ public class ObjectPositionChecker : MonoBehaviour
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
 
         // 画面外に出たかどうかを判定
-        if (screenPosition.x < 0 || screenPosition.x > Screen.width || screenPosition.y < 0 || screenPosition.y > Screen.height)
+        if (enabled && (screenPosition.x < 0 || screenPosition.x > Screen.width || screenPosition.y < 0 || screenPosition.y > Screen.height))
         {
             // 一回だけ処理を行う
             enabled = false;
@@ -60,6 +60,8 @@ public class ObjectPositionChecker : MonoBehaviour
 
         // ゲームの時間を元に戻す
         Time.timeScale = 1f;
+
+        enabled = true;
 
         // タイトルシーンに切り替える
         gameSceneManager.LoadTitleScene();

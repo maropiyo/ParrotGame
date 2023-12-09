@@ -75,6 +75,7 @@ public class PlayerMover : MonoBehaviour
         touchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // オブジェクトをタップしたX座標に移動
         objectStartPos = new Vector3(touchStartPos.x, transform.position.y, transform.position.z);
+        transform.position = objectStartPos;
 
     }
 
