@@ -36,14 +36,9 @@ public class PlayerMover : MonoBehaviour
         {
             // オブジェクトの半径を計算
             CalculateObjectRadius();
-            if (transform.position.x < _leftLimit + halfObjectRadius)
-            {
-                transform.position = new Vector3(_leftLimit + halfObjectRadius, transform.position.y, transform.position.z);
-            }
-            if (transform.position.x > _rightLimit - halfObjectRadius)
-            {
-                transform.position = new Vector3(_rightLimit - halfObjectRadius, transform.position.y, transform.position.z);
-            }
+
+            // 左右の制限を超えないようにする
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, _leftLimit + halfObjectRadius, _rightLimit - halfObjectRadius), transform.position.y, transform.position.z);
         }
 
         canMove = true;
