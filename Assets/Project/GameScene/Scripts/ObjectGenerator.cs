@@ -74,7 +74,7 @@ public class ObjectGenerator : MonoBehaviour
     /// <param name="spawnObject"></param>
     private void SpawnObject(GameObject spawnObject)
     {
-        playerSpriteManager.ChangeNormalSprite();
+        playerSpriteManager.ChangeNormalSprite(spawnObject);
         // スポーン位置を設定し生成
         spawnPosition = player.transform.position;
         currentObject = Instantiate(spawnObject, spawnPosition, Quaternion.identity);
