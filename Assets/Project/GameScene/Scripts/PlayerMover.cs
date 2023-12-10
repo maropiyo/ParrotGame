@@ -8,7 +8,7 @@ public class PlayerMover : MonoBehaviour
     // 動かせるか
     public bool canMove = true;
     // オブジェクトの半径
-    private float halfObjectRadius;
+    private float objectRadius = 0;
     // ドラッグ開始位置
     private Vector3 touchStartPos;
     // オブジェクトの初期位置
@@ -38,7 +38,7 @@ public class PlayerMover : MonoBehaviour
             CalculateObjectRadius();
 
             // 左右の制限を超えないようにする
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, _leftLimit + halfObjectRadius, _rightLimit - halfObjectRadius), transform.position.y, transform.position.z);
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, _leftLimit + objectRadius, _rightLimit - objectRadius), transform.position.y, transform.position.z);
         }
 
         canMove = true;
@@ -77,7 +77,7 @@ public class PlayerMover : MonoBehaviour
     {
         // オブジェクトのスケールとコライダーの半径を掛け合わせることでオブジェクトの半径を計算
         CircleCollider2D collider = currentObject.GetComponent<CircleCollider2D>();
-        halfObjectRadius = currentObject.transform.localScale.x * collider.radius * transform.localScale.x;
+        objectRadius = currentObject.transform.localScale.x * collider.radius * transform.localScale.x;
     }
 
     // ドラッグ開始時に呼ばれる
@@ -86,7 +86,8 @@ public class PlayerMover : MonoBehaviour
         // タップされた位置を取得
         touchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // オブジェクトをタップしたX座標に移動
-        objectStartPos = new Vector3(touchStartPos.x, transform.position.y, transform.position.z);
+
+        objectStartPos = new Vector3(Mathf.Clamp(touchStartPos.x, _leftLimit + objectRadius, _rightLimit - objectRadius), transform.position.y, transform.position.z);
         transform.position = objectStartPos;
 
     }
@@ -97,7 +98,7 @@ public class PlayerMover : MonoBehaviour
         Vector3 offset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - touchStartPos;
 
         // 新しいX座標を計算し、制限内でクランプする
-        float newXPos = Mathf.Clamp(objectStartPos.x + offset.x, _leftLimit + halfObjectRadius, _rightLimit - halfObjectRadius);
+        float newXPos = Mathf.Clamp(objectStartPos.x + offset.x, _leftLimit + objectRadius, _rightLimit - objectRadius);
 
         // オブジェクトの位置を更新する
         transform.position = new Vector3(newXPos, objectStartPos.y, objectStartPos.z);
