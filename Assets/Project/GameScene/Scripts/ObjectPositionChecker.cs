@@ -12,11 +12,10 @@ public class ObjectPositionChecker : MonoBehaviour
 
     void Start()
     {
-        enabled = true;
-        // ScoreManagerオブジェクトのScoreManagerコンポーネントを取得
-        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         // GameSceneManagerオブジェクトのGameSceneManagerコンポーネントを取得
         gameSceneManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
+        // チェックを有効にする
+        enabled = true;
     }
 
     private void FixedUpdate()
@@ -31,39 +30,11 @@ public class ObjectPositionChecker : MonoBehaviour
         // 画面外に出たかどうかを判定
         if (enabled && (screenPosition.x < 0 || screenPosition.x > Screen.width || screenPosition.y < 0 || screenPosition.y > Screen.height))
         {
-            // 一回だけ処理を行う
+            // チェックを無効にする
             enabled = false;
-            // プレイヤーの動きを止める
-            GameObject.Find("Player").GetComponent<PlayerMover>().canMove = false;
-            // ベストスコアを保存
-            scoreManager.SaveBestScore();
-            StartCoroutine(PauseAndLoadCoroutine());
+
+            // ゲームオーバー処理
+            gameSceneManager.GameOver();
         }
-        else
-        {
-            // 画面内にある場合は処理を継続
-            enabled = true;
-        }
-    }
-
-
-    IEnumerator PauseAndLoadCoroutine()
-    {
-        // 動きを停止
-        Time.timeScale = 0;
-
-        // 一定時間待つ
-        yield return new WaitForSecondsRealtime(2.0f);
-
-        // インタースティシャル広告を表示する
-        // GoogleMobileAdsManager.Instance.ShowInterstitialAd();
-
-        // ゲームの時間を元に戻す
-        Time.timeScale = 1f;
-
-        enabled = true;
-
-        // タイトルシーンに切り替える
-        gameSceneManager.LoadTitleScene();
     }
 }
