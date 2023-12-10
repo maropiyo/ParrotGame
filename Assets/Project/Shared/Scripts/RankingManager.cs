@@ -24,7 +24,14 @@ public class RankingManager : MonoBehaviour
         // ランキングポップアップを非表示にする。
         RankingPopup.SetActive(false);
 
-        // 子オブジェクト（ランキングノード）をすべて削除する。
+        // RankingNodeを全て削除する。
+        ClearRankingNodes();
+    }
+
+    /// ランキングノードを全て削除する。
+    public void ClearRankingNodes()
+    {
+        // RankingNodeを全て削除する。
         foreach (Transform child in rankingParent.transform)
         {
             Destroy(child.gameObject);

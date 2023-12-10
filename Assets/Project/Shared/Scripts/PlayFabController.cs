@@ -161,6 +161,9 @@ public class PlayFabController : MonoBehaviour
 
         // ランキングマネージャーを取得する。
         var rankingManager = GameObject.Find("RankingManager").GetComponent<RankingManager>();
+        // すでに表示されているランキングノードを削除する。
+        rankingManager.ClearRankingNodes();
+
         // ランキングを表示する。
         foreach (var item in result.Leaderboard)
         {
