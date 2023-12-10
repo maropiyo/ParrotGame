@@ -18,6 +18,8 @@ public class PlayerMover : MonoBehaviour
     // 右制限
     private float _rightLimit = 2.19f;
     private ObjectGenerator objectGenerator;
+    // ドラッグ中か
+    private bool isDragging;
 
     void Start()
     {
@@ -41,35 +43,37 @@ public class PlayerMover : MonoBehaviour
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, _leftLimit + objectRadius, _rightLimit - objectRadius), transform.position.y, transform.position.z);
         }
 
-        canMove = true;
         // UIをタップしている場合は処理をしない
         if (EventSystem.current.IsPointerOverGameObject())
         {
             canMove = false;
         }
         // スマホでUIをタップしている場合は処理をしない
-        if (Input.touchCount > 0)
+        else if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
         {
-            if (EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
-            {
-                canMove = false;
-            }
+            canMove = false;
+        }
+        else
+        {
+            canMove = true;
         }
 
         if (Input.GetMouseButtonDown(0) && canMove)
         {
-            // ドラッグ開始
+            // ドラッグ開始時の処理
             OnDragStart();
+            isDragging = true;
         }
-        else if (Input.GetMouseButton(0) && canMove)
+        if (Input.GetMouseButton(0) && isDragging && canMove)
         {
-            // ドラッグ中
+            // ドラッグ時の処理
             OnDragging();
         }
-        else if (Input.GetMouseButtonUp(0) && canMove)
+        if (Input.GetMouseButtonUp(0) && canMove)
         {
-            // ドラッグ終了
+            // ドラッグ終了時の処理
             OnDragEnd();
+            isDragging = false;
         }
     }
 
