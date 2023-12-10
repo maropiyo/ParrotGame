@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMover : MonoBehaviour
 {
@@ -44,9 +45,15 @@ public class PlayerMover : MonoBehaviour
                 transform.position = new Vector3(_rightLimit - halfObjectRadius, transform.position.y, transform.position.z);
             }
         }
-        // タップされた時
-        if (Input.GetMouseButtonDown(0) && canMove)
+
+        // UIをタップしている場合は処理をしない
+        if (EventSystem.current.IsPointerOverGameObject())
         {
+            return;
+        }
+        else if (Input.GetMouseButtonDown(0) && canMove)
+        {
+            // ドラッグ開始
             OnDragStart();
         }
         else if (Input.GetMouseButton(0) && canMove)
