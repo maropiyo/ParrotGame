@@ -42,7 +42,7 @@ public class PlayerMover : MonoBehaviour
             // 左右の制限を超えないようにする
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, _leftLimit + objectRadius, _rightLimit - objectRadius), transform.position.y, transform.position.z);
         }
-
+        canMove = true;
         // UIをタップしている場合は処理をしない
         if (EventSystem.current.IsPointerOverGameObject())
         {
@@ -52,10 +52,6 @@ public class PlayerMover : MonoBehaviour
         else if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
         {
             canMove = false;
-        }
-        else
-        {
-            canMove = true;
         }
 
         if (Input.GetMouseButtonDown(0) && canMove)
@@ -69,7 +65,7 @@ public class PlayerMover : MonoBehaviour
             // ドラッグ時の処理
             OnDragging();
         }
-        if (Input.GetMouseButtonUp(0) && canMove)
+        if (Input.GetMouseButtonUp(0) && isDragging && canMove)
         {
             // ドラッグ終了時の処理
             OnDragEnd();
