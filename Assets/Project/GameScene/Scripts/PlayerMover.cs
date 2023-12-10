@@ -46,12 +46,22 @@ public class PlayerMover : MonoBehaviour
             }
         }
 
+        canMove = true;
         // UIをタップしている場合は処理をしない
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            return;
+            canMove = false;
         }
-        else if (Input.GetMouseButtonDown(0) && canMove)
+        // スマホでUIをタップしている場合は処理をしない
+        if (Input.touchCount > 0)
+        {
+            if (EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
+            {
+                canMove = false;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0) && canMove)
         {
             // ドラッグ開始
             OnDragStart();

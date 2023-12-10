@@ -128,27 +128,47 @@ public class ObjectGenerator : MonoBehaviour
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Mameruriha");
         foreach (GameObject obj in objects)
         {
-            Destroy(obj);
+            // currentObjectと一致するオブジェクトは削除しない
+            if (obj != currentObject)
+            {
+                Destroy(obj);
+            }
         }
         objects = GameObject.FindGameObjectsWithTag("Botan");
         foreach (GameObject obj in objects)
         {
-            Destroy(obj);
+            // currentObjectと一致するオブジェクトは削除しない
+            if (obj != currentObject)
+            {
+                Destroy(obj);
+            }
         }
         objects = GameObject.FindGameObjectsWithTag("Sazanami");
         foreach (GameObject obj in objects)
         {
-            Destroy(obj);
+            // currentObjectと一致するオブジェクトは削除しない
+            if (obj != currentObject)
+            {
+                Destroy(obj);
+            }
         }
         objects = GameObject.FindGameObjectsWithTag("Kozakura");
         foreach (GameObject obj in objects)
         {
-            Destroy(obj);
+            // currentObjectと一致するオブジェクトは削除しない
+            if (obj != currentObject)
+            {
+                Destroy(obj);
+            }
         }
         objects = GameObject.FindGameObjectsWithTag("Lutino");
         foreach (GameObject obj in objects)
         {
-            Destroy(obj);
+            // currentObjectと一致するオブジェクトは削除しない
+            if (obj != currentObject)
+            {
+                Destroy(obj);
+            }
         }
     }
 }
