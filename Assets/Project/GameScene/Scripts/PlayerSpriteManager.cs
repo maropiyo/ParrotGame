@@ -18,7 +18,6 @@ public class PlayerSpriteManager : MonoBehaviour
     // 通常時のスプライトに変更する
     public void ChangeNormalSprite(GameObject spawnedObject)
     {
-        transform.localScale = spawnedObject.transform.localScale + new Vector3(0.02f, 0.02f, 0);
         if (playerSpriteRenderer)
         {
             playerSpriteRenderer.sprite = normalSprite;
