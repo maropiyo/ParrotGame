@@ -3,32 +3,36 @@ using System.Collections;
 
 public class ObjectPositionChecker : MonoBehaviour
 {
-    // ScoreManagerコンポーネント
-    private ScoreManager scoreManager;
-    // SoundEffectPlayerコンポーネント
-    private SEPlayer soundEffectPlayer;
+    // エリアオブジェクト
+    public GameObject area;
     // GameSceneManagerコンポーネント
     private GameSceneManager gameSceneManager;
 
     void Start()
     {
+        area = GameObject.Find("Area");
         // GameSceneManagerオブジェクトのGameSceneManagerコンポーネントを取得
         gameSceneManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
-        // チェックを有効にする
-        enabled = true;
     }
 
     private void FixedUpdate()
     {
-        CheckIfOutOfScreen();
+        // エリア外に出たかどうかを判定する
+        CheckIfOutOfArea();
     }
 
-    private void CheckIfOutOfScreen()
+    // エリア外に出たかどうかを判定する
+    private void CheckIfOutOfArea()
     {
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        // エリアの左下の座標を取得
+        Vector2 areaMin = area.GetComponent<Renderer>().bounds.min;
+        // エリアの右上の座標を取得
+        Vector2 areaMax = area.GetComponent<Renderer>().bounds.max;
+        // オブジェクトの座標を取得
+        Vector2 objectPosition = transform.position;
 
-        // 画面外に出たかどうかを判定
-        if (enabled && (screenPosition.x < 0 || screenPosition.x > Screen.width || screenPosition.y < 0 || screenPosition.y > Screen.height))
+        // エリア外に出たかどうかを判定
+        if (enabled && (objectPosition.x < areaMin.x || objectPosition.x > areaMax.x || objectPosition.y < areaMin.y || objectPosition.y > areaMax.y))
         {
             // チェックを無効にする
             enabled = false;

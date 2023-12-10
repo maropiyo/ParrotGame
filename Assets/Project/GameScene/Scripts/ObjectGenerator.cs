@@ -98,6 +98,8 @@ public class ObjectGenerator : MonoBehaviour
         if (currentObject)
         {
             playerSpriteManager.ChangeFallSprite();
+            // 判定を有効化
+            currentObject.GetComponent<ObjectPositionChecker>().enabled = true;
             // 重力を有効化
             currentObject.GetComponent<Rigidbody2D>().gravityScale = 1;
             // 当たり判定を有効化

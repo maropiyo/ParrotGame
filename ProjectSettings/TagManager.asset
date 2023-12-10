@@ -19,6 +19,7 @@ TagManager:
   - Taihaku
   - Kogane
   - SceneManager
+  - Area
   layers:
   - Default
   - TransparentFX
