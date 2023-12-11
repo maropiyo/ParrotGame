@@ -33,11 +33,13 @@ public class ObjectEvolution : MonoBehaviour
             // 衝突したオブジェクトを破棄
             Destroy(collision.gameObject);
 
-            // まだ進化していない場合は進化させる
+            // まだ進化していない場合は進化させる(接触したオブジェクトの片方のみこの処理を走らせるため)
             if (isEvolved == false && collision.gameObject.GetComponent<ObjectEvolution>().isEvolved == false)
             {
                 // 進化フラグをTrueにする
                 isEvolved = true;
+                // 進化時の効果音を鳴らす
+                SEPlayer.Instance.PlayEvolutionSound();
                 // 接触したオブジェクトがコンゴウインコ以外の場合
                 if (!collision.gameObject.CompareTag("Kongo"))
                 {
@@ -51,8 +53,6 @@ public class ObjectEvolution : MonoBehaviour
                     ParticleSystem particle = newObject.GetComponent<ParticleSystem>();
                     particle.Play();
                 }
-                // 進化時の効果音を鳴らす
-                SEPlayer.Instance.PlayEvolutionSound();
                 // スコアを加算する
                 scoreManager.addScore(tag);
             }
