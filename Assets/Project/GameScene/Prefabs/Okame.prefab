@@ -174,7 +174,7 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6749771380065320965}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19729925d3fa64277a22e0ceb58960e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  area: {fileID: 0}
 --- !u!198 &-4388792828013742416
 ParticleSystem:
   m_ObjectHideFlags: 0
