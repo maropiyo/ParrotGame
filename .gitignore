@@ -73,6 +73,7 @@ crashlytics-build.properties
 
 # ImportPackages
 /[Aa]ssets/6000FlatButtonIcon*
+/[Aa]ssets/CleanFlatIcon/*
 
 # keystore
 User.keystore

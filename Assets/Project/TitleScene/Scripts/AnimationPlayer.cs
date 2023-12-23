@@ -12,7 +12,7 @@ public class AnimationPlayer : MonoBehaviour
         // アニメーターを再生する
         foreach (Animator animator in animators)
         {
-            animator.SetBool("isPlaying", true);
+            animator.Play("TitleAnimation");
         }
     }
 }
