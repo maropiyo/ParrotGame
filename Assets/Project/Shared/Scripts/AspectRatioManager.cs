@@ -24,8 +24,11 @@ public class AspectRatioManager : MonoBehaviour
 
     void Start()
     {
+        // 画面サイズからアスペクト比を計算する
+        targetAspect = (float)Screen.width / (float)Screen.height;
+
         // 目標のアスペクト比を計算する
-        targetAspect = targetAspectX / targetAspectY;
+        // targetAspect = targetAspectX / targetAspectY;
 
         // シーンがロードされた時に呼び出されるイベントにメソッドを登録する
         SceneManager.sceneLoaded += OnSceneLoaded;
