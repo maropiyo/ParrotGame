@@ -20,8 +20,8 @@ public class GameModeLoader : MonoBehaviour
         switch (gameMode)
         {
             case "Normal":
-                parrotPhysicsMaterial.friction = 0.2f;
-                parrotPhysicsMaterial.bounciness = 0;
+                parrotPhysicsMaterial.friction = 0.3f;
+                parrotPhysicsMaterial.bounciness = 0f;
                 break;
             case "Hard":
                 parrotPhysicsMaterial.friction = 0.2f;
