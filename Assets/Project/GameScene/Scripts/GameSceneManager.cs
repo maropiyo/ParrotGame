@@ -37,16 +37,23 @@ public class GameSceneManager : MonoBehaviour
         SceneManager.LoadScene("TitleScene");
     }
 
+    // リザルト画面をロードする
+    public void LoadResultScene()
+    {
+        // ゲーム画面をロードする。
+        SceneManager.LoadScene("ResultScene");
+    }
+
     // ゲームオーバー時の処理
     public void GameOver()
     {
         // プレイヤーの動きを止める
         GameObject.Find("Player").GetComponent<PlayerMover>().canMove = false;
-        // ベストスコアを保存
-        scoreManager.SaveBestScore();
+        // スコアを保存
+        scoreManager.SaveScore();
 
-        // リザルトポップアップを表示する。
-        ShowResultPopup();
+        // リザルト画面をロードする。
+        LoadResultScene();
     }
 
     // メニューポップアップを表示する

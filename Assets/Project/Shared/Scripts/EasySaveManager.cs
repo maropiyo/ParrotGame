@@ -8,12 +8,15 @@ public class EasySaveManager : MonoBehaviour
     public static EasySaveManager Instance;
 
     // セーブデータのキー
+    const string KEY_CURRENT_SCORE = "CurrentScore";
     const string KEY_BEST_SCORE = "BestScore";
     const string KEY_BGM_VOLUME = "BgmVolume";
     const string KEY_SE_VOLUME = "SeVolume";
     const string KEY_DISPLAY_NAME = "DisplayName";
     const string KEY_GAME_MODE = "GameMode";
 
+    // 現在のスコア
+    public int CurrentScore { get; set; }
     // ベストスコア
     public int BestScore { get; private set; }
     // BGMの音量
@@ -24,7 +27,6 @@ public class EasySaveManager : MonoBehaviour
     public string DisplayName { get; private set; }
     // ゲームモード
     public string GameMode { get; set; }
-
 
     void Awake()
     {
@@ -44,6 +46,8 @@ public class EasySaveManager : MonoBehaviour
     // セーブデータをロードする。
     public void Load()
     {
+        // 現在のスコアをロードする。
+        LoadCurrentScore();
         // ベストスコアをロードする。
         LoadBestScore();
         // 表示名をロードする。
@@ -54,6 +58,23 @@ public class EasySaveManager : MonoBehaviour
         LoadSeVolume();
         // ゲームモードをロードする。
         LoadGameMode();
+    }
+
+    // 現在のスコアをセーブする。
+    public void SaveCurrentScore(int currentScore)
+    {
+        // 現在のスコアをセーブする。
+        ES3.Save(KEY_CURRENT_SCORE, currentScore);
+
+        // 現在のスコアをロードする。
+        LoadCurrentScore();
+    }
+
+    // 現在のスコアをロードする。
+    public void LoadCurrentScore()
+    {
+        // 現在のスコアをロードする。
+        CurrentScore = ES3.Load<int>(KEY_CURRENT_SCORE, defaultValue: 0);
     }
 
     // べストスコアをセーブする。

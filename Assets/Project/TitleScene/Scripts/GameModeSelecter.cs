@@ -17,23 +17,12 @@ public class GameModeSelector : MonoBehaviour
     }
 
     /// <summary>
-    /// ゲームモードをJumpに設定してGameSceneに遷移する。
+    /// ゲームモードをHardに設定してGameSceneに遷移する。
     /// </summary>
     public void SelectJumpMode()
     {
-        // ゲームモードをSlipに設定する。
-        EasySaveManager.Instance.SaveGameMode("Jump");
-        // GameSceneに遷移する。
-        sceneController.GetComponent<TitleSceneManager>().LoadGameScene();
-    }
-
-    /// <summary>
-    /// ゲームモードをSuperJumpに設定してGameSceneに遷移する。
-    /// </summary>
-    public void SelectSuperJumpMode()
-    {
-        // ゲームモードをSuperJumpに設定する。
-        EasySaveManager.Instance.SaveGameMode("SuperJump");
+        // ゲームモードをHardに設定する。
+        EasySaveManager.Instance.SaveGameMode("Hard");
         // GameSceneに遷移する。
         sceneController.GetComponent<TitleSceneManager>().LoadGameScene();
     }

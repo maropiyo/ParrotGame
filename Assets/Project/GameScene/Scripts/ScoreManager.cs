@@ -55,10 +55,12 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ベストスコアを保存する。
+    /// スコアを保存する。
     /// </summary>
-    public void SaveBestScore()
+    public void SaveScore()
     {
+        // 現在のスコアを保存する。
+        EasySaveManager.Instance.SaveCurrentScore(currentScore);
         // ベストスコアを保存する。
         EasySaveManager.Instance.SaveBestScore(bestScore);
         // ベストスコアをPlayFabに送信する。
