@@ -8,8 +8,6 @@ public class GameSceneManager : MonoBehaviour
 {
     // メニューポップアップ
     public GameObject menuPopup;
-    // リザルトポップアップ
-    public GameObject resultPopup;
     // ScoreManagerコンポーネント
     private ScoreManager scoreManager;
     // SoundEffectPlayerコンポーネント
@@ -74,26 +72,6 @@ public class GameSceneManager : MonoBehaviour
 
         // メニューポップアップを非表示にする。
         menuPopup.SetActive(false);
-    }
-
-    // リザルトポップアップを表示する
-    public void ShowResultPopup()
-    {
-        // ゲームを一時停止する。
-        Pause();
-
-        // リザルトポップアップを表示する。
-        resultPopup.SetActive(true);
-    }
-
-    // リザルトポップアップを閉じる
-    public void CloseResultPopup()
-    {
-        // ゲームを再開する。
-        Resume();
-
-        // リザルトポップアップを非表示にする。
-        resultPopup.SetActive(false);
     }
 
     // ポーズする

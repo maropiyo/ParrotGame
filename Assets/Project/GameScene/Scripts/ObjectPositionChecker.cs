@@ -4,7 +4,7 @@ using System.Collections;
 public class ObjectPositionChecker : MonoBehaviour
 {
     // エリアオブジェクト
-    public GameObject area;
+    private GameObject area;
     // GameSceneManagerコンポーネント
     private GameSceneManager gameSceneManager;
 
