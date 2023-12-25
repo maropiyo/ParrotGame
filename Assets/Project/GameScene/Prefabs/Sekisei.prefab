@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d0ac2b325ea4704aea498c1bcf5b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextObjectTag: Sekisei
+  nextObjectTag: Akikusa
   nextObjectPrefab: {fileID: 6749771380065320965, guid: 42b8c55e1b2004384a86ee17eee64226, type: 3}
 --- !u!58 &7740610747865950220
 CircleCollider2D:

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -45,13 +46,27 @@ public class GameSceneManager : MonoBehaviour
     // ゲームオーバー時の処理
     public void GameOver()
     {
+        // ポーズする
+        Pause();
         // プレイヤーの動きを止める
         GameObject.Find("Player").GetComponent<PlayerMover>().canMove = false;
         // スコアを保存
         scoreManager.SaveScore();
 
-        // リザルト画面をロードする。
-        LoadResultScene();
+        // ゲームオーバー時のスプライトに変更する
+        changeGameOverSprite();
+
+        // 2秒後にリザルト画面をロードする
+        StartCoroutine(WaitAndLoadResultScene(1.5f));
+    }
+
+    IEnumerator WaitAndLoadResultScene(float waitTime)
+    {
+        // 指定された時間待つ
+        yield return new WaitForSecondsRealtime(waitTime);
+
+        // リザルト画面をロード
+        SceneManager.LoadScene("ResultScene");
     }
 
     // メニューポップアップを表示する
@@ -88,4 +103,21 @@ public class GameSceneManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    // ゲームオーバー時のスプライトに変更する
+    private void changeGameOverSprite()
+    {
+        // タグのリスト
+        string[] tagList = { "Mameruriha", "Botan", "Sazanami", "Kozakura", "Sekisei", "Akikusa", "Shirohara", "Okame", "Momoiro", "Ohana", "Kongo" };
+
+        // タグのリストの数だけループする
+        foreach (string tag in tagList)
+        {
+            // 画面上のタグがtagのオブジェクトがあればゲームオーバー時のスプライトに変更する
+            GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
+            foreach (GameObject obj in objects)
+            {
+                obj.GetComponent<ParrotSpriteChanger>().ChangeGameOverSprite();
+            }
+        }
+    }
 }
