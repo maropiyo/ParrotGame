@@ -14,11 +14,12 @@ GameObject:
   - component: {fileID: -5527357471213665947}
   - component: {fileID: 7740610747865950220}
   - component: {fileID: -5939499571720064986}
-  - component: {fileID: 5520786932211791396}
-  - component: {fileID: 1620069507948100120}
+  - component: {fileID: 1467645867454426423}
+  - component: {fileID: -7821615177041619602}
+  - component: {fileID: -5208336167381857274}
   m_Layer: 0
-  m_Name: Lutino
-  m_TagString: Lutino
+  m_Name: Akikusa
+  m_TagString: Akikusa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.19, y: 0.19, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3e3663cac446f4905be9f19460b895da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f33a12477602247c1800547d977e98b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,7 +103,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2.025
+  m_Mass: 1.875
   m_LinearDrag: 0.1
   m_AngularDrag: 0.5
   m_GravityScale: 1
@@ -129,8 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9d0ac2b325ea4704aea498c1bcf5b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextObjectTag: Sekisei
-  nextObjectPrefab: {fileID: 6749771380065320965, guid: 42b8c55e1b2004384a86ee17eee64226, type: 3}
+  nextObjectTag: Shirohara
+  nextObjectPrefab: {fileID: 6749771380065320965, guid: fb3ad58d29a0a4289baa179dc463776a, type: 3}
 --- !u!58 &7740610747865950220
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -178,8 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19729925d3fa64277a22e0ceb58960e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  area: {fileID: 0}
---- !u!198 &5520786932211791396
+--- !u!198 &1467645867454426423
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4978,7 +4978,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &1620069507948100120
+--- !u!199 &-7821615177041619602
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -5052,3 +5052,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-5208336167381857274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749771380065320965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6348909bec53a46149d58381eb73e75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteSetsArray:
+  - type: Rose
+    normalSprite: {fileID: 21300000, guid: f33a12477602247c1800547d977e98b4, type: 3}
+    gameoverSprite: {fileID: 21300000, guid: e23946a1cbec54265962d74daa8bd7ca, type: 3}

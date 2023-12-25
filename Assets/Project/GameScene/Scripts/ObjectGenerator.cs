@@ -126,7 +126,7 @@ public class ObjectGenerator : MonoBehaviour
     /// </summary>
     public void DestroyObject()
     {
-        // Mameruriha,Botan,Sazanami,Kozakura,Lutinoタグに一致するオブジェクトを削除
+        // Mameruriha,Botan,Sazanami,Kozakura,Sekiseiタグに一致するオブジェクトを削除
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Mameruriha");
         foreach (GameObject obj in objects)
         {
@@ -163,7 +163,7 @@ public class ObjectGenerator : MonoBehaviour
                 Destroy(obj);
             }
         }
-        objects = GameObject.FindGameObjectsWithTag("Lutino");
+        objects = GameObject.FindGameObjectsWithTag("Sekisei");
         foreach (GameObject obj in objects)
         {
             // currentObjectと一致するオブジェクトは削除しない

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -5939499571720064986}
   - component: {fileID: 4344802639337666168}
   - component: {fileID: -2931920987605773330}
+  - component: {fileID: 4113449172094140319}
   m_Layer: 0
   m_Name: Shirohara
   m_TagString: Shirohara
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4770d3cd17cf54ac8bc5bd468d05a1ef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a9dfbb3cf0bdf48c9bcf2524ac61445d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -178,7 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19729925d3fa64277a22e0ceb58960e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  area: {fileID: 0}
 --- !u!198 &4344802639337666168
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5052,3 +5052,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4113449172094140319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749771380065320965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6348909bec53a46149d58381eb73e75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteSetsArray:
+  - type: Normal
+    normalSprite: {fileID: 21300000, guid: a9dfbb3cf0bdf48c9bcf2524ac61445d, type: 3}
+    gameoverSprite: {fileID: 21300000, guid: c9169c6fafcd04eca8ecc7a749fa016b, type: 3}
