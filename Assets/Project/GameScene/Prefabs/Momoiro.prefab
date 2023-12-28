@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f49a72b0ee7844e1bba5ac7c336160c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4bc6da4fb5aab406987b32c3c7137366, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5066,5 +5066,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteSetsArray:
   - type: Normal
-    normalSprite: {fileID: 21300000, guid: f49a72b0ee7844e1bba5ac7c336160c6, type: 3}
+    normalSprite: {fileID: 21300000, guid: 4bc6da4fb5aab406987b32c3c7137366, type: 3}
     gameoverSprite: {fileID: 21300000, guid: 6bade2bbcb17648ba9054a5c2ff964b4, type: 3}

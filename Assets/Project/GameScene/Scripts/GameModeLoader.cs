@@ -11,7 +11,8 @@ public class GameModeLoader : MonoBehaviour
 
     void Start()
     {
-        gameMode = ES3.Load<string>("GameMode");
+        EasySaveManager.Instance.LoadGameMode();
+        gameMode = EasySaveManager.Instance.GameMode;
         GameModeChange(gameMode);
     }
 
@@ -19,11 +20,11 @@ public class GameModeLoader : MonoBehaviour
     {
         switch (gameMode)
         {
-            case "Normal":
+            case "Sun":
                 parrotPhysicsMaterial.friction = 0.2f;
                 parrotPhysicsMaterial.bounciness = 0f;
                 break;
-            case "Hard":
+            case "Moon":
                 parrotPhysicsMaterial.friction = 0.2f;
                 parrotPhysicsMaterial.bounciness = 0.8f;
                 break;

@@ -150,12 +150,15 @@ public class EasySaveManager : MonoBehaviour
     {
         // ゲームモードをセーブする。
         ES3.Save(KEY_GAME_MODE, gameMode);
+
+        // ゲームモードをロードする。
+        LoadGameMode();
     }
 
     // ゲームモードをロードする。
     public void LoadGameMode()
     {
         // ゲームモードをロードする。
-        GameMode = ES3.Load<string>(KEY_GAME_MODE, defaultValue: "Normal");
+        GameMode = ES3.Load<string>(KEY_GAME_MODE, defaultValue: "Sun");
     }
 }

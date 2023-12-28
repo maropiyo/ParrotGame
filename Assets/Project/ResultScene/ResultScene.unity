@@ -612,6 +612,7 @@ GameObject:
   - component: {fileID: 1257882506}
   - component: {fileID: 1257882505}
   - component: {fileID: 1257882507}
+  - component: {fileID: 1257882508}
   m_Layer: 0
   m_Name: ResultSceneManager
   m_TagString: Untagged
@@ -660,6 +661,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: {fileID: 1933100525}
   scoreText: {fileID: 1763117023}
+--- !u!114 &1257882508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257882504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68749897a8699450aa6dc5f87814d398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 670186639}
 --- !u!1 &1261429972
 GameObject:
   m_ObjectHideFlags: 0
