@@ -3,64 +3,42 @@ using System.Collections;
 
 public class ObjectPositionChecker : MonoBehaviour
 {
-    // ScoreManagerコンポーネント
-    private ScoreManager scoreManager;
-    // SoundEffectPlayerコンポーネント
-    private SoundEffectPlayer soundEffectPlayer;
+    // エリアオブジェクト
+    private GameObject area;
     // GameSceneManagerコンポーネント
     private GameSceneManager gameSceneManager;
 
     void Start()
     {
-        enabled = true;
-        // ScoreManagerオブジェクトのScoreManagerコンポーネントを取得
-        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        // SoundEffectManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
-        soundEffectPlayer = GameObject.Find("SoundEffectManager").GetComponent<SoundEffectPlayer>();
+        area = GameObject.Find("Area");
         // GameSceneManagerオブジェクトのGameSceneManagerコンポーネントを取得
         gameSceneManager = GameObject.Find("GameSceneManager").GetComponent<GameSceneManager>();
     }
 
     private void FixedUpdate()
     {
-        CheckIfOutOfScreen();
+        // エリア外に出たかどうかを判定する
+        CheckIfOutOfArea();
     }
 
-    private void CheckIfOutOfScreen()
+    // エリア外に出たかどうかを判定する
+    private void CheckIfOutOfArea()
     {
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        // エリアの左下の座標を取得
+        Vector2 areaMin = area.GetComponent<Renderer>().bounds.min;
+        // エリアの右上の座標を取得
+        Vector2 areaMax = area.GetComponent<Renderer>().bounds.max;
+        // オブジェクトの座標を取得
+        Vector2 objectPosition = transform.position;
 
-        // 画面外に出たかどうかを判定
-        if (screenPosition.x < 0 || screenPosition.x > Screen.width || screenPosition.y < 0 || screenPosition.y > Screen.height)
+        // エリア外に出たかどうかを判定
+        if (enabled && (objectPosition.x < areaMin.x || objectPosition.x > areaMax.x || objectPosition.y < areaMin.y || objectPosition.y > areaMax.y))
         {
-            // 一回だけ処理を行う
+            // チェックを無効にする
             enabled = false;
-            // プレイヤーの動きを止める
-            GameObject.Find("Player").GetComponent<PlayerMover>().canMove = false;
-            // ベストスコアを保存
-            scoreManager.SaveBestScore();
-            StartCoroutine(PauseAndLoadCoroutine());
+
+            // ゲームオーバー処理
+            gameSceneManager.GameOver();
         }
-        else
-        {
-            // 画面内にある場合は処理を継続
-            enabled = true;
-        }
-    }
-
-
-    IEnumerator PauseAndLoadCoroutine()
-    {
-        // 動きを停止
-        Time.timeScale = 0;
-
-        // 一定時間待つ
-        yield return new WaitForSecondsRealtime(2.0f);
-
-        // ゲームの時間を元に戻す
-        Time.timeScale = 1f;
-
-        // タイトルシーンに切り替える
-        gameSceneManager.LoadTitleScene();
     }
 }

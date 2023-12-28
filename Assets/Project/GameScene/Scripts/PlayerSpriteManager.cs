@@ -13,11 +13,10 @@ public class PlayerSpriteManager : MonoBehaviour
     {
         // SpriteRendererコンポーネントを取得
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
-        ChangeNormalSprite();
     }
 
     // 通常時のスプライトに変更する
-    public void ChangeNormalSprite()
+    public void ChangeNormalSprite(GameObject spawnedObject)
     {
         if (playerSpriteRenderer)
         {

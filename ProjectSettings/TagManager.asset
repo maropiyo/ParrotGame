@@ -19,6 +19,8 @@ TagManager:
   - Taihaku
   - Kogane
   - SceneManager
+  - Area
+  - Akikusa
   layers:
   - Default
   - TransparentFX
@@ -55,4 +57,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particle
+    uniqueID: 3588747807
     locked: 0

@@ -143,7 +143,6 @@ public class PlayFabController : MonoBehaviour
     /// </summary>
     public void GetLeaderboard()
     {
-
         // リクエストを作成する。
         var request = new GetLeaderboardRequest
         {
@@ -162,11 +161,12 @@ public class PlayFabController : MonoBehaviour
 
         // ランキングマネージャーを取得する。
         var rankingManager = GameObject.Find("RankingManager").GetComponent<RankingManager>();
+        // すでに表示されているランキングノードを削除する。
+        rankingManager.ClearRankingNodes();
+
         // ランキングを表示する。
         foreach (var item in result.Leaderboard)
         {
-            // ランキングポップアップを表示する。
-            rankingManager.ShowRankingPopup();
             // ランキングノードを生成する。
             rankingManager.GenerateRankingNode(
                 (item.Position + 1).ToString(),
@@ -180,5 +180,6 @@ public class PlayFabController : MonoBehaviour
     private void OnGetLeaderboardFailure(PlayFabError error)
     {
         Debug.LogError($"ランキングの取得に失敗しました\n{error.GenerateErrorReport()}");
+        // TODO: ランキングの取得に失敗した旨を表示する。
     }
 }

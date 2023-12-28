@@ -74,7 +74,7 @@ public class ObjectGenerator : MonoBehaviour
     /// <param name="spawnObject"></param>
     private void SpawnObject(GameObject spawnObject)
     {
-        playerSpriteManager.ChangeNormalSprite();
+        playerSpriteManager.ChangeNormalSprite(spawnObject);
         // スポーン位置を設定し生成
         spawnPosition = player.transform.position;
         currentObject = Instantiate(spawnObject, spawnPosition, Quaternion.identity);
@@ -98,6 +98,8 @@ public class ObjectGenerator : MonoBehaviour
         if (currentObject)
         {
             playerSpriteManager.ChangeFallSprite();
+            // 判定を有効化
+            currentObject.GetComponent<ObjectPositionChecker>().enabled = true;
             // 重力を有効化
             currentObject.GetComponent<Rigidbody2D>().gravityScale = 1;
             // 当たり判定を有効化
@@ -117,5 +119,58 @@ public class ObjectGenerator : MonoBehaviour
 
         // キューの最初のオブジェクトをスポーン
         SpawnObject(generatedObjectQueue[0]);
+    }
+
+    /// <summary>
+    /// オブジェクトを削除する
+    /// </summary>
+    public void DestroyObject()
+    {
+        // Mameruriha,Botan,Sazanami,Kozakura,Sekiseiタグに一致するオブジェクトを削除
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Mameruriha");
+        foreach (GameObject obj in objects)
+        {
+            // currentObjectと一致するオブジェクトは削除しない
+            if (obj != currentObject)
+            {
+                Destroy(obj);
+            }
+        }
+        objects = GameObject.FindGameObjectsWithTag("Botan");
+        foreach (GameObject obj in objects)
+        {
+            // currentObjectと一致するオブジェクトは削除しない
+            if (obj != currentObject)
+            {
+                Destroy(obj);
+            }
+        }
+        objects = GameObject.FindGameObjectsWithTag("Sazanami");
+        foreach (GameObject obj in objects)
+        {
+            // currentObjectと一致するオブジェクトは削除しない
+            if (obj != currentObject)
+            {
+                Destroy(obj);
+            }
+        }
+        objects = GameObject.FindGameObjectsWithTag("Kozakura");
+        foreach (GameObject obj in objects)
+        {
+            // currentObjectと一致するオブジェクトは削除しない
+            if (obj != currentObject)
+            {
+                Destroy(obj);
+            }
+        }
+        objects = GameObject.FindGameObjectsWithTag("Sekisei");
+        foreach (GameObject obj in objects)
+        {
+            // currentObjectと一致するオブジェクトは削除しない
+            if (obj != currentObject)
+            {
+                Destroy(obj);
+            }
+        }
     }
 }

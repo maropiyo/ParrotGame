@@ -12,8 +12,8 @@ public class ScoreManager : MonoBehaviour
         {"Botan", 3},
         {"Sazanami", 6},
         {"Kozakura", 10},
-        {"Lutino", 15},
-        {"Sekisei", 21},
+        {"Sekisei", 15},
+        {"Akikusa", 21},
         {"Shirohara", 28},
         {"Okame", 36},
         {"Momoiro", 45},
@@ -55,10 +55,12 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ベストスコアを保存する。
+    /// スコアを保存する。
     /// </summary>
-    public void SaveBestScore()
+    public void SaveScore()
     {
+        // 現在のスコアを保存する。
+        EasySaveManager.Instance.SaveCurrentScore(currentScore);
         // ベストスコアを保存する。
         EasySaveManager.Instance.SaveBestScore(bestScore);
         // ベストスコアをPlayFabに送信する。

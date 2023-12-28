@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMover : MonoBehaviour
 {
@@ -7,16 +8,18 @@ public class PlayerMover : MonoBehaviour
     // 動かせるか
     public bool canMove = true;
     // オブジェクトの半径
-    private float halfObjectRadius;
+    private float objectRadius = 0;
     // ドラッグ開始位置
     private Vector3 touchStartPos;
     // オブジェクトの初期位置
     private Vector3 objectStartPos;
     // 左制限
-    private float leftLimit = -2.69f;
+    private float _leftLimit = -2.19f;
     // 右制限
-    private float rightLimit = 2.69f;
+    private float _rightLimit = 2.19f;
     private ObjectGenerator objectGenerator;
+    // ドラッグ中か
+    private bool isDragging;
 
     void Start()
     {
@@ -26,7 +29,6 @@ public class PlayerMover : MonoBehaviour
         objectGenerator = GameObject.Find("ObjectManager").GetComponent<ObjectGenerator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         // objectGeneratorコンポーネントから現在のオブジェクトを取得
@@ -36,24 +38,38 @@ public class PlayerMover : MonoBehaviour
         {
             // オブジェクトの半径を計算
             CalculateObjectRadius();
-            if (transform.position.x < leftLimit + halfObjectRadius)
-            {
-                transform.position = new Vector3(leftLimit + halfObjectRadius, transform.position.y, transform.position.z);
-            }
-            if (transform.position.x > rightLimit - halfObjectRadius)
-            {
-                transform.position = new Vector3(rightLimit - halfObjectRadius, transform.position.y, transform.position.z);
-            }
+
+            // 左右の制限を超えないようにする
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, _leftLimit + objectRadius, _rightLimit - objectRadius), transform.position.y, transform.position.z);
         }
-        // タップされた時
+        canMove = true;
+        // UIをタップしている場合は処理をしない
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            canMove = false;
+        }
+        // スマホでUIをタップしている場合は処理をしない
+        else if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
+        {
+            canMove = false;
+        }
+
         if (Input.GetMouseButtonDown(0) && canMove)
         {
+            // ドラッグ開始時の処理
             OnDragStart();
+            isDragging = true;
         }
-        else if (Input.GetMouseButton(0) && canMove)
+        if (Input.GetMouseButton(0) && isDragging && canMove)
         {
-            // ドラッグ中
+            // ドラッグ時の処理
             OnDragging();
+        }
+        if (Input.GetMouseButtonUp(0) && isDragging && canMove)
+        {
+            // ドラッグ終了時の処理
+            OnDragEnd();
+            isDragging = false;
         }
     }
 
@@ -61,15 +77,18 @@ public class PlayerMover : MonoBehaviour
     {
         // オブジェクトのスケールとコライダーの半径を掛け合わせることでオブジェクトの半径を計算
         CircleCollider2D collider = currentObject.GetComponent<CircleCollider2D>();
-        halfObjectRadius = currentObject.transform.localScale.x * collider.radius * transform.localScale.x;
+        objectRadius = currentObject.transform.localScale.x * collider.radius * transform.localScale.x;
     }
 
+    // ドラッグ開始時に呼ばれる
     private void OnDragStart()
     {
-        // ドラッグ開始位置を記録
+        // タップされた位置を取得
         touchStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // オブジェクトの初期位置を記録
-        objectStartPos = transform.position;
+        // オブジェクトをタップしたX座標に移動
+
+        objectStartPos = new Vector3(Mathf.Clamp(touchStartPos.x, _leftLimit + objectRadius, _rightLimit - objectRadius), transform.position.y, transform.position.z);
+        transform.position = objectStartPos;
 
     }
 
@@ -79,9 +98,16 @@ public class PlayerMover : MonoBehaviour
         Vector3 offset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - touchStartPos;
 
         // 新しいX座標を計算し、制限内でクランプする
-        float newXPos = Mathf.Clamp(objectStartPos.x + offset.x, leftLimit + halfObjectRadius, rightLimit - halfObjectRadius);
+        float newXPos = Mathf.Clamp(objectStartPos.x + offset.x, _leftLimit + objectRadius, _rightLimit - objectRadius);
 
         // オブジェクトの位置を更新する
         transform.position = new Vector3(newXPos, objectStartPos.y, objectStartPos.z);
+    }
+
+    // ドラック終了時に呼ばれる
+    private void OnDragEnd()
+    {
+        // 現在のオブジェクトを落下させる
+        objectGenerator.DropCurrentObject();
     }
 }

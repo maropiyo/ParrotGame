@@ -12,6 +12,8 @@ public class RankingManager : MonoBehaviour
     /// ランキングポップアップを表示する。
     public void ShowRankingPopup()
     {
+        // リーダーボードを取得する。
+        PlayFabController.Instance.GetLeaderboard();
         // ランキングポップアップを表示する。
         RankingPopup.SetActive(true);
     }
@@ -22,7 +24,14 @@ public class RankingManager : MonoBehaviour
         // ランキングポップアップを非表示にする。
         RankingPopup.SetActive(false);
 
-        // 子オブジェクト（ランキングノード）をすべて削除する。
+        // RankingNodeを全て削除する。
+        ClearRankingNodes();
+    }
+
+    /// ランキングノードを全て削除する。
+    public void ClearRankingNodes()
+    {
+        // RankingNodeを全て削除する。
         foreach (Transform child in rankingParent.transform)
         {
             Destroy(child.gameObject);

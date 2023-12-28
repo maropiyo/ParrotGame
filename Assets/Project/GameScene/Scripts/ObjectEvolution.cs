@@ -13,14 +13,12 @@ public class ObjectEvolution : MonoBehaviour
     // ScoreManagerコンポーネント
     private ScoreManager scoreManager;
     // SoundEffectPlayerコンポーネント
-    private SoundEffectPlayer soundEffectPlayer;
+    private SEPlayer soundEffectPlayer;
 
     void Start()
     {
         // ScoreManagerコンポーネントのScoreManagerコンポーネントを取得
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        // SoundEffectManagerオブジェクトのSoundEffectPlayerコンポーネントを取得
-        soundEffectPlayer = GameObject.Find("SoundEffectManager").GetComponent<SoundEffectPlayer>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -35,19 +33,28 @@ public class ObjectEvolution : MonoBehaviour
             // 衝突したオブジェクトを破棄
             Destroy(collision.gameObject);
 
-            // まだ進化していない場合は進化させる
+            // まだ進化していない場合は進化させる(接触したオブジェクトの片方のみこの処理を走らせるため)
             if (isEvolved == false && collision.gameObject.GetComponent<ObjectEvolution>().isEvolved == false)
             {
                 // 進化フラグをTrueにする
                 isEvolved = true;
+                // 進化時の効果音を鳴らす
+                SEPlayer.Instance.PlayEvolutionSound();
                 // 接触したオブジェクトがコンゴウインコ以外の場合
                 if (!collision.gameObject.CompareTag("Kongo"))
                 {
-                    // 進化後のオブジェクトを衝突したオブジェクトの間に生成
-                    Instantiate(nextObjectPrefab, (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
+                    // 進化後のオブジェクトを生成
+                    GameObject newObject = Instantiate(nextObjectPrefab, (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
+                    // 接触したオブジェクトの平均のベロシティをもとに進化後のオブジェクトのベロシティを設定
+                    newObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity + collision.gameObject.GetComponent<Rigidbody2D>().velocity;
+                    // newObjectのサイズを0にする
+                    newObject.transform.localScale = Vector3.zero;
+                    // 進化後のオブジェクトを徐々に大きくする
+                    LeanTween.scale(newObject, nextObjectPrefab.transform.localScale, 0.1f).setEase(LeanTweenType.easeInExpo);
+                    // エフェクトを再生
+                    ParticleSystem particle = newObject.GetComponent<ParticleSystem>();
+                    particle.Play();
                 }
-                // 進化時の効果音を鳴らす
-                soundEffectPlayer.PlayEvolutionSound();
                 // スコアを加算する
                 scoreManager.addScore(tag);
             }
