@@ -28,6 +28,6 @@ public class InputValidation : MonoBehaviour
     /// <returns></returns>
     public bool IsValidDisplayName(string displayName)
     {
-        return 2 <= displayName.Length && displayName.Length <= 8;
+        return 3 <= displayName.Length && displayName.Length <= 8;
     }
 }

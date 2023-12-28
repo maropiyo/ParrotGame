@@ -45,8 +45,8 @@ public class ObjectEvolution : MonoBehaviour
                 {
                     // 進化後のオブジェクトを生成
                     GameObject newObject = Instantiate(nextObjectPrefab, (transform.position + collision.gameObject.transform.position) / 2, Quaternion.identity);
-                    // 接触したオブジェクトの平均のベロシティをもとに進化後のオブジェクトのベロシティを設定
-                    newObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity + collision.gameObject.GetComponent<Rigidbody2D>().velocity;
+                    // ベロシティを設定
+                    newObject.GetComponent<Rigidbody2D>().velocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity + GetComponent<Rigidbody2D>().velocity;
                     // newObjectのサイズを0にする
                     newObject.transform.localScale = Vector3.zero;
                     // 進化後のオブジェクトを徐々に大きくする
