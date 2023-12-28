@@ -15,8 +15,6 @@ class UIManager : MonoBehaviour
     public GameObject SettingPopup;
     // ユーザー情報ポップアップ
     public GameObject UserInfoPopup;
-    // モード選択ポップアップ
-    public GameObject ModeSelectPopup;
 
     void Start()
     {
@@ -134,19 +132,5 @@ class UIManager : MonoBehaviour
     {
         // ユーザー情報ポップアップを閉じる
         UserInfoPopup.SetActive(false);
-    }
-
-    /// モード選択ポップアップを表示する
-    public void ShowModeSelectPopup()
-    {
-        // モード選択ポップアップを表示する
-        ModeSelectPopup.SetActive(true);
-    }
-
-    /// モード選択ポップアップを閉じる
-    public void CloseModeSelectPopup()
-    {
-        // モード選択ポップアップを閉じる
-        ModeSelectPopup.SetActive(false);
     }
 }
