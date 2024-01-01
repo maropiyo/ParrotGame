@@ -161,4 +161,60 @@ public class EasySaveManager : MonoBehaviour
         // ゲームモードをロードする。
         GameMode = ES3.Load<string>(KEY_GAME_MODE, defaultValue: "Sun");
     }
+
+    // マメルリハの色をセーブする。
+    public void SaveMamerurihaColor(string mamerurihaColor)
+    {
+        // マメルリハの色をセーブする。
+        ES3.Save("MamerurihaColor", mamerurihaColor);
+    }
+
+    // マメルリハの色をロードする。
+    public string LoadMamerurihaColor()
+    {
+        // マメルリハの色をロードする。
+        return ES3.Load<string>("MamerurihaColor", defaultValue: "Green");
+    }
+
+    // ボタンインコの色をセーブする。
+    public void SaveBotanColor(string botanColor)
+    {
+        // ボタンインコの色をセーブする。
+        ES3.Save("BotanColor", botanColor);
+    }
+
+    // ボタンインコの色をロードする。
+    public string LoadBotanColor()
+    {
+        // ボタンインコの色をロードする。
+        return ES3.Load<string>("BotanColor", defaultValue: "Blue");
+    }
+
+    // サザナミインコの色をセーブする。
+    public void SaveSazanamiColor(string sazanamiColor)
+    {
+        // サザナミインコの色をセーブする。
+        ES3.Save("SazanamiColor", sazanamiColor);
+    }
+
+    // サザナミインコの色をロードする。
+    public string LoadSazanamiColor()
+    {
+        // サザナミインコの色をロードする。
+        return ES3.Load<string>("SazanamiColor", defaultValue: "Blue");
+    }
+
+    // セキセイインコの色をセーブする。
+    public void SaveSekiseiColor(string sekiseiColor)
+    {
+        // セキセイインコの色をセーブする。
+        ES3.Save("SekiseiColor", sekiseiColor);
+    }
+
+    // セキセイインコの色をロードする。
+    public string LoadSekiseiColor()
+    {
+        // セキセイインコの色をロードする。
+        return ES3.Load<string>("SekiseiColor", defaultValue: "Blue");
+    }
 }

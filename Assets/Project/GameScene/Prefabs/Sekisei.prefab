@@ -5068,3 +5068,6 @@ MonoBehaviour:
   - type: Blue
     normalSprite: {fileID: 21300000, guid: 8418cce2aa54c408ba404c4094302448, type: 3}
     gameoverSprite: {fileID: 21300000, guid: ba40f97621e1b4b4aba4b1a6817160bc, type: 3}
+  - type: Lutino
+    normalSprite: {fileID: 21300000, guid: 444a9d32e007044eea3c42fbc15feb7d, type: 3}
+    gameoverSprite: {fileID: 21300000, guid: cda01be67b3d44c8594735146503c943, type: 3}
