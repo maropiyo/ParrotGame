@@ -63,7 +63,7 @@ public class SnapScroll : MonoBehaviour
     void Update()
     {
         // 画面の中心に一番近いParrotのインデックスをスクリーンサイズから取得
-        int currentParrotIndex = Mathf.RoundToInt(0 - content.localPosition.x / listItem.rect.width + horizontalLayoutGroup.spacing);
+        currentParrotIndex = Mathf.RoundToInt(0 - content.localPosition.x / listItem.rect.width + horizontalLayoutGroup.spacing);
 
         if (scrollRect.velocity.magnitude < 300 && !isSnapped)
         {

@@ -32,6 +32,9 @@ public class GameSceneManager : MonoBehaviour
     // タイトル画面をロードする
     public void LoadTitleScene()
     {
+        // ゲームを再開する。
+        Resume();
+
         // タイトル画面をロードする。
         SceneManager.LoadScene("TitleScene");
     }
@@ -64,6 +67,9 @@ public class GameSceneManager : MonoBehaviour
     {
         // 指定された時間待つ
         yield return new WaitForSecondsRealtime(waitTime);
+
+        // ゲームを再開する。
+        Resume();
 
         // リザルト画面をロード
         SceneManager.LoadScene("ResultScene");
