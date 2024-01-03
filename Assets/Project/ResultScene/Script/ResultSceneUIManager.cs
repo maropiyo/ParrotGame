@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ public class NewBehaviourScript : MonoBehaviour
 
     // スコアを表示するテキスト
     public Text scoreText;
+
+    // ゲームオーバー時のスクリーンショットを表示するRawImage
+    public RawImage gameOverImage;
 
     void Start()
     {
@@ -34,5 +38,15 @@ public class NewBehaviourScript : MonoBehaviour
 
         // スコアを表示する
         scoreText.text = currentScore.ToString();
+
+        // スクリーンショットの読み込み
+        byte[] image = File.ReadAllBytes(Application.persistentDataPath + "/gameover_screenshot.png");
+
+        // Texture2D を作成して読み込み
+        Texture2D texture2D = new Texture2D(0, 0);
+        texture2D.LoadImage(image);
+
+        // ゲームオーバー時のスクリーンショットを表示する
+        gameOverImage.texture = texture2D;
     }
 }

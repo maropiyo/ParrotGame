@@ -15,6 +15,8 @@ public class EasySaveManager : MonoBehaviour
     const string KEY_DISPLAY_NAME = "DisplayName";
     const string KEY_GAME_MODE = "GameMode";
 
+
+
     // 現在のスコア
     public int CurrentScore { get; set; }
     // ベストスコア
@@ -27,6 +29,30 @@ public class EasySaveManager : MonoBehaviour
     public string DisplayName { get; private set; }
     // ゲームモード
     public string GameMode { get; set; }
+
+    // マメルリハの色
+    public int MamerurihaColor { get; set; }
+    // ボタンインコの色
+    public int BotanColor { get; set; }
+    // サザナミインコの色
+    public int SazanamiColor { get; set; }
+    // コザクラインコの色
+    public int KozakuraColor { get; set; }
+    // セキセイインコの色
+    public int SekiseiColor { get; set; }
+    // アキクサインコの色
+    public int AkikusaColor { get; set; }
+    // シロハラインコの色
+    public int ShiroharaColor { get; set; }
+    // オカメインコの色
+    public int OkameColor { get; set; }
+    // モモイロインコの色
+    public int MomoiroColor { get; set; }
+    // オハナインコの色
+    public int OhanaColor { get; set; }
+    // コンゴウインコの色
+    public int KongoColor { get; set; }
+
 
     void Awake()
     {
@@ -58,6 +84,8 @@ public class EasySaveManager : MonoBehaviour
         LoadSeVolume();
         // ゲームモードをロードする。
         LoadGameMode();
+        // 全てのインコの色をロードする。
+        LoadAllParrotColor();
     }
 
     // 現在のスコアをセーブする。
@@ -162,59 +190,217 @@ public class EasySaveManager : MonoBehaviour
         GameMode = ES3.Load<string>(KEY_GAME_MODE, defaultValue: "Sun");
     }
 
+    // 全てのインコの色をロードする。
+    public void LoadAllParrotColor()
+    {
+        // マメルリハの色をロードする。
+        LoadMamerurihaColor();
+        // ボタンインコの色をロードする。
+        LoadBotanColor();
+        // サザナミインコの色をロードする。
+        LoadSazanamiColor();
+        // コザクラインコの色をロードする。
+        LoadKozakuraColor();
+        // セキセイインコの色をロードする。
+        LoadSekiseiColor();
+        // アキクサインコの色をロードする。
+        LoadAkikusaColor();
+        // シロハラインコの色をロードする。
+        LoadShiroharaColor();
+        // オカメインコの色をロードする。
+        LoadOkameColor();
+        // モモイロインコの色をロードする。
+        LoadMomoiroColor();
+        // オハナインコの色をロードする。
+        LoadOhanaColor();
+        // コンゴウインコの色をロードする。
+        LoadKongoColor();
+    }
+
     // マメルリハの色をセーブする。
-    public void SaveMamerurihaColor(string mamerurihaColor)
+    public void SaveMamerurihaColor(int mamerurihaColor)
     {
         // マメルリハの色をセーブする。
         ES3.Save("MamerurihaColor", mamerurihaColor);
+
+        // マメルリハの色をロードする。
+        LoadMamerurihaColor();
     }
 
     // マメルリハの色をロードする。
-    public string LoadMamerurihaColor()
+    public void LoadMamerurihaColor()
     {
         // マメルリハの色をロードする。
-        return ES3.Load<string>("MamerurihaColor", defaultValue: "Green");
+        MamerurihaColor = ES3.Load<int>("MamerurihaColor", defaultValue: 0);
     }
 
     // ボタンインコの色をセーブする。
-    public void SaveBotanColor(string botanColor)
+    public void SaveBotanColor(int botanColor)
     {
         // ボタンインコの色をセーブする。
         ES3.Save("BotanColor", botanColor);
+
+        // ボタンインコの色をロードする。
+        LoadBotanColor();
     }
 
     // ボタンインコの色をロードする。
-    public string LoadBotanColor()
+    public void LoadBotanColor()
     {
         // ボタンインコの色をロードする。
-        return ES3.Load<string>("BotanColor", defaultValue: "Blue");
+        BotanColor = ES3.Load<int>("BotanColor", defaultValue: 0);
     }
 
     // サザナミインコの色をセーブする。
-    public void SaveSazanamiColor(string sazanamiColor)
+    public void SaveSazanamiColor(int sazanamiColor)
     {
         // サザナミインコの色をセーブする。
         ES3.Save("SazanamiColor", sazanamiColor);
+
+        // サザナミインコの色をロードする。
+        LoadSazanamiColor();
     }
 
     // サザナミインコの色をロードする。
-    public string LoadSazanamiColor()
+    public void LoadSazanamiColor()
     {
         // サザナミインコの色をロードする。
-        return ES3.Load<string>("SazanamiColor", defaultValue: "Blue");
+        SazanamiColor = ES3.Load<int>("SazanamiColor", defaultValue: 0);
+    }
+
+    // コザクラインコの色をセーブする。
+    public void SaveKozakuraColor(int kozakuraColor)
+    {
+        // コザクラインコの色をセーブする。
+        ES3.Save("KozakuraColor", kozakuraColor);
+
+        // コザクラインコの色をロードする。
+        LoadKozakuraColor();
+    }
+
+    // コザクラインコの色をロードする。
+    public void LoadKozakuraColor()
+    {
+        // コザクラインコの色をロードする。
+        KozakuraColor = ES3.Load<int>("KozakuraColor", defaultValue: 0);
     }
 
     // セキセイインコの色をセーブする。
-    public void SaveSekiseiColor(string sekiseiColor)
+    public void SaveSekiseiColor(int sekiseiColor)
     {
         // セキセイインコの色をセーブする。
         ES3.Save("SekiseiColor", sekiseiColor);
+
+        // セキセイインコの色をロードする。
+        LoadSekiseiColor();
     }
 
     // セキセイインコの色をロードする。
-    public string LoadSekiseiColor()
+    public void LoadSekiseiColor()
     {
         // セキセイインコの色をロードする。
-        return ES3.Load<string>("SekiseiColor", defaultValue: "Blue");
+        SekiseiColor = ES3.Load<int>("SekiseiColor", defaultValue: 0);
+    }
+
+    // アキクサインコの色をセーブする。
+    public void SaveAkikusaColor(int akikusaColor)
+    {
+        // アキクサインコの色をセーブする。
+        ES3.Save("AkikusaColor", akikusaColor);
+
+        // アキクサインコの色をロードする。
+        LoadAkikusaColor();
+    }
+
+    // アキクサインコの色をロードする。
+    public void LoadAkikusaColor()
+    {
+        // アキクサインコの色をロードする。
+        AkikusaColor = ES3.Load<int>("AkikusaColor", defaultValue: 0);
+    }
+
+    // シロハラインコの色をセーブする。
+    public void SaveShiroharaColor(int shiroharaColor)
+    {
+        // シロハラインコの色をセーブする。
+        ES3.Save("ShiroharaColor", shiroharaColor);
+
+        // シロハラインコの色をロードする。
+        LoadShiroharaColor();
+    }
+
+    // シロハラインコの色をロードする。
+    public void LoadShiroharaColor()
+    {
+        // シロハラインコの色をロードする。
+        ShiroharaColor = ES3.Load<int>("ShiroharaColor", defaultValue: 0);
+    }
+
+    // オカメインコの色をセーブする。
+    public void SaveOkameColor(int okameColor)
+    {
+        // オカメインコの色をセーブする。
+        ES3.Save("OkameColor", okameColor);
+
+        // オカメインコの色をロードする。
+        LoadOkameColor();
+    }
+
+    // オカメインコの色をロードする。
+    public void LoadOkameColor()
+    {
+        // オカメインコの色をロードする。
+        OkameColor = ES3.Load<int>("OkameColor", defaultValue: 0);
+    }
+
+    // モモイロインコの色をセーブする。
+    public void SaveMomoiroColor(int momoiroColor)
+    {
+        // モモイロインコの色をセーブする。
+        ES3.Save("MomoiroColor", momoiroColor);
+
+        // モモイロインコの色をロードする。
+        LoadMomoiroColor();
+    }
+
+    // モモイロインコの色をロードする。
+    public void LoadMomoiroColor()
+    {
+        // モモイロインコの色をロードする。
+        MomoiroColor = ES3.Load<int>("MomoiroColor", defaultValue: 0);
+    }
+
+    // オオハナインコの色をセーブする。
+    public void SaveOhanaColor(int ohanaColor)
+    {
+        // オハナインコの色をセーブする。
+        ES3.Save("OhanaColor", ohanaColor);
+
+        // オハナインコの色をロードする。
+        LoadOhanaColor();
+    }
+
+    // オオハナインコの色をロードする。
+    public void LoadOhanaColor()
+    {
+        // オハナインコの色をロードする。
+        OhanaColor = ES3.Load<int>("OhanaColor", defaultValue: 0);
+    }
+
+    // コンゴウインコの色をセーブする。
+    public void SaveKongoColor(int kongoColor)
+    {
+        // コンゴウインコの色をセーブする。
+        ES3.Save("KongoColor", kongoColor);
+
+        // コンゴウインコの色をロードする。
+        LoadKongoColor();
+    }
+
+    // コンゴウインコの色をロードする。
+    public void LoadKongoColor()
+    {
+        // コンゴウインコの色をロードする。
+        KongoColor = ES3.Load<int>("KongoColor", defaultValue: 0);
     }
 }

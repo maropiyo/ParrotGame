@@ -2995,6 +2995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuPopup: {fileID: 680934148}
+  captureObject: {fileID: 1808193250}
 --- !u!4 &1870223125
 Transform:
   m_ObjectHideFlags: 0
