@@ -30,5 +30,6 @@ public class NextObjectManager : MonoBehaviour
         displayObject = objectGenerator.nextObject;
 
         image.sprite = displayObject.GetComponent<SpriteRenderer>().sprite;
+        image.transform.localScale = displayObject.transform.localScale * 4;
     }
 }
