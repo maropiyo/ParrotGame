@@ -10,4 +10,10 @@ public class TitleSceneManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
+
+    // ParrotSelectSceneに遷移する。
+    public void LoadParrotSelectScene()
+    {
+        SceneManager.LoadScene("ParrotSelectScene");
+    }
 }

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/ResultScene/ResultScene.unity
     guid: 529a0687540c646e2ba4a378c7a989f2
+  - enabled: 1
+    path: Assets/Project/ParrotSelectScene/ParrotSelectScene.unity
+    guid: 0da51d260c79142989402cfb8bb72517
   m_configObjects: {}

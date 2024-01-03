@@ -1,3 +1,5 @@
+using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,4 +18,16 @@ public class ResultSceneManager : MonoBehaviour
         // タイトル画面をロードする。
         SceneManager.LoadScene("TitleScene");
     }
+
+    // シェアをする
+    public void Share()
+    {
+        // スクリーンショットを撮る
+        ScreenCapture.CaptureScreenshot("share_screenshot.png");
+        // シェアするテキスト
+        string text = "インコゲームで" + EasySaveManager.Instance.CurrentScore + "点をとったよ！";
+        // シェアする
+        SunShineNativeShare.instance.ShareSingleFile(Application.persistentDataPath + "/share_screenshot.png", "png", text, "共有する");
+    }
+
 }

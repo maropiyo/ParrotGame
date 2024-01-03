@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public struct SpriteSet
 {
-    public string type;
+    public string colorType;
     public Sprite normalSprite;
     public Sprite gameoverSprite;
 }
@@ -11,19 +11,19 @@ public class ParrotSpriteChanger : MonoBehaviour
 {
     public SpriteSet[] spriteSetsArray;
 
-    // 現在のタイプのインデックス
-    private int currentIndex = 0;
+    // 現在のカラーのインデックス
+    private int currentColorTypeIndex = 0;
 
-    // タイプに応じたスプライトを設定する
-    public void ChangeSprite(string type)
+    // カラーに応じたスプライトを設定する
+    public void ChangeSprite(string color)
     {
         // タイプに応じたスプライトを設定する
         for (int i = 0; i < spriteSetsArray.Length; i++)
         {
-            if (spriteSetsArray[i].type == type)
+            if (spriteSetsArray[i].colorType == color)
             {
                 GetComponent<SpriteRenderer>().sprite = spriteSetsArray[i].normalSprite;
-                currentIndex = i;
+                currentColorTypeIndex = i;
                 break;
             }
         }
@@ -32,12 +32,12 @@ public class ParrotSpriteChanger : MonoBehaviour
     // 通常時のスプライトに変更する
     public void ChangeNormalSprite()
     {
-        GetComponent<SpriteRenderer>().sprite = spriteSetsArray[currentIndex].normalSprite;
+        GetComponent<SpriteRenderer>().sprite = spriteSetsArray[currentColorTypeIndex].normalSprite;
     }
 
     // ゲームオーバー時のスプライトに変更する
     public void ChangeGameOverSprite()
     {
-        GetComponent<SpriteRenderer>().sprite = spriteSetsArray[currentIndex].gameoverSprite;
+        GetComponent<SpriteRenderer>().sprite = spriteSetsArray[currentColorTypeIndex].gameoverSprite;
     }
 }
