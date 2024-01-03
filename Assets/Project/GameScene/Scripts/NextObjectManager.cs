@@ -1,8 +1,10 @@
-using System.Runtime.Serialization;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NextObjectManager : MonoBehaviour
 {
+    // Image
+    public Image image;
     // 表示するオブジェクト
     private GameObject displayObject;
     // ObjectGenerator
@@ -24,20 +26,9 @@ public class NextObjectManager : MonoBehaviour
 
     void DisplayNextParrot()
     {
-        // 既存のオブジェクトがあれば破棄する
-        if (displayObject)
-        {
-            Destroy(displayObject);
-        }
+        // 表示するオブジェクトを取得
+        displayObject = objectGenerator.nextObject;
 
-        // 既存のUI要素にPrefabを追加
-        displayObject = Instantiate(objectGenerator.nextObject, transform.position, Quaternion.identity);
-        // 判定を無効化
-        displayObject.GetComponent<ObjectPositionChecker>().enabled = false;
-        // 重力を無効化
-        displayObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-        // 当たり判定を無効化
-        Collider2D[] colliders = displayObject.GetComponents<Collider2D>();
-        foreach (Collider2D collider in colliders) collider.enabled = false;
+        image.sprite = displayObject.GetComponent<SpriteRenderer>().sprite;
     }
 }

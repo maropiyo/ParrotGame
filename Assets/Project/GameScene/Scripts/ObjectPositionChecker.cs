@@ -31,6 +31,12 @@ public class ObjectPositionChecker : MonoBehaviour
         // オブジェクトの座標を取得
         Vector2 objectPosition = transform.position;
 
+        // 落下中はチェックしない
+        if (GetComponent<Rigidbody2D>().velocity.y <= 0)
+        {
+            return;
+        }
+
         // エリア外に出たかどうかを判定
         if (enabled && (objectPosition.x < areaMin.x || objectPosition.x > areaMax.x || objectPosition.y < areaMin.y || objectPosition.y > areaMax.y))
         {
