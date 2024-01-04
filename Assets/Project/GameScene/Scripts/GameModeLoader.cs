@@ -26,7 +26,7 @@ public class GameModeLoader : MonoBehaviour
                 break;
             case "Moon":
                 parrotPhysicsMaterial.friction = 0.2f;
-                parrotPhysicsMaterial.bounciness = 1.0f;
+                parrotPhysicsMaterial.bounciness = 0.5f;
                 break;
             default:
                 break;
